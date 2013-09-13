@@ -113,6 +113,10 @@ body {
     right: -40px;
     top: -40px;
 }
+.adjustable .resetBtn{
+    left: -40px;
+    top: -40px;
+}
 .adjustable .roteateBtn{
     left: -40px;
     bottom: -40px;
@@ -121,6 +125,7 @@ body {
     right: -40px;
     bottom: -40px;
 }
+
 
 .adjustable > .wrap{
     width: 100%;
