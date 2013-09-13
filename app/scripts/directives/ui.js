@@ -5,9 +5,9 @@ var ui = angular.module('ui' , ['utility']);
 
 
 ui.factory("transform" , [function(){
-	return function(targetDOM , data){		
+	return function(targetDOM , data){				
 
-		var transformStr = 'translate(' + data.x + 'px,' + data.y + 'px) ' + 
+		var transformStr = 'translate(' + data.offsetX + 'px,' + data.offsetY + 'px) ' + 
 							'rotate(' + data.rotateDegrees + 'deg) ';
 
 		targetDOM.css({
@@ -19,7 +19,8 @@ ui.factory("transform" , [function(){
 	}    
 }]);
 
-ui.factory("rotatable" , ['$document', 'throttle' , function($document , throttle){
+ui.factory("rotatable" , ['$document', 'throttle' , 'transform' , 'extend' , 
+	function($document , throttle , transform , extend){
 	return function(triggerDOM , targetDOM , data){
 
 			var
@@ -75,13 +76,10 @@ ui.factory("rotatable" , ['$document', 'throttle' , function($document , throttl
 						rotateDegrees+= rotateDelta;
 					}
 				}
-
-				targetDOM.css({
-					'-moz-transform': 'rotate(' + rotateDegrees + 'deg)',
-					'-webkit-transform': 'rotate(' + rotateDegrees + 'deg)',
-					'-o-transform': 'rotate(' + rotateDegrees + 'deg)',
-					'-ms-transform': 'rotate(' + rotateDegrees + 'deg)'
-				});				
+				
+				var transformParam = extend({}, data);
+				transformParam.rotateDegrees = rotateDegrees;				
+				transform(targetDOM , transformParam);
 			}
 
 			var rotate_mouseup = function() {
@@ -95,8 +93,11 @@ ui.factory("rotatable" , ['$document', 'throttle' , function($document , throttl
 			angular.element(triggerDOM).on('mousedown', function(event) {			    
 				event.preventDefault();
 				event.stopPropagation();
+				//reset
 				startX = event.screenX;
 				startY = event.screenY;
+				x = 0;
+				y = 0;
 				data.W = targetDOM[0].clientWidth;
 				data.H = targetDOM[0].clientHeight;
 				$document.on('mousemove', throttle_rotate_mousemove);
@@ -105,7 +106,8 @@ ui.factory("rotatable" , ['$document', 'throttle' , function($document , throttl
 	}    
 }]);
 
-ui.factory("resizable" , ['$document', 'throttle' , function($document , throttle){
+ui.factory("resizable" , ['$document', 'throttle' , 'transform' , 'extend' , 
+	function($document , throttle , transform , extend){
 	return function(triggerDOM , targetDOM , data){	
 
 		var 
@@ -125,12 +127,15 @@ ui.factory("resizable" , ['$document', 'throttle' , function($document , throttl
 			stretchW = (x*cosTheta + y*sinTheta);
 			stretchH = (-x*sinTheta + y*cosTheta);
 							
-			targetDOM.css({
-				'left': ( data.offsetX - stretchW ) + "px",
-				'top':  ( data.offsetY - stretchH ) + "px",
+			targetDOM.css({				
 				'width': ( data.W + stretchW*2 ) + "px",
 				'height': ( data.H + stretchH*2 ) + "px"
 			});
+
+			var transformParam = extend({}, data);
+			transformParam.offsetX = data.offsetX - stretchW;
+			transformParam.offsetY = data.offsetY - stretchH;			
+			transform(targetDOM , transformParam);
 		}
 
 		var resize_mouseup = function() {
@@ -148,14 +153,19 @@ ui.factory("resizable" , ['$document', 'throttle' , function($document , throttl
 		angular.element(triggerDOM).on('mousedown', function(event) {			    
 			event.preventDefault();
 			event.stopPropagation();
+			//reset
 			startX = event.screenX;
 			startY = event.screenY;
+			x = 0;
+			y = 0;
+			stretchW = 0;
+			stretchH = 0;
 			data.W = targetDOM[0].clientWidth;
-			data.H = targetDOM[0].clientHeight;
-			data.offsetX = parseInt(targetDOM[0].style.left , 10) || 0;
-			data.offsetY = parseInt(targetDOM[0].style.top , 10) || 0;				
+			data.H = targetDOM[0].clientHeight;			
 			cosTheta = Math.floor(Math.cos(Math.PI*data.rotateDegrees/180)*1000)/1000; //3 decimal
 			sinTheta = Math.floor(Math.sin(Math.PI*data.rotateDegrees/180)*1000)/1000;			
+
+
 			$document.on('mousemove', resize_mousemove);
 			$document.on('mouseup', resize_mouseup);
 			
@@ -176,21 +186,18 @@ ui.factory("draggable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 
 		var drag_mousemove = function(event) {
 			y = event.screenY - startY;
-			x = event.screenX - startX;											
-			targetDOM.css({
-				left : data.offsetX + x + 'px',
-				top : data.offsetY + y + 'px'
-			});
-			//var transformParam = extend({x : data.offsetX + x, y : data.offsetY + y }, data);
-			//console.log(transformParam);
-			//transform(targetDOM , transformParam);
+			x = event.screenX - startX;			
+			var transformParam = extend({}, data);			
+			transformParam.offsetX = data.offsetX + x;
+			transformParam.offsetY = data.offsetY + y;
+			transform(targetDOM , transformParam);
 		}
 
 		var drag_mouseup = function(){
 			$document.unbind('mousemove', throttle_drag_mousemove);
 			$document.unbind('mouseup', drag_mouseup);
 			data.offsetX = data.offsetX + x;
-			data.offsetY = data.offsetY + y;
+			data.offsetY = data.offsetY + y;			
 		}
 
 		var throttle_drag_mousemove = throttle(drag_mousemove , 16);
@@ -198,10 +205,11 @@ ui.factory("draggable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 		angular.element(triggerDOM).on('mousedown', function(event) {								
 		    // Prevent default dragging of selected content			    
 		    event.preventDefault();
+		    //reset
 		    startX = event.screenX;
-		    startY = event.screenY;
-		    data.offsetX = parseInt(targetDOM[0].style.left , 10) || 0;
-			data.offsetY = parseInt(targetDOM[0].style.top , 10) || 0;
+		    startY = event.screenY;		    
+		    x = 0;
+		    y = 0;
 		    $document.on('mousemove', throttle_drag_mousemove);
 		    $document.on('mouseup', drag_mouseup);
 		});
