@@ -47,22 +47,29 @@ body {
     opacity: 0;
 }
 .deleteable .delBtn,
-.rotatable .roteateBtn{
-    position: absolute;    
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
-    text-align: center;    
+.rotatable .roteateBtn,
+.resizeable .resizeBtn{
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    line-height: 34px;
+    font-size: 18px;    
     border-radius: 50%;
 }
 .deleteable .delBtn{
-    left: -40px;
-    top: -40px;
+    right: -50px;
+    top: -50px;
 }
 .rotatable .roteateBtn{
-    right: -40px;
-    top: -40px;
+    left: -50px;
+    bottom: -50px;
 }
+.resizeable .resizeBtn{
+    right: -50px;
+    bottom: -50px;
+}
+
+
 .selectable{    
 
 }
