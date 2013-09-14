@@ -76,16 +76,14 @@ ui.factory("rotatable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 						rotateDegrees+= rotateDelta;
 					}
 				}
-				
-				var transformParam = extend({}, data);
-				transformParam.rotateDegrees = rotateDegrees;				
-				transform(targetDOM , transformParam);
+											
+				data.rotateDegrees = rotateDegrees;
+				transform(targetDOM , data);
 			}
 
 			var rotate_mouseup = function() {
 				$document.unbind('mousemove', throttle_rotate_mousemove);
-				$document.unbind('mouseup', rotate_mouseup);
-				data.rotateDegrees = rotateDegrees;
+				$document.unbind('mouseup', rotate_mouseup);				
 			}
 
 			var throttle_rotate_mousemove = throttle(rotate_mousemove , 16);
@@ -114,7 +112,11 @@ ui.factory("resizable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 			startX = 0,
 			startY = 0,
 			x = 0,
-			y = 0,			
+			y = 0,
+			startOffsetX = 0,
+			startOffsetY = 0,
+			startW = 0,
+			startH = 0,
 			stretchW = 0,
 			stretchH = 0,
 			cosTheta = 0,
@@ -126,26 +128,23 @@ ui.factory("resizable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 			x = event.screenX - startX;				
 			stretchW = (x*cosTheta + y*sinTheta);
 			stretchH = (-x*sinTheta + y*cosTheta);
+
+
+			data.offsetX = startOffsetX - stretchW;
+			data.offsetY = startOffsetY - stretchH;
+			data.W = startW + stretchW*2;
+			data.H = startH + stretchH*2;
 							
 			targetDOM.css({				
-				'width': ( data.W + stretchW*2 ) + "px",
-				'height': ( data.H + stretchH*2 ) + "px"
+				'width': data.W + "px",
+				'height': data.H + "px"
 			});
-
-			var transformParam = extend({}, data);
-			transformParam.offsetX = data.offsetX - stretchW;
-			transformParam.offsetY = data.offsetY - stretchH;			
-			transform(targetDOM , transformParam);
+			transform(targetDOM , data);
 		}
 
 		var resize_mouseup = function() {
 			$document.unbind('mousemove', resize_mousemove);
 			$document.unbind('mouseup', resize_mouseup);
-
-			data.offsetX = data.offsetX - stretchW;
-			data.offsetY = data.offsetY - stretchH;
-			data.W = data.W + stretchW*2;
-			data.H = data.H + stretchH*2;
 		}
 
 		var throttle_resize_mousemove = throttle(resize_mousemove , 16);
@@ -160,8 +159,10 @@ ui.factory("resizable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 			y = 0;
 			stretchW = 0;
 			stretchH = 0;
-			data.W = targetDOM[0].clientWidth;
-			data.H = targetDOM[0].clientHeight;			
+			startW = data.W = targetDOM[0].clientWidth;
+			startH = data.H = targetDOM[0].clientHeight;
+			startOffsetX = data.offsetX;
+			startOffsetY = data.offsetY;			
 			cosTheta = Math.floor(Math.cos(Math.PI*data.rotateDegrees/180)*1000)/1000; //3 decimal
 			sinTheta = Math.floor(Math.sin(Math.PI*data.rotateDegrees/180)*1000)/1000;			
 
@@ -181,23 +182,22 @@ ui.factory("draggable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 		var 
 			x = 0,
 			y = 0,
+			startOffsetX = 0,
+			startOffsetY = 0,
 			startX = 0,
 			startY = 0;
 
 		var drag_mousemove = function(event) {
 			y = event.screenY - startY;
 			x = event.screenX - startX;			
-			var transformParam = extend({}, data);			
-			transformParam.offsetX = data.offsetX + x;
-			transformParam.offsetY = data.offsetY + y;
-			transform(targetDOM , transformParam);
+			data.offsetX = startOffsetX + x;
+			data.offsetY = startOffsetY + y;
+			transform(targetDOM , data);
 		}
 
 		var drag_mouseup = function(){
 			$document.unbind('mousemove', throttle_drag_mousemove);
-			$document.unbind('mouseup', drag_mouseup);
-			data.offsetX = data.offsetX + x;
-			data.offsetY = data.offsetY + y;			
+			$document.unbind('mouseup', drag_mouseup);			
 		}
 
 		var throttle_drag_mousemove = throttle(drag_mousemove , 16);
@@ -210,6 +210,8 @@ ui.factory("draggable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 		    startY = event.screenY;		    
 		    x = 0;
 		    y = 0;
+		    startOffsetX = data.offsetX;
+		    startOffsetY = data.offsetY;
 		    $document.on('mousemove', throttle_drag_mousemove);
 		    $document.on('mouseup', drag_mouseup);
 		});
