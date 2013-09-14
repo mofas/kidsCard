@@ -225,7 +225,10 @@ ui.directive('adjustable', [ '$document', 'rotatable' , 'resizable' , 'draggable
 
 	return {
 
-		scope : {},
+		scope : {
+			"obj" : "=",
+			"delCallback" : "="
+		},
 		controller : function ($scope, $element) {    	      
 			//using $scope.$parent as "root" scope			
 			$scope.$parent.perviousSelected = null;    	    	
@@ -253,7 +256,8 @@ ui.directive('adjustable', [ '$document', 'rotatable' , 'resizable' , 'draggable
 			resizable(element[0].children[2] , element , data);
 			draggable(element[0].children[3] , element , data);
 
-			scope.del = function(){								
+			scope.del = function(){				
+				scope.delCallback(scope.obj.id);
 				element[0].parentNode.removeChild(element[0]);				
 			}
 

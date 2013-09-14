@@ -3,5 +3,5 @@
 var app = angular.module('kidsCardApp', [
   'ui',
   'kidsCardApp.controllers'
-  ]);
+]);
 

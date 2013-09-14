@@ -15,35 +15,77 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 </head>
-  <body ng-app="kidsCardApp">
-
-
+<body ng-app="kidsCardApp">
 
     <!-- Add your site or application content here -->
     <div class="container" ng-view="">
-        <div class="canvas">
-<!--             <span class="component" selectable>Select ME</span>            
-            <span class="component" draggable>Drag ME</span>
-            <span class="component" resizeable>Resize ME</span>
-
-            <span class="component" deleteable>Delete ME</span>
-            <span class="component" rotatable>Rotate ME</span>
- -->            
-
-            <span class="component" style="left: 200px; top: 200px;" adjustable>Adjust ME</span>
-            <!-- <span class="component" style="left: 200px;" adjustable>Adjust ME</span>
-            <span class="component" style="top: 200px;" adjustable>Adjust ME</span> -->
-
-            
+        <div id="cardFactory" ng-controller="MainCtrl">  
+            <div class="clearfix">
+                <div class="workingArea">
+                    <div class="canvas" style="background: {{ selected_bg }};">
+                        <div class="frame" style="background: {{ selected_frame }};">
+                            <span ng-cloak class="adornment_item" 
+                                adjustable obj="adornment" del-callback="removeAdornment"
+                                ng-repeat="adornment in adornmentList">
+                                <div class="adornmentImg" style="background: url('{{adornment.src}}');"></div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="window" ng-class="{'open' : isWindowOpen }">
+                        <div class="closeBtn" ng-click="closeWindow();"></div>
+                        <div class="bg section" ng-class="{'open' : openSection == 'bg' }">
+                            <div class="item" ng-repeat="item in bg">
+                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectBackground('{{item.src}}');">
+                            </div>
+                        </div>
+                        <div class="frame section" ng-class="{'open' : openSection == 'frame' }">
+                            <div class="item" ng-repeat="item in frame">
+                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectFrame('{{item.src}}');">
+                            </div>
+                        </div>
+                        <div class="adornment section" ng-class="{'open' : openSection == 'adornment' }">
+                            <div class="item" ng-repeat="item in adornment">
+                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="addAdornment(item);">
+                            </div>
+                        </div>
+                        <div class="word section" ng-class="{'open' : openSection == 'word' }">
+                            word
+                        </div>
+                        <div class="graffiti section" ng-class="{'open' : openSection == 'graffiti' }">
+                            graffiti
+                        </div>
+                    </div>
+                </div>
+                <div class="menu">
+                    <div class="menuBtn functionBtn1" ng-click="openSectionWindow('bg');"></div>
+                    <div class="menuBtn functionBtn2" ng-click="openSectionWindow('frame');"></div>
+                    <div class="menuBtn functionBtn3" ng-click="openSectionWindow('adornment');"></div>
+                    <div class="menuBtn functionBtn4" ng-click="openSectionWindow('word');"></div>
+                    <div class="menuBtn functionBtn5" ng-click="openSectionWindow('graffiti');"></div>
+                    <div class="menuBtn functionBtn6" ng-click="reset();"></div>
+                    <div class="menuBtn submitBtn"></div>
+                </div>
+            </div>
+            <div class="subMenu">
+                <div class="navBtn navLeft"></div>
+                <div class="navBtn navRight"></div>
+                <div class="objWrap clearfix">
+                    <div class="subMenuBtn topic1"></div>
+                    <div class="subMenuBtn topic2"></div>
+                    <div class="subMenuBtn topic3"></div>
+                    <div class="subMenuBtn topic4"></div>
+                    <div class="subMenuBtn topic5"></div>
+                </div>
+            </div>
         </div>
     </div>
 
-    
-  
-    <!-- build:js scripts/modules.js -->
-    <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+
+
+    <!-- build:js scripts/modules.js -->    
     <script src="bower_components/angular/angular.js"></script>
     <!--
+    <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
