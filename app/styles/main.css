@@ -78,16 +78,31 @@ body {
 #cardFactory .window .section.open{
     display: block;
 }
-#cardFactory .window .item{
+#cardFactory .item{
     cursor: pointer;
     float: left;
     width: 50px;
     height: 50px;
     margin: 10px;
-    background: #fff;
+    position: relative;
 }
-#cardFactory .window .item img{
+#cardFactory .item img{
     width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+#cardFactory .frame .item{
+    width: 150px;
+    height: 100px;
+    background: #fff;
+    border-radius: 5px;
+}
+#cardFactory .word .item{
+    width: 150px;
+    height: 100px;
 }
 
 #cardFactory .menu{
@@ -213,8 +228,54 @@ body {
 .adornmentImg{
     width: 250px;
     height: 250px;
+    -webkit-animation: play .8s steps(2) infinite;
+    -moz-animation: play .8s steps(2) infinite;
+    -ms-animation: play .8s steps(2) infinite;
+    -o-animation: play .8s steps(2) infinite;
+    animation: play .8s steps(2) infinite;
+}
+@-webkit-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
 }
 
+@-moz-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@-ms-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@-o-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+.bubbler_item{
+    display: block;    
+    width: 300px;
+    height: 150px;            
+    position: relative;
+}
+.bubblerText{
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    z-index: 1002;
+    font-size: 30px;
+    line-height: 45px;
+    font-family: "微軟正黑體";
+    resize: none;
+    overflow: hidden;
+}
 
 
 /*!
@@ -248,7 +309,7 @@ body {
     line-height: 34px;
     font-size: 18px;    
     border-radius: 50%;
-    z-index: 5; 
+    z-index: 6; 
     opacity: 0;
     display: none;
 }
@@ -275,7 +336,8 @@ body {
 .adjustable > .wrap{
     width: 100%;
     height: 100%;
-    display: block;    
+    display: block;
+    overflow: hidden;
 }
 .adjustable.select > .wrap{
     position: absolute;

@@ -5,10 +5,11 @@ var ui = angular.module('ui' , ['utility']);
 
 
 ui.factory("transform" , [function(){
-	return function(targetDOM , data){				
+	return function(targetDOM , data){	
 
-		var transformStr = 'translate(' + data.offsetX + 'px,' + data.offsetY + 'px) ' + 
-							'rotate(' + data.rotateDegrees + 'deg) ';
+		var transformStr = 'translate(' + (data.offsetX || 0) + 'px,' + (data.offsetY || 0) + 'px) ' + 
+							'rotate(' + (data.rotateDegrees || 0) + 'deg) ' +
+							'scale( ' + (data.scaleX || 1) + ', ' + (data.scaleY || 1) + ')';		
 
 		targetDOM.css({
 			'-moz-transform': transformStr,
@@ -19,8 +20,8 @@ ui.factory("transform" , [function(){
 	}    
 }]);
 
-ui.factory("rotatable" , ['$document', 'throttle' , 'transform' , 'extend' , 
-	function($document , throttle , transform , extend){
+ui.factory("rotatable" , ['$document', 'throttle' , 'transform' ,
+	function($document , throttle , transform ) {
 	return function(triggerDOM , targetDOM , data){
 
 			var
@@ -104,8 +105,8 @@ ui.factory("rotatable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 	}    
 }]);
 
-ui.factory("resizable" , ['$document', 'throttle' , 'transform' , 'extend' , 
-	function($document , throttle , transform , extend){
+ui.factory("resizable" , ['$document', 'throttle' , 'transform' ,
+	function($document , throttle , transform ) {
 	return function(triggerDOM , targetDOM , data){	
 
 		var 
@@ -129,11 +130,15 @@ ui.factory("resizable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 			stretchW = (x*cosTheta + y*sinTheta);
 			stretchH = (-x*sinTheta + y*cosTheta);
 
-
-			data.offsetX = startOffsetX - stretchW;
-			data.offsetY = startOffsetY - stretchH;
-			data.W = startW + stretchW*2;
-			data.H = startH + stretchH*2;
+			//check size limit
+			if( !((startW + stretchW*2) < data.minW || (startW + stretchW*2) > data.maxW) ){
+				data.offsetX = startOffsetX - stretchW;
+				data.W = startW + stretchW*2;
+			}
+			if( !((startH + stretchH*2) < data.minH || (startH + stretchH*2) > data.maxH) ){
+				data.offsetY = startOffsetY - stretchH;			
+				data.H = startH + stretchH*2;		
+			}
 							
 			targetDOM.css({				
 				'width': data.W + "px",
@@ -175,8 +180,8 @@ ui.factory("resizable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 	}    
 }]);
 
-ui.factory("draggable" , ['$document', 'throttle' , 'transform' , 'extend' , 
-	function($document , throttle , transform , extend){
+ui.factory("draggable" , ['$document', 'throttle' , 'transform' ,
+	function($document , throttle , transform ) {
 	return function(triggerDOM , targetDOM , data){		
 
 		var 
@@ -202,9 +207,7 @@ ui.factory("draggable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 
 		var throttle_drag_mousemove = throttle(drag_mousemove , 16);
 
-		angular.element(triggerDOM).on('mousedown', function(event) {								
-		    // Prevent default dragging of selected content			    
-		    event.preventDefault();
+		angular.element(triggerDOM).on('mousedown', function(event) {		    
 		    //reset
 		    startX = event.screenX;
 		    startY = event.screenY;		    
@@ -220,27 +223,34 @@ ui.factory("draggable" , ['$document', 'throttle' , 'transform' , 'extend' ,
 
 
 
-ui.directive('adjustable', [ '$document', 'rotatable' , 'resizable' , 'draggable',
-	function($document , rotatable , resizable , draggable) {
+ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable' , 'draggable',
+	function($document , $timeout , rotatable , resizable , draggable) {
 
 	return {
 
 		scope : {
 			"obj" : "=",
-			"delCallback" : "="
+			"minW": "=",
+			"minH": "=",
+			"maxW": "=",
+			"maxH": "=",
+			"delCallback" : "=",
+			"transformCallback": "="
 		},
 		controller : function ($scope, $element) {    	      
-			//using $scope.$parent as "root" scope			
-			$scope.$parent.perviousSelected = null;    	    	
+			//using $scope.$parent.$parent as "root" scope	
+			var $tempRootScope = $scope.$parent.$parent;				
+
+			// $tempRootScope.perviousSelected = null;
+
 			$element.bind("mousedown" , function(event){    					
-				if($scope.$parent.perviousSelected != null){
-					$scope.$parent.perviousSelected.removeClass("select");
+				if($tempRootScope.perviousSelected != null){
+					$tempRootScope.perviousSelected.removeClass("select");
 				}				
 				$element.addClass("select");
-				$scope.$parent.perviousSelected = $element;
-			});
-
-		},
+				$tempRootScope.perviousSelected = $element;				
+			});			
+		},		
 		link : function(scope, element, attrs) {
 
 			var data = {};
@@ -251,6 +261,13 @@ ui.directive('adjustable', [ '$document', 'rotatable' , 'resizable' , 'draggable
 			data.H = 0; //original height
 			data.rotateDegrees = 0; //rotate degree
 
+			
+			data.minW = scope.minW || 0;
+			data.minH = scope.minH || 0;
+			data.maxW = scope.maxW || 1000;
+			data.maxH = scope.maxH || 1000;			
+
+			scope.obj.data = data;
 				
 			rotatable(element[0].children[1] , element , data);
 			resizable(element[0].children[2] , element , data);

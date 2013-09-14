@@ -88,7 +88,7 @@ var injectData = function($scope){
 			"thumb": "images/adornment/3-1/004.jpg",
 			"src": "images/adornment/3-1/004-1.png"
 		},
-				{
+		{
 			"topic": "simple",
 			"thumb": "images/adornment/3-1/005.jpg",
 			"src": "images/adornment/3-1/005-1.png"
@@ -105,8 +105,37 @@ var injectData = function($scope){
 		}
 	];
 
-	$scope.word = [
-
+	$scope.bubbler = [
+		{
+			"topic": "simple",
+			"style": "border: 4px dashed #FF88A6; border-radius:35px; background: #FFC1D1;",
+			"thumb": "images/bubbler/001.png"
+		},
+		{
+			"topic": "simple",
+			"style": "border: 4px dashed #FFB197; border-radius:35px; background: #FFD0C1;",
+			"thumb": "images/bubbler/002.png"
+		},
+		{
+			"topic": "simple",
+			"style": "border: 4px dashed #93E698; border-radius:35px; background: #BDF1C0;",
+			"thumb": "images/bubbler/003.png"
+		},
+		{
+			"topic": "simple",
+			"style": "border: 4px dashed #93C2E6; border-radius:35px; background: #BDDBF1;",
+			"thumb": "images/bubbler/004.png"
+		},
+		{
+			"topic": "simple",
+			"style": "border: 4px dashed #BE93E6; border-radius:35px; background: #D7BDF1;",
+			"thumb": "images/bubbler/005.png"
+		},
+		{
+			"topic": "simple",
+			"style": "border: 4px dashed #FF88A6; border-radius:100px; background: #FFC1D1;",
+			"thumb": "images/bubbler/006.png"
+		}
 	];
 
 	$scope.graffiti = [
@@ -126,6 +155,7 @@ var initData = function($scope){
 	$scope.selected_bg = "transparent";
 	$scope.selected_frame = "transparent";
 	$scope.adornmentList = [];
+	$scope.bubblerList = [];
 }
 
 app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , function ($scope , $timeout , extend) {
@@ -154,6 +184,8 @@ app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , function ($scope 
 	$scope.reset = function(){
 		$scope.selected_bg = "transparent";
 		$scope.selected_frame = "transparent";
+		$scope.adornmentList = [];
+		$scope.bubblerList = [];
 	}
 
 	$scope.selectBackground = function(src){		
@@ -169,15 +201,38 @@ app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , function ($scope 
 			id: $scope.adornmentIndex++,
 			src: item.src			
 		}
-		$scope.adornmentList.push(newObj);
-		console.log($scope.adornmentList);
+		$scope.adornmentList.push(newObj);		
+		$scope.closeWindow();
 	}
 
-	$scope.removeAdornment = function(index){
-		// angular.forEach();
-		$scope.adornmentList.
-		console.log($scope.adornmentList);
+	$scope.removeAdornment = function(id){
+		var index = null;
+		 angular.forEach($scope.adornmentList , function(obj , i){		 	
+		 	if( obj.id == id){
+		 		index = i;
+		 	}
+		 });
+		$scope.adornmentList.splice(index , 1);		
 	}
 
+
+	$scope.addBubbler = function(item){
+		var newObj = { 
+			id: $scope.adornmentIndex++,
+			style: item.style
+		}
+		$scope.bubblerList.push(newObj);		
+		$scope.closeWindow();
+	}
+
+	$scope.removeBubbler = function(id){
+		var index = null;
+		 angular.forEach($scope.bubblerList , function(obj , i){		 	
+		 	if( obj.id == id){
+		 		index = i;
+		 	}
+		 });
+		$scope.bubblerList.splice(index , 1);		
+	}
 	
 }]);
