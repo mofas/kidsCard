@@ -111,44 +111,6 @@ module.exports = function (grunt) {
       },
       server: '.tmp'
     },
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc'
-      },
-      all: [
-        'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js'
-      ]
-    },
-    coffee: {
-      options: {
-        sourceMap: true,
-        sourceRoot: ''
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
-          ext: '.js'
-        }]
-      },
-      test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
-          ext: '.js'
-        }]
-      }
-    },
-    // not used since Uglify task does concat,
-    // but still available if needed
-    /*concat: {
-      dist: {}
-    },*/
     rev: {
       dist: {
         files: {
@@ -174,23 +136,29 @@ module.exports = function (grunt) {
     },
     imagemin: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.app %>',
+            src: [
+              'styles/{,*/}*.{png,jpg,jpeg}',
+              'images/*/{,*/}*.{png,jpg,jpeg}'
+            ],
+            dest: '<%= yeoman.dist %>'
+            
+          }          
+        ]
       }
     },
     svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
+      // dist: {
+      //   files: [{
+      //     expand: true,
+      //     cwd: '<%= yeoman.app %>/images',
+      //     src: '{,*/}*.svg',
+      //     dest: '<%= yeoman.dist %>/images'
+      //   }]
+      // }
     },
     cssmin: {
       // By default, your `index.html` <!-- Usemin Block --> will take care of
@@ -208,15 +176,6 @@ module.exports = function (grunt) {
     htmlmin: {
       dist: {
         options: {
-          /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
         },
         files: [{
           expand: true,
@@ -236,7 +195,6 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             '*.{ico,png,txt}',
-            '.htaccess',
             'bower_components/**/*',
             'images/{,*/}*.{gif,webp}',
             'styles/fonts/*'
@@ -259,18 +217,15 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
-        'coffee:dist',
         'copy:styles'
       ],
       test: [
-        'coffee',
         'copy:styles'
       ],
       dist: [
-        'coffee',
         'copy:styles',
         'imagemin',
-        'svgmin',
+        //'svgmin',
         'htmlmin'
       ]
     },

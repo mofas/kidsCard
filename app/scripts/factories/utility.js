@@ -9,7 +9,7 @@
 
 var factories = angular.module('utility', []);
 
-factories.factory("throttle" , function(){
+factories.factory("throttle" , [ function(){
 	return function(func, wait, options){							
 		var context, args, result;
 		var timeout = null;
@@ -37,9 +37,9 @@ factories.factory("throttle" , function(){
 			return result;
 		};	
 	}    
-});
+}]);
 
-factories.factory("each" , function(){
+factories.factory("each" , [ function(){
 	return function(obj, iterator, context) {
     	if (obj == null) return;
     	if (Array.prototype.forEach && obj.forEach === Array.prototype.forEach) {
@@ -55,7 +55,7 @@ factories.factory("each" , function(){
       		}
     	}
   	};
-});
+}]);
 
 factories.factory("extend" , [ 'each' , function(each){
 	return function(obj){  	

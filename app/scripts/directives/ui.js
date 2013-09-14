@@ -4,7 +4,7 @@
 var ui = angular.module('ui' , ['utility']);
 
 
-ui.factory("transform" , [function(){
+ui.factory("transform" , [ function(){
 	return function(targetDOM , data){	
 
 		var transformStr = 'translate(' + (data.offsetX || 0) + 'px,' + (data.offsetY || 0) + 'px) ' + 
@@ -20,7 +20,7 @@ ui.factory("transform" , [function(){
 	}    
 }]);
 
-ui.factory("rotatable" , ['$document', 'throttle' , 'transform' ,
+ui.factory("rotatable" , [ '$document', 'throttle' , 'transform' ,
 	function($document , throttle , transform ) {
 	return function(triggerDOM , targetDOM , data){
 
@@ -105,7 +105,7 @@ ui.factory("rotatable" , ['$document', 'throttle' , 'transform' ,
 	}    
 }]);
 
-ui.factory("resizable" , ['$document', 'throttle' , 'transform' ,
+ui.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 	function($document , throttle , transform ) {
 	return function(triggerDOM , targetDOM , data){	
 
@@ -204,7 +204,7 @@ ui.factory("resizable" , ['$document', 'throttle' , 'transform' ,
 	}    
 }]);
 
-ui.factory("draggable" , ['$document', 'throttle' , 'transform' ,
+ui.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 	function($document , throttle , transform ) {
 	return function(triggerDOM , targetDOM , data){		
 
@@ -245,8 +245,6 @@ ui.factory("draggable" , ['$document', 'throttle' , 'transform' ,
 	}    
 }]);
 
-
-
 ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable' , 'draggable',
 	function($document , $timeout , rotatable , resizable , draggable) {
 
@@ -261,7 +259,7 @@ ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable'
 			"delCallback" : "=",
 			"resizeInner" : "="
 		},
-		controller : function ($scope, $element) {    	      
+		controller : [ '$scope' , '$element' , function ($scope, $element) {    	      
 			//using $scope.$parent.$parent as "root" scope	
 			var $tempRootScope = $scope.$parent.$parent;				
 
@@ -274,7 +272,7 @@ ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable'
 				$element.addClass("select");
 				$tempRootScope.perviousSelected = $element;				
 			});			
-		},		
+		}],		
 		link : function(scope, element, attrs) {
 
 			var data = {};
