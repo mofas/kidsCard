@@ -38,7 +38,7 @@
                                 adjustable  obj="bubbler" del-callback="removeBubbler"
                                 min-w="100" min-h="50" max-w="600" max-h="300"
                                 ng-repeat="bubbler in bubblerList">                                
-                                    <textarea class="bubblerText" style="{{bubbler.style}}" ng-model="text" autofocus="true">
+                                    <textarea ng-cloak class="bubblerText" style="{{bubbler.style}}" ng-model="text" autofocus="true">
                                     </textarea>                                
                             </span>
                         </div>

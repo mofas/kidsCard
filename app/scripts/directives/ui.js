@@ -245,6 +245,23 @@ ui.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 	}    
 }]);
 
+
+ui.service('selectCtrl', ['$document', function ($document) {
+    var ctrl = {};
+
+	var cancelSelectEvent = function(e){		
+		if(e.toElement === ctrl.$parentDOM){	
+			if(ctrl.perviousSelected != null){		
+				ctrl.perviousSelected.removeClass("select");
+				ctrl.perviousSelected = null;
+			}
+		}
+	}
+
+	$document.on("click" , cancelSelectEvent);
+    return ctrl;
+}]);
+
 ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable' , 'draggable',
 	function($document , $timeout , rotatable , resizable , draggable) {
 
@@ -259,19 +276,19 @@ ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable'
 			"delCallback" : "=",
 			"resizeInner" : "="
 		},
-		controller : [ '$scope' , '$element' , function ($scope, $element) {    	      
-			//using $scope.$parent.$parent as "root" scope	
-			var $tempRootScope = $scope.$parent.$parent;				
-
-			// $tempRootScope.perviousSelected = null;
-
+		controller : [ '$scope' , '$element' , 'selectCtrl' , function ($scope, $element , selectCtrl) {    	      			
+			if(!(selectCtrl.$parentDOM != null)){
+				selectCtrl.$parentDOM = $element.parent()[0];				
+			}
+			
 			$element.bind("mousedown" , function(event){    					
-				if($tempRootScope.perviousSelected != null){
-					$tempRootScope.perviousSelected.removeClass("select");
+				if(selectCtrl.perviousSelected != null){
+					selectCtrl.perviousSelected.removeClass("select");
 				}				
 				$element.addClass("select");
-				$tempRootScope.perviousSelected = $element;				
-			});			
+				selectCtrl.perviousSelected = $element;												
+			});
+
 		}],		
 		link : function(scope, element, attrs) {
 
@@ -296,8 +313,7 @@ ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable'
 			resizable(element[0].children[2] , element , data);
 			draggable(element[0].children[3] , element , data);
 
-			scope.del = function(){				
-				scope.delCallback(scope.obj.id);
+			scope.del = function(){								
 				element[0].parentNode.removeChild(element[0]);				
 			}
 
