@@ -9,14 +9,14 @@ ui.factory("transform" , [function(){
 
 		var transformStr = 'translate(' + (data.offsetX || 0) + 'px,' + (data.offsetY || 0) + 'px) ' + 
 							'rotate(' + (data.rotateDegrees || 0) + 'deg) ' +
-							'scale( ' + (data.scaleX || 1) + ', ' + (data.scaleY || 1) + ')';		
+							'scale( ' + (data.scaleX || 1) + ', ' + (data.scaleY || 1) + ')';
 
 		targetDOM.css({
 			'-moz-transform': transformStr,
 			'-webkit-transform': transformStr,
 			'-o-transform': transformStr,
 			'-ms-transform': transformStr,
-		});				
+		});		
 	}    
 }]);
 
@@ -145,6 +145,30 @@ ui.factory("resizable" , ['$document', 'throttle' , 'transform' ,
 				'height': data.H + "px"
 			});
 			transform(targetDOM , data);
+			if(data.resizeInner){
+				var inner = targetDOM[0].children[3].children[0],
+					innerW = inner.clientWidth,
+					innerH = inner.clientHeight,
+					scaleX = 1,
+					scaleY = 1,
+					offsetX = 0,
+					offsetY = 0;
+				if(innerW > data.W){
+					scaleX = data.W/innerW;
+					offsetX = -(innerW-data.W)/2;
+				}
+				if(innerH > data.H){
+					scaleY = data.H/innerH;
+					offsetY = -(innerH-data.H)/2;
+				}
+				data.inner = {
+					offsetX : offsetX,
+					offsetY : offsetY, 
+					scaleX : scaleX,
+					scaleY : scaleY 
+				}
+				transform(angular.element(inner) , data.inner);
+			}
 		}
 
 		var resize_mouseup = function() {
@@ -235,7 +259,7 @@ ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable'
 			"maxW": "=",
 			"maxH": "=",
 			"delCallback" : "=",
-			"transformCallback": "="
+			"resizeInner" : "="
 		},
 		controller : function ($scope, $element) {    	      
 			//using $scope.$parent.$parent as "root" scope	
@@ -265,7 +289,8 @@ ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable'
 			data.minW = scope.minW || 0;
 			data.minH = scope.minH || 0;
 			data.maxW = scope.maxW || 1000;
-			data.maxH = scope.maxH || 1000;			
+			data.maxH = scope.maxH || 1000;
+			data.resizeInner = scope.resizeInner || false;	
 
 			scope.obj.data = data;
 				

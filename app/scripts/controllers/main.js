@@ -156,6 +156,13 @@ var initData = function($scope){
 	$scope.selected_frame = "transparent";
 	$scope.adornmentList = [];
 	$scope.bubblerList = [];
+
+
+	//TEST CODE
+	$scope.adornmentList.push({ 
+		id: 1,
+		src: "images/adornment/3-1/001-1.png"		
+	});
 }
 
 app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , function ($scope , $timeout , extend) {

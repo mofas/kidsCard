@@ -28,7 +28,7 @@
                             <!-- adornment -->
                             <span ng-cloak class="adornment_item" 
                                 adjustable obj="adornment" del-callback="removeAdornment"
-                                min-w="50" min-h="50" max-w="250" max-h="250"
+                                min-w="50" min-h="50" max-w="250" max-h="250" resize-inner="true"
                                 ng-repeat="adornment in adornmentList">
                                 <div class="adornmentImg" style="background: url('{{adornment.src}}');"></div>
                             </span>
@@ -43,7 +43,6 @@
                             </span>
 
 
-                            <!-- <textarea class="bubblerText ng-scope" style="border: 4px dashed #BE93E6; border-radius:35px; background: #D7BDF1;"></textarea> -->
                         </div>
                     </div>
                     <div class="window" ng-class="{'open' : isWindowOpen }">
