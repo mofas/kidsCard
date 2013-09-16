@@ -197,7 +197,9 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             // 'bower_components/**/*',
             'images/{,*/}*.{gif,webp}',
-            'styles/fonts/*'
+            'styles/img/{,*/}*.{gif,webp}',
+            'styles/fonts/*',
+            'data/*'
           ]
         }, {
           expand: true,
@@ -268,7 +270,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'oncurrent:server',
+      'concurrent:server',
       'autoprefixer',
       'connect:livereload',
       'open',
@@ -278,7 +280,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'oncurrent:test',
+    'concurrent:test',
     'autoprefixer',
     'connect:test',
     'karma'
