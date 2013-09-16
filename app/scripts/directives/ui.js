@@ -7,16 +7,17 @@ var ui = angular.module('ui' , ['utility']);
 ui.factory("transform" , [ function(){
 	return function(targetDOM , data){	
 
-		var transformStr = 'translate(' + (data.offsetX || 0) + 'px,' + (data.offsetY || 0) + 'px) ' + 
+		if(data != null && targetDOM != null){
+			var transformStr = 'translate(' + (data.offsetX || 0) + 'px,' + (data.offsetY || 0) + 'px) ' + 
 							'rotate(' + (data.rotateDegrees || 0) + 'deg) ' +
 							'scale( ' + (data.scaleX || 1) + ', ' + (data.scaleY || 1) + ')';
-							
-		targetDOM.css({
-			'-moz-transform': transformStr,
-			'-webkit-transform': transformStr,
-			'-o-transform': transformStr,
-			'-ms-transform': transformStr,
-		});		
+			targetDOM.css({
+				'-moz-transform': transformStr,
+				'-webkit-transform': transformStr,
+				'-o-transform': transformStr,
+				'-ms-transform': transformStr,
+			});		
+		}		
 	}    
 }]);
 

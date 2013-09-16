@@ -30,8 +30,14 @@ app.service('StyleService', [ function () {
 
 
 
-app.controller('MainCtrl' , [ function() {
-
+app.controller('MainCtrl' , [ '$scope' , function($scope) {
+	$scope.previewMode = false;
+	$scope.openPreview = function () {
+		$scope.previewMode = true;
+	}
+	$scope.closePreview = function() {
+		$scope.previewMode = false;
+	}
 }]);
 
 app.controller('CardFactoryCtrl', [ '$scope' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
@@ -260,8 +266,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$timeout', 'StyleService' , 'sha
 			 		index = i;
 			 	}
 			 });
-			$scope.bubblerList.splice(index , 1);
-			console.log($scope.bubblerList);
+			$scope.bubblerList.splice(index , 1);			
 		}
 
 		$scope.preview = function(){			
@@ -271,7 +276,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$timeout', 'StyleService' , 'sha
 			canvasData.adornmentList = $scope.adornmentList;
 			canvasData.bubblerList = $scope.bubblerList;						
 			shareCanvasDataService.shareData = canvasData;
-			shareCanvasDataService.refresh();
+			shareCanvasDataService.refresh();			
 		}
 	}
 
