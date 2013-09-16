@@ -98,12 +98,12 @@
                 <div class="frame" style="background: {{ selected_frame }};">
 
                     <!-- adornment -->
-                    <span ng-cloak class="adornment_item" ng-repeat="adornment in adornmentList" transformable transform-data="adornment">
+                    <span ng-cloak class="adornment_item displayItem" ng-repeat="adornment in adornmentList" transformable transform-data="adornment">
                         <div class="adornmentImg" style="background: url('{{originalData.src}}');"></div>
                     </span>
                     
                     <!--  bubbler -->
-                    <span ng-cloak class="bubbler_item" ng-repeat="bubbler in bubblerList" transformable transform-data="bubbler">
+                    <span ng-cloak class="bubbler_item displayItem" ng-repeat="bubbler in bubblerList" transformable transform-data="bubbler">
                         <textarea ng-cloak class="bubblerText" style="{{originalData.style}}" ng-model="originalData.text" readonly>
                             </textarea>                                
                     </span>

@@ -10,8 +10,7 @@ ui.factory("transform" , [ function(){
 		var transformStr = 'translate(' + (data.offsetX || 0) + 'px,' + (data.offsetY || 0) + 'px) ' + 
 							'rotate(' + (data.rotateDegrees || 0) + 'deg) ' +
 							'scale( ' + (data.scaleX || 1) + ', ' + (data.scaleY || 1) + ')';
-
-		console.log(targetDOM , transformStr);
+							
 		targetDOM.css({
 			'-moz-transform': transformStr,
 			'-webkit-transform': transformStr,

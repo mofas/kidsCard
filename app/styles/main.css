@@ -308,7 +308,8 @@ body {
 /*!
 *  UI
 */
-.adjustable{    
+.adjustable,
+.displayItem{    
     position: absolute;
     min-width: 50px;
     min-height: 50px;
