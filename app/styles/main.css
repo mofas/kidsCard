@@ -291,7 +291,7 @@ body {
     -moz-transition: all 0.2s;    
 }
 #preview.open{
-    z-index: 1000;
+    z-index: 600;
     visibility: visible;
     opacity: 1;
 }

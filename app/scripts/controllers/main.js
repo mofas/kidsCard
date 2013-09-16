@@ -30,10 +30,12 @@ app.service('StyleService', [ function () {
 
 
 
-app.controller('MainCtrl' , [ '$scope' , function($scope) {
+app.controller('MainCtrl' , [ '$scope' , 'shareCanvasDataService' , function($scope , shareCanvasDataService) {
 	$scope.previewMode = false;
-	$scope.openPreview = function () {
-		$scope.previewMode = true;
+	$scope.openPreview = function () {		
+		if(shareCanvasDataService.ready != false){
+			$scope.previewMode = true;	
+		}		
 	}
 	$scope.closePreview = function() {
 		$scope.previewMode = false;
@@ -269,13 +271,27 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$timeout', 'StyleService' , 'sha
 			$scope.bubblerList.splice(index , 1);			
 		}
 
-		$scope.preview = function(){			
+		var isBasicSetting = function(){
+			if($scope.selected_bg.background == "transparent"){
+				alert("先幫你的卡片加個背景吧");
+				return false;
+			}
+			if($scope.selected_frame.background == "transparent"){
+				alert("先挑選個好看的邊框吧");
+				return false;
+			}
+			return true;
+		}
+
+		$scope.preview = function(callback){
+			//check if user had set background and frame			
 			var canvasData = {};
 			canvasData.selected_bg = $scope.selected_bg;
 			canvasData.selected_frame = $scope.selected_frame;
 			canvasData.adornmentList = $scope.adornmentList;
 			canvasData.bubblerList = $scope.bubblerList;						
-			shareCanvasDataService.shareData = canvasData;
+			shareCanvasDataService.shareData = canvasData;						
+			shareCanvasDataService.ready = isBasicSetting() ? true : false;
 			shareCanvasDataService.refresh();			
 		}
 	}
