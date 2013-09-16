@@ -268,7 +268,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'concurrent:server',
+      'oncurrent:server',
       'autoprefixer',
       'connect:livereload',
       'open',
@@ -278,7 +278,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'concurrent:test',
+    'oncurrent:test',
     'autoprefixer',
     'connect:test',
     'karma'
