@@ -7,8 +7,8 @@ app.service('shareCanvasDataService', [ function () {
 }]);
 
 app.service('StyleService', [ function () {
-	return {		
-		getBGStyle : function(bg){						
+	return {				
+		getBGStyle : function(bg){									
 			if(bg === "transparent"){
 				return { 'background' : 'transparent'}
 			}			
@@ -19,7 +19,7 @@ app.service('StyleService', [ function () {
 				}
 			}
 			//IMAGES
-			else{
+			else{		
 				return{
 					'background' : 'url(' + bg + ') no-repeat',
 				}
@@ -42,8 +42,8 @@ app.controller('MainCtrl' , [ '$scope' , 'shareCanvasDataService' , function($sc
 	}
 }]);
 
-app.controller('CardFactoryCtrl', [ '$scope' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
-	function ($scope , $timeout , StyleService , shareCanvasDataService) {
+app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
+	function ($scope , $http , $q , $timeout , StyleService , shareCanvasDataService) {
 
 
 	var initData = function($scope){
@@ -52,6 +52,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$timeout', 'StyleService' , 'sha
 		$scope.isWindowOpen = false;
 		$scope.openSection = "bg";
 		$scope.adornmentIndex = 0;
+		$scope.isLoadding = true;
 
 		//canvas
 		$scope.selected_bg = { "background" : "transparent" };
@@ -59,144 +60,6 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$timeout', 'StyleService' , 'sha
 		$scope.adornmentList = [];
 		$scope.bubblerList = [];
 
-	}
-
-	var injectData = function($scope){
-		$scope.bg = [
-			{
-				"topic": "simple",
-				"thumb": "images/bg/1-1/001.jpg",
-				"src": "images/bg/1-1/001-1.jpg"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/bg/1-1/002.jpg",
-				"src": "images/bg/1-1/002-1.jpg"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/bg/1-1/003.jpg",
-				"src": "images/bg/1-1/003-1.jpg"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/bg/1-1/004.jpg",
-				"src": "images/bg/1-1/004-1.jpg"
-			}
-		];
-
-		$scope.frame = [
-			{
-				"topic": "simple",
-				"thumb": "images/frame/2-1/001.png",
-				"src": "images/frame/2-1/001.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/frame/2-1/002.png",
-				"src": "images/frame/2-1/002.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/frame/2-1/003.png",
-				"src": "images/frame/2-1/003.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/frame/2-1/004.png",
-				"src": "images/frame/2-1/004.png"
-			},
-					{
-				"topic": "simple",
-				"thumb": "images/frame/2-1/005.png",
-				"src": "images/frame/2-1/005.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/frame/2-1/006.png",
-				"src": "images/frame/2-1/006.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/frame/2-1/007.png",
-				"src": "images/frame/2-1/007.png"
-			}
-		];
-
-		$scope.adornment = [
-			{
-				"topic": "simple",
-				"thumb": "images/adornment/3-1/001.jpg",
-				"src": "images/adornment/3-1/001-1.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/adornment/3-1/002.jpg",
-				"src": "images/adornment/3-1/002-1.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/adornment/3-1/003.jpg",
-				"src": "images/adornment/3-1/003-1.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/adornment/3-1/004.jpg",
-				"src": "images/adornment/3-1/004-1.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/adornment/3-1/005.jpg",
-				"src": "images/adornment/3-1/005-1.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/adornment/3-1/006.jpg",
-				"src": "images/adornment/3-1/006-1.png"
-			},
-			{
-				"topic": "simple",
-				"thumb": "images/adornment/3-1/007.jpg",
-				"src": "images/adornment/3-1/007-1.png"
-			}
-		];
-
-		$scope.bubbler = [
-			{
-				"topic": "simple",
-				"style": { "border" : "4px dashed #FF88A",  "border-radius" : "35px", "background": "#FFC1D1"},
-				"thumb": "images/bubbler/001.png"
-			},
-			{
-				"topic": "simple",
-				"style": { "border" : "4px dashed #FFB19",  "border-radius" : "35px", "background": "#FFD0C1"},
-				"thumb": "images/bubbler/002.png"
-			},
-			{
-				"topic": "simple",
-				"style": { "border" : "4px dashed #93E69",  "border-radius" : "35px", "background": "#BDF1C0"},
-				"thumb": "images/bubbler/003.png"
-			},
-			{
-				"topic": "simple",
-				"style": { "border" : "4px dashed #93C2E",  "border-radius" : "35px", "background": "#BDDBF1"},
-				"thumb": "images/bubbler/004.png"
-			},
-			{
-				"topic": "simple",
-				"style": { "border" : "4px dashed #BE93E",  "border-radius" : "35px", "background": "#D7BDF1"},
-				"thumb": "images/bubbler/005.png"
-			},
-			{
-				"topic": "simple",
-				"style": { "border" : "4px dashed #FF88A6", "border-radius" : "100px", "background": "#FFC1D1"},
-				"thumb": "images/bubbler/006.png"
-			}
-		];
-
-		$scope.graffiti = [
-
-		];
 	}
 
 	var injectFunction = function($scope){
@@ -223,7 +86,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$timeout', 'StyleService' , 'sha
 			$scope.bubblerList = [];
 		}
 
-		$scope.selectBackground = function(src){		
+		$scope.selectBackground = function(src){				
 			$scope.selected_bg = StyleService.getBGStyle(src);			
 		}
 
@@ -297,9 +160,33 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$timeout', 'StyleService' , 'sha
 	}
 
 	initData($scope);
-	injectData($scope);
 	injectFunction($scope);	
-	
+
+	//LOAD DATA
+	$scope.$watch("topic" , function(){		
+		$scope.isLoadding = true;		
+		$scope.bg = [];
+		$scope.frame = [];
+		$scope.adornment = [];
+		$scope.bubbler = [];
+		$timeout(function(){
+			$q.all([
+				$http.get("data/" + $scope.topic + ".json").success(function(data){				
+					$scope.bg = data.bg;
+					$scope.frame = data.frame;
+					$scope.adornment = data.adornment;
+					$scope.bubbler = data.bubbler;			
+				}),
+				$http.get("data/graffiti.json").success(function(data){
+					$scope.graffiti = data.graffiti;
+				})
+		    ]).then(function(){
+		        $scope.isLoadding = false;
+		    });
+		} , 300);
+		
+	});	
+		
 }]);
 
 app.controller('PreviewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService' , 

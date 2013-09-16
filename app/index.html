@@ -19,7 +19,7 @@
     
     <!-- Add your site or application content here -->
     <div ng-view=""></div>
-    <div class="container" ng-controller="MainCtrl">
+    <div class="container" ng-controller="MainCtrl">        
         <div id="cardFactory" ng-controller="CardFactoryCtrl">  
             <div class="clearfix">
                 <div class="workingArea">
@@ -48,7 +48,7 @@
                         <div class="closeBtn" ng-click="closeWindow();"></div>
                         <div class="bg section" ng-class="{'open' : openSection == 'bg' }">
                             <div class="item" ng-repeat="item in bg">
-                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectBackground('{{item.src}}');">
+                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectBackground('{{item.src}}');">                                
                             </div>
                         </div>
                         <div class="frame section" ng-class="{'open' : openSection == 'frame' }">
@@ -85,16 +85,17 @@
                 <div class="navBtn navLeft"></div>
                 <div class="navBtn navRight"></div>
                 <div class="objWrap clearfix">
-                    <div class="subMenuBtn topic1"></div>
-                    <div class="subMenuBtn topic2"></div>
-                    <div class="subMenuBtn topic3"></div>
-                    <div class="subMenuBtn topic4"></div>
-                    <div class="subMenuBtn topic5"></div>
+                    <div class="subMenuBtn topic1" ng-click="topic = 'simple'"></div>
+                    <div class="subMenuBtn topic2"  ng-click="topic = 'activity'"></div>
+                    <div class="subMenuBtn topic3"  ng-click="topic = 'subject'"></div>
+                    <div class="subMenuBtn topic4"  ng-click="topic = 'mail'"></div>
+                    <div class="subMenuBtn topic5"  ng-click="topic = 'special'"></div>
                 </div>
             </div>
+            <div class="loadingOverlay" ng-show="isLoadding">
+                <div class="loading"></div>
+            </div>
         </div>
-
-
         <div id="preview" ng-controller="PreviewCtrl" ng-class="{'open': previewMode}">
             <div class="previewOverlay">
                 <div class="canvasWrap">
