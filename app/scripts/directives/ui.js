@@ -11,6 +11,7 @@ ui.factory("transform" , [ function(){
 							'rotate(' + (data.rotateDegrees || 0) + 'deg) ' +
 							'scale( ' + (data.scaleX || 1) + ', ' + (data.scaleY || 1) + ')';
 
+		console.log(targetDOM , transformStr);
 		targetDOM.css({
 			'-moz-transform': transformStr,
 			'-webkit-transform': transformStr,
@@ -262,6 +263,44 @@ ui.service('selectCtrl', ['$document', function ($document) {
     return ctrl;
 }]);
 
+
+ui.directive('transformable', [ '$timeout' , 'transform' , function($timeout , transform){
+
+	return {
+		scope: {
+			"originalData" : "=transformData"
+		},
+		link : function(scope, element, attrs) {
+			var data = scope.originalData.data;			
+			if(data.W == 0){
+				data.W = element[0].clientWidth;
+			}
+			if(data.H == 0){
+				data.H = element[0].clientHeight;
+			}
+			var targetDOM = angular.element(element[0]);
+			var inner = angular.element(element[0].children[0]);
+			targetDOM.css({				
+				'width': data.W + "px",
+				'height': data.H + "px"
+			});
+			transform(targetDOM , data);			
+
+			if(data.resizeInner){
+				//waiting for finish data.style finish
+				$timeout(function(){
+					transform(inner , data.inner);		
+				} , 1);				
+			}
+			
+
+		}		
+	}
+
+}]);
+
+
+
 ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable' , 'draggable',
 	function($document , $timeout , rotatable , resizable , draggable) {
 
@@ -315,6 +354,7 @@ ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable'
 
 			scope.del = function(){								
 				element[0].parentNode.removeChild(element[0]);				
+				scope.delCallback(scope.obj.id);
 			}
 
 		},

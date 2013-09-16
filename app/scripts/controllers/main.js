@@ -2,8 +2,13 @@
 
 var app = angular.module('kidsCardApp.controllers', ['utility']);
 
+app.service('shareCanvasDataService', [ function () {
+	return { shareData : {} }
+}]);
 
-app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , function ($scope , $timeout , extend) {
+
+app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , 'shareCanvasDataService' ,
+	function ($scope , $timeout , extend , shareCanvasDataService) {
 
 
 	var initData = function($scope){
@@ -19,11 +24,6 @@ app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , function ($scope 
 		$scope.adornmentList = [];
 		$scope.bubblerList = [];
 
-		//TEST CODE
-		// $scope.adornmentList.push({ 
-		// 	id: 1,
-		// 	src: "images/adornment/3-1/001-1.png"		
-		// });
 	}
 
 	var injectData = function($scope){
@@ -231,7 +231,18 @@ app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , function ($scope 
 			 		index = i;
 			 	}
 			 });
-			$scope.bubblerList.splice(index , 1);		
+			$scope.bubblerList.splice(index , 1);
+			console.log($scope.bubblerList);
+		}
+
+		$scope.preview = function(){			
+			var canvasData = {};
+			canvasData.selected_bg = $scope.selected_bg;
+			canvasData.selected_frame = $scope.selected_frame;
+			canvasData.adornmentList = $scope.adornmentList;
+			canvasData.bubblerList = $scope.bubblerList;						
+			shareCanvasDataService.shareData = canvasData;
+			shareCanvasDataService.refresh();
 		}
 	}
 
@@ -239,4 +250,22 @@ app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , function ($scope 
 	injectData($scope);
 	injectFunction($scope);	
 	
+}]);
+
+
+
+app.controller('PreviewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService' , 
+	function ($scope , $timeout , shareCanvasDataService) {
+	
+		shareCanvasDataService.refresh = function(){			
+			$scope.adornmentList = [];
+			$scope.bubblerList = [];
+			//timeout force $digest
+			$timeout(function(){
+				$scope.selected_bg = shareCanvasDataService.shareData.selected_bg;
+				$scope.selected_frame = shareCanvasDataService.shareData.selected_frame;
+				$scope.adornmentList = shareCanvasDataService.shareData.adornmentList;
+				$scope.bubblerList = shareCanvasDataService.shareData.bubblerList;					
+			}, 1);
+		}		
 }]);
