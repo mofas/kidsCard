@@ -18,19 +18,20 @@
 <body ng-app="kidsCardApp">
     
     <!-- Add your site or application content here -->
-    <div class="container" ng-view="">
-        <div id="cardFactory" ng-controller="MainCtrl">  
+    <div ng-view=""></div>
+    <div class="container" ng-controller="MainCtrl">
+        <div id="cardFactory" ng-controller="CardFactoryCtrl">  
             <div class="clearfix">
                 <div class="workingArea">
-                    <div class="canvas" style="background: {{ selected_bg }};">
-                        <div class="frame" style="background: {{ selected_frame }};">
-
+                    <div class="canvas" ng-style="selected_bg" >
+                        <div class="frame" ng-style="selected_frame" >
                             <!-- adornment -->
                             <span ng-cloak class="adornment_item" 
                                 adjustable obj="adornment" del-callback="removeAdornment"
                                 min-w="50" min-h="50" max-w="250" max-h="250" resize-inner="true"
                                 ng-repeat="adornment in adornmentList">
-                                <div class="adornmentImg" style="background: url('{{adornment.src}}');"></div>
+                                <div class="adornmentImg" ng-style="adornment.style">
+                                </div>
                             </span>
                             
                             <!--  bubbler -->
@@ -38,8 +39,8 @@
                                 adjustable  obj="bubbler" del-callback="removeBubbler"
                                 min-w="100" min-h="50" max-w="600" max-h="300"
                                 ng-repeat="bubbler in bubblerList">                                
-                                    <textarea ng-cloak class="bubblerText" style="{{bubbler.style}}" ng-model="bubbler.text" autofocus="true">
-                                    </textarea>                                
+                                    <textarea ng-cloak class="bubblerText" ng-style="bubbler.style" ng-model="bubbler.text" autofocus="true">
+                                    </textarea>
                             </span>
                         </div>
                     </div>
@@ -92,19 +93,18 @@
                 </div>
             </div>
         </div>
-
         <div id="preview" ng-controller="PreviewCtrl">
-            <div class="canvas" style="background: {{ selected_bg }};" ng-click="refresh();">
-                <div class="frame" style="background: {{ selected_frame }};">
+            <div class="canvas" ng-style="selected_bg" ng-click="refresh();">
+                <div class="frame" ng-style="selected_frame">
 
                     <!-- adornment -->
                     <span ng-cloak class="adornment_item displayItem" ng-repeat="adornment in adornmentList" transformable transform-data="adornment">
-                        <div class="adornmentImg" style="background: url('{{originalData.src}}');"></div>
+                        <div class="adornmentImg" ng-style="originalData.style"></div>
                     </span>
                     
                     <!--  bubbler -->
                     <span ng-cloak class="bubbler_item displayItem" ng-repeat="bubbler in bubblerList" transformable transform-data="bubbler">
-                        <textarea ng-cloak class="bubblerText" style="{{originalData.style}}" ng-model="originalData.text" readonly>
+                        <textarea ng-cloak class="bubblerText" ng-style="originalData.style" ng-model="originalData.text" readonly>
                             </textarea>                                
                     </span>
                 </div>

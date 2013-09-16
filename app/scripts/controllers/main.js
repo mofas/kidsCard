@@ -6,9 +6,36 @@ app.service('shareCanvasDataService', [ function () {
 	return { shareData : {} }
 }]);
 
+app.service('StyleService', [ function () {
+	return {		
+		getBGStyle : function(bg){						
+			if(bg === "transparent"){
+				return { 'background' : 'transparent'}
+			}			
+			//color code
+			else if(bg.indexOf("#") == 0){
+				return {
+					'background' : bg
+				}
+			}
+			//IMAGES
+			else{
+				return{
+					'background' : 'url(' + bg + ') no-repeat',
+				}
+			}
+		}
+	}
+}]);
 
-app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , 'shareCanvasDataService' ,
-	function ($scope , $timeout , extend , shareCanvasDataService) {
+
+
+app.controller('MainCtrl' , [ function() {
+
+}]);
+
+app.controller('CardFactoryCtrl', [ '$scope' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
+	function ($scope , $timeout , StyleService , shareCanvasDataService) {
 
 
 	var initData = function($scope){
@@ -19,8 +46,8 @@ app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , 'shareCanvasDataS
 		$scope.adornmentIndex = 0;
 
 		//canvas
-		$scope.selected_bg = "transparent";
-		$scope.selected_frame = "transparent";
+		$scope.selected_bg = { "background" : "transparent" };
+		$scope.selected_frame = { "background" : "transparent" };
 		$scope.adornmentList = [];
 		$scope.bubblerList = [];
 
@@ -129,32 +156,32 @@ app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , 'shareCanvasDataS
 		$scope.bubbler = [
 			{
 				"topic": "simple",
-				"style": "border: 4px dashed #FF88A6; border-radius:35px; background: #FFC1D1;",
+				"style": { "border" : "4px dashed #FF88A",  "border-radius" : "35px", "background": "#FFC1D1"},
 				"thumb": "images/bubbler/001.png"
 			},
 			{
 				"topic": "simple",
-				"style": "border: 4px dashed #FFB197; border-radius:35px; background: #FFD0C1;",
+				"style": { "border" : "4px dashed #FFB19",  "border-radius" : "35px", "background": "#FFD0C1"},
 				"thumb": "images/bubbler/002.png"
 			},
 			{
 				"topic": "simple",
-				"style": "border: 4px dashed #93E698; border-radius:35px; background: #BDF1C0;",
+				"style": { "border" : "4px dashed #93E69",  "border-radius" : "35px", "background": "#BDF1C0"},
 				"thumb": "images/bubbler/003.png"
 			},
 			{
 				"topic": "simple",
-				"style": "border: 4px dashed #93C2E6; border-radius:35px; background: #BDDBF1;",
+				"style": { "border" : "4px dashed #93C2E",  "border-radius" : "35px", "background": "#BDDBF1"},
 				"thumb": "images/bubbler/004.png"
 			},
 			{
 				"topic": "simple",
-				"style": "border: 4px dashed #BE93E6; border-radius:35px; background: #D7BDF1;",
+				"style": { "border" : "4px dashed #BE93E",  "border-radius" : "35px", "background": "#D7BDF1"},
 				"thumb": "images/bubbler/005.png"
 			},
 			{
 				"topic": "simple",
-				"style": "border: 4px dashed #FF88A6; border-radius:100px; background: #FFC1D1;",
+				"style": { "border" : "4px dashed #FF88A6", "border-radius" : "100px", "background": "#FFC1D1"},
 				"thumb": "images/bubbler/006.png"
 			}
 		];
@@ -165,6 +192,7 @@ app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , 'shareCanvasDataS
 	}
 
 	var injectFunction = function($scope){
+
 		$scope.closeWindow = function(){
 			$scope.isWindowOpen = false;
 		}
@@ -188,17 +216,18 @@ app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , 'shareCanvasDataS
 		}
 
 		$scope.selectBackground = function(src){		
-			$scope.selected_bg = 'url(' + src + ') repeat;';
+			$scope.selected_bg = StyleService.getBGStyle(src);			
 		}
 
 		$scope.selectFrame = function(src){		
-			$scope.selected_frame = 'url(' + src + ') no-repeat;';
+			$scope.selected_frame = StyleService.getBGStyle(src);
 		}
 
 		$scope.addAdornment = function(item){
 			var newObj = { 
 				id: $scope.adornmentIndex++,
-				src: item.src			
+				src: item.src,
+				style: StyleService.getBGStyle(item.src)		
 			}
 			$scope.adornmentList.push(newObj);		
 			$scope.closeWindow();
@@ -251,8 +280,6 @@ app.controller('MainCtrl', [ '$scope' , '$timeout', 'extend' , 'shareCanvasDataS
 	injectFunction($scope);	
 	
 }]);
-
-
 
 app.controller('PreviewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService' , 
 	function ($scope , $timeout , shareCanvasDataService) {
