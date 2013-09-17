@@ -47,7 +47,7 @@
                     <div class="window" ng-class="{'open' : isWindowOpen }">
                         <div class="closeBtn" ng-click="closeWindow();"></div>
                         <div class="bg section" ng-class="{'open' : openSection == 'bg' }">
-                            <div class="item" ng-repeat="item in bg">
+                            <div class="item" ng-repeat="item in bg | startFrom: currentPage*pageSize  | limitTo:pageSize">
                                 <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectBackground('{{item.src}}');">                                
                             </div>
                             <div class="well empty" ng-class="{'show': bg.length < 1 }">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="frame section" ng-class="{'open' : openSection == 'frame' }">
-                            <div class="item" ng-repeat="item in frame">
+                            <div class="item" ng-repeat="item in frame | startFrom: currentPage*pageSize  | limitTo:pageSize">
                                 <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectFrame('{{item.src}}');">
                             </div>
                             <div class="well empty" ng-class="{'show': frame.length < 1 }">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="adornment section" ng-class="{'open' : openSection == 'adornment' }">
-                            <div class="item" ng-repeat="item in adornment">
+                            <div class="item" ng-repeat="item in adornment | startFrom: currentPage*pageSize  | limitTo:pageSize">
                                 <img ng-cloak ng-src="{{item.thumb}}" ng-click="addAdornment(item);">
                             </div>
                             <div class="well empty" ng-class="{'show': adornment.length < 1 }">
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="bubbler section" ng-class="{'open' : openSection == 'bubbler' }">
-                            <div class="item" ng-repeat="item in bubbler">
+                            <div class="item" ng-repeat="item in bubbler | startFrom: currentPage*pageSize  | limitTo:pageSize">
                                 <img ng-cloak ng-src="{{item.thumb}}" ng-click="addBubbler(item);">
                             </div>
                             <div class="well empty" ng-class="{'show': bubbler.length < 1 }">

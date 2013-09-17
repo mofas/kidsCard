@@ -104,6 +104,14 @@ app.controller('MainCtrl' , [ '$scope' , 'shareCanvasDataService' , function($sc
 app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
 	function ($scope , $http , $q , $timeout , StyleService , shareCanvasDataService) {
 
+	var changePageSizeEvent = function(){		
+		if($scope.openSection === "bg" || $scope.openSection === "adornment"){
+			$scope.pageSize = 24;	
+		}
+		else{
+			$scope.pageSize = 8;
+		}
+	}
 
 	var initData = function($scope){
 		//function
@@ -127,16 +135,15 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 
 	var injectFunction = function($scope){
 
-
 		$scope.$watch("openSection" , function(){			
 			var targetSection = $scope[$scope.openSection];						
 			if(targetSection != null){
+				changePageSizeEvent();
 				$scope.numberOfPages = Math.ceil($scope[$scope.openSection].length/$scope.pageSize);
 			}
 			else{
 				$scope.numberOfPages = 0;
-			}
-			console.log($scope.numberOfPages);			
+			}			
 		});
 
 		$scope.setCurrentPage = function($index){
@@ -262,7 +269,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 				$scope.bubbler = data.bubbler;	
 				//refresh pageNo				
 				if($scope.openSection != null){
-					$scope.numberOfPages = Math.ceil($scope[$scope.openSection].length/$scope.pageSize);				
+					$scope.numberOfPages = Math.ceil($scope[$scope.openSection].length/$scope.pageSize);
 				}
 				$scope.currentPage = 0;
 			}),
