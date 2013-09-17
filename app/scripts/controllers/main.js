@@ -88,7 +88,6 @@ app.service('StyleService', [ function () {
 }]);
 
 
-
 app.controller('MainCtrl' , [ '$scope' , 'shareCanvasDataService' , function($scope , shareCanvasDataService) {
 	$scope.previewMode = false;
 
@@ -109,12 +108,15 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	var initData = function($scope){
 		//function
 		$scope.topic = "simple";
-		$scope.isWindowOpen = false;
-		$scope.openSection = "bg";
+		$scope.isWindowOpen = false;		
+		$scope.openSection = null;
 		$scope.adornmentIndex = 0;
 		$scope.isLoadding = true;
 
-		$scope.isLoadding = false;
+		$scope.currentPage = 0;
+		$scope.numberOfPages = 0;
+		$scope.pageSize = 24;  //bg and adornment is 24, frame and bubbler is 8
+
 
 		//canvas
 		$scope.selected_bg = { "background" : "transparent" };
@@ -124,6 +126,23 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	}
 
 	var injectFunction = function($scope){
+
+
+		$scope.$watch("openSection" , function(){			
+			var targetSection = $scope[$scope.openSection];						
+			if(targetSection != null){
+				$scope.numberOfPages = Math.ceil($scope[$scope.openSection].length/$scope.pageSize);
+			}
+			else{
+				$scope.numberOfPages = 0;
+			}
+			console.log($scope.numberOfPages);			
+		});
+
+		$scope.setCurrentPage = function($index){
+			$scope.currentPage = $index;
+		}
+		
 
 		$scope.closeWindow = function(){
 			$scope.isWindowOpen = false;
@@ -228,8 +247,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	initData($scope);
 	injectFunction($scope);	
 
-	//LOAD DATA
-	/**/
+	//LOAD DATA	
 	$scope.$watch("topic" , function(){		
 		$scope.isLoadding = true;		
 		$scope.bg = [];
@@ -241,7 +259,12 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 				$scope.bg = data.bg;
 				$scope.frame = data.frame;
 				$scope.adornment = data.adornment;
-				$scope.bubbler = data.bubbler;			
+				$scope.bubbler = data.bubbler;	
+				//refresh pageNo				
+				if($scope.openSection != null){
+					$scope.numberOfPages = Math.ceil($scope[$scope.openSection].length/$scope.pageSize);				
+				}
+				$scope.currentPage = 0;
 			}),
 			$http.get("data/graffiti.json").success(function(data){
 				$scope.graffiti = data.graffiti;
@@ -250,8 +273,6 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
         	$scope.isLoadding = false;	        
 	    });		
 	});	
-	
-	/**/
 		
 }]);
 

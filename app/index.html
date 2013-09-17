@@ -70,7 +70,7 @@
                                 現在還沒有東西可以用
                             </div>
                         </div>
-                        <div class="word section" ng-class="{'open' : openSection == 'word' }">
+                        <div class="bubbler section" ng-class="{'open' : openSection == 'bubbler' }">
                             <div class="item" ng-repeat="item in bubbler">
                                 <img ng-cloak ng-src="{{item.thumb}}" ng-click="addBubbler(item);">
                             </div>
@@ -81,6 +81,12 @@
                         <div class="graffiti section" ng-class="{'open' : openSection == 'graffiti' }">
                             <div class="well empty show">現在還沒有東西可以用</div>
                         </div>
+                        
+                        <ul class="pagination">                                        
+                            <li ng-repeat="n in [] | range:numberOfPages" ng-click="setCurrentPage($index)" ng-class="{'selected': $index == currentPage }">
+                                <span></span>
+                            </li>
+                        </ul>                        
                     </div>
                     <div class="loadingOverlay" ng-class="{'show' : !isLoadding}">
                         <div class="loading"></div>
@@ -90,7 +96,7 @@
                     <div class="menuBtn functionBtn1" ng-click="openSectionWindow('bg');"></div>
                     <div class="menuBtn functionBtn2" ng-click="openSectionWindow('frame');"></div>
                     <div class="menuBtn functionBtn3" ng-click="openSectionWindow('adornment');"></div>
-                    <div class="menuBtn functionBtn4" ng-click="openSectionWindow('word');"></div>
+                    <div class="menuBtn functionBtn4" ng-click="openSectionWindow('bubbler');"></div>
                     <div class="menuBtn functionBtn5" ng-click="openSectionWindow('graffiti');"></div>
                     <div class="menuBtn functionBtn6" ng-click="reset();"></div>
                     <div class="menuBtn submitBtn" ng-click="preview(); openPreview();"></div>
@@ -179,6 +185,7 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/directives/ui.js"></script>
     <script src="scripts/factories/utility.js"></script>
+    <script src="scripts/factories/filter.js"></script>
     <!-- endbuild -->
 
 
