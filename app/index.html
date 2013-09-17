@@ -79,10 +79,13 @@
                             </div>
                         </div>
                         <div class="graffiti section" ng-class="{'open' : openSection == 'graffiti' }">
-                            <div class="well empty">現在還沒有東西可以用</div>
+                            <div class="well empty show">現在還沒有東西可以用</div>
                         </div>
                     </div>
-                </div>
+                    <div class="loadingOverlay" ng-class="{'show' : !isLoadding}">
+                        <div class="loading"></div>
+                    </div>
+                </div>                
                 <div class="menu">
                     <div class="menuBtn functionBtn1" ng-click="openSectionWindow('bg');"></div>
                     <div class="menuBtn functionBtn2" ng-click="openSectionWindow('frame');"></div>
@@ -103,10 +106,7 @@
                     <div class="subMenuBtn topic4"  ng-click="topic = 'mail'"></div>
                     <div class="subMenuBtn topic5"  ng-click="topic = 'special'"></div>
                 </div>
-            </div>
-            <div class="loadingOverlay" ng-class="{'hide' : !isLoadding}">
-                <div class="loading"></div>
-            </div>
+            </div>            
         </div>
         <div id="preview" ng-controller="PreviewCtrl" ng-class="{'open': previewMode}">
             <div class="previewOverlay">

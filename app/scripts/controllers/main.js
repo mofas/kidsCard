@@ -246,10 +246,8 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 			$http.get("data/graffiti.json").success(function(data){
 				$scope.graffiti = data.graffiti;
 			})
-	    ]).then(function(){
-	    	$timeout(function(){
-	        	$scope.isLoadding = false;
-	        } , 300);
+	    ]).then(function(){	    
+        	$scope.isLoadding = false;	        
 	    });		
 	});	
 	

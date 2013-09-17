@@ -90,6 +90,7 @@ textarea{
     background: #CE4E4E;
     color: #fff;
     opacity: 0;
+    box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.6);
 }
 #cardFactory .section .empty.show{
     opacity: 1;
@@ -371,8 +372,6 @@ textarea{
 
 
 
-
-
 /*!
 *   Loading
 */
@@ -381,17 +380,15 @@ textarea{
     top:0;
     left:0;
     right:0;
-    bottom: 0;
-    background: rgba(0,0,0,0.5);  
+    bottom: 0;    
     z-index: 1001;
     opacity: 1;
     visibility: visible;  
-    transition: all 0.2s;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;    
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;    
 }
-.loadingOverlay.hide{
-    z-index: -1;
+.loadingOverlay.show{    
     opacity: 0;
     visibility: hidden;
 }
@@ -404,8 +401,7 @@ textarea{
     margin: auto;
     width: 52px;
     height: 52px;        
-    background: #000 url(img/fal.gif) no-repeat 50% 50%;
-    opacity: 0.5;
+    background: #000 url(img/fal.gif) no-repeat 50% 50%;    
     border-radius: 10px;
 }
 
