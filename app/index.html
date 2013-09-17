@@ -50,24 +50,36 @@
                             <div class="item" ng-repeat="item in bg">
                                 <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectBackground('{{item.src}}');">                                
                             </div>
+                            <div class="well empty" ng-class="{'show': bg.length < 1 }">
+                                現在還沒有東西可以用
+                            </div>
                         </div>
                         <div class="frame section" ng-class="{'open' : openSection == 'frame' }">
                             <div class="item" ng-repeat="item in frame">
                                 <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectFrame('{{item.src}}');">
+                            </div>
+                            <div class="well empty" ng-class="{'show': frame.length < 1 }">
+                                現在還沒有東西可以用
                             </div>
                         </div>
                         <div class="adornment section" ng-class="{'open' : openSection == 'adornment' }">
                             <div class="item" ng-repeat="item in adornment">
                                 <img ng-cloak ng-src="{{item.thumb}}" ng-click="addAdornment(item);">
                             </div>
+                            <div class="well empty" ng-class="{'show': adornment.length < 1 }">
+                                現在還沒有東西可以用
+                            </div>
                         </div>
                         <div class="word section" ng-class="{'open' : openSection == 'word' }">
                             <div class="item" ng-repeat="item in bubbler">
                                 <img ng-cloak ng-src="{{item.thumb}}" ng-click="addBubbler(item);">
                             </div>
+                            <div class="well empty" ng-class="{'show': bubbler.length < 1 }">
+                                現在還沒有東西可以用
+                            </div>
                         </div>
                         <div class="graffiti section" ng-class="{'open' : openSection == 'graffiti' }">
-                            <div class="btn btn-danger">尚未完工</div>
+                            <div class="well empty">現在還沒有東西可以用</div>
                         </div>
                     </div>
                 </div>
@@ -81,7 +93,7 @@
                     <div class="menuBtn submitBtn" ng-click="preview(); openPreview();"></div>
                 </div>
             </div>
-            <div class="subMenu">
+            <div class="subMenu" ng-class="{'open': isWindowOpen }">
                 <div class="navBtn navLeft"></div>
                 <div class="navBtn navRight"></div>
                 <div class="objWrap clearfix">
