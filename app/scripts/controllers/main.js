@@ -26,8 +26,8 @@ app.service('StyleService', [ function () {
 			}
 		},
 
-		//obj in list contain 'data' which transform using
-		//now we convert it to 'style' which ng-style can digest
+		//obj in list contain 'data' which function 'transform' use to adjust dom
+		//now we convert it to 'style' which ng-style can digest and remove unnecessary data.
 		convertDataToStyle : function(list){
 			var returnList = [],
 				newObj,
@@ -271,4 +271,15 @@ app.controller('PreviewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService'
 				$scope.bubblerList = shareCanvasDataService.shareData.bubblerList;					
 			}, 1);
 		}		
+
+
+		$scope.save = function(){
+			var saveObj = {
+				"selected_bg" : $scope.selected_bg,
+				"selected_frame" : $scope.selected_frame,
+				"adornmentList" : $scope.adornmentList,
+				"bubblerList" : $scope.bubblerList
+			}
+			alert("以下資訊會送往後端儲存:" + JSON.stringify(saveObj));			
+		}
 }]);

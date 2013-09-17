@@ -3,6 +3,9 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
 }
+textarea{
+    border: 0;
+}
 
 [ng-cloak]{
     display: none;
@@ -380,8 +383,6 @@ body {
 }
 
 
-
-
 /*!
 *  UI
 */
@@ -392,6 +393,14 @@ body {
     min-height: 50px;
     left: 0;
     top: 0;
+}
+.displayItem,
+.displayItem textarea{ 
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .adjustable.select{
     z-index: 100;
