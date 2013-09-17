@@ -287,7 +287,7 @@ ui.directive('transformable', [ '$timeout' , 'transform' , function($timeout , t
 			transform(targetDOM , data);			
 
 			if(data.resizeInner){
-				//waiting for finish data.style finish
+				//waiting for ng-style finish
 				$timeout(function(){
 					transform(inner , data.inner);		
 				} , 1);				

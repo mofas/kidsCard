@@ -24,6 +24,65 @@ app.service('StyleService', [ function () {
 					'background' : 'url(' + bg + ') no-repeat',
 				}
 			}
+		},
+
+		//obj in list contain 'data' which transform using
+		//now we convert it to 'style' which ng-style can digest
+		convertDataToStyle : function(list){
+			var returnList = [],
+				newObj,
+				transformStr = "",
+				data;			
+			
+			angular.forEach(list , function(originalObj){					
+				newObj = {
+					id: originalObj.id,
+					style: {},
+					inner: {
+						style: {}
+					}
+				}
+				//copy style into inside 
+				angular.forEach(originalObj.style , function(val, key){					
+					newObj.inner.style[key] = val;
+				});
+				//width and height
+				if(originalObj.data.W != 0){
+					newObj.style["width"] = originalObj.data.W + "px";
+				}
+				if(originalObj.data.H != 0){
+					newObj.style["height"] = originalObj.data.H + "px";					
+				}
+				//text
+				if(originalObj.text != null){
+					newObj.text = originalObj.text;
+				}
+
+			 	if(originalObj.data != null){
+			 		data = originalObj.data;			 		
+			 		transformStr = 'translate(' + (data.offsetX || 0) + 'px,' + (data.offsetY || 0) + 'px) ' + 
+							'rotate(' + (data.rotateDegrees || 0) + 'deg) ' +
+							'scale( ' + (data.scaleX || 1) + ', ' + (data.scaleY || 1) + ')';					
+					newObj.style["-moz-transform"] = transformStr;
+					newObj.style["-webkit-transform"] = transformStr;
+					newObj.style["-o-transform"] = transformStr;
+					newObj.style["-ms-transform"] = transformStr;
+
+					//inner style
+					if(originalObj.data.resizeInner && originalObj.data.inner != null){
+						data = originalObj.data.inner;						
+			 			transformStr = 'translate(' + (data.offsetX || 0) + 'px,' + (data.offsetY || 0) + 'px) ' + 
+							'rotate(' + (data.rotateDegrees || 0) + 'deg) ' +
+							'scale( ' + (data.scaleX || 1) + ', ' + (data.scaleY || 1) + ')';
+						newObj.inner.style["-moz-transform"] = transformStr;
+						newObj.inner.style["-webkit-transform"] = transformStr;
+						newObj.inner.style["-o-transform"] = transformStr;
+						newObj.inner.style["-ms-transform"] = transformStr;
+					}
+			 	}
+			 	returnList.push(newObj);
+			});			
+			return returnList;
 		}
 	}
 }]);
@@ -32,6 +91,7 @@ app.service('StyleService', [ function () {
 
 app.controller('MainCtrl' , [ '$scope' , 'shareCanvasDataService' , function($scope , shareCanvasDataService) {
 	$scope.previewMode = false;
+
 	$scope.openPreview = function () {		
 		if(shareCanvasDataService.ready != false){
 			$scope.previewMode = true;	
@@ -54,12 +114,13 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 		$scope.adornmentIndex = 0;
 		$scope.isLoadding = true;
 
+		$scope.isLoadding = false;
+
 		//canvas
 		$scope.selected_bg = { "background" : "transparent" };
 		$scope.selected_frame = { "background" : "transparent" };
 		$scope.adornmentList = [];
 		$scope.bubblerList = [];
-
 	}
 
 	var injectFunction = function($scope){
@@ -151,10 +212,15 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 			var canvasData = {};
 			canvasData.selected_bg = $scope.selected_bg;
 			canvasData.selected_frame = $scope.selected_frame;
-			canvasData.adornmentList = $scope.adornmentList;
-			canvasData.bubblerList = $scope.bubblerList;						
+
+			canvasData.adornmentList = StyleService.convertDataToStyle($scope.adornmentList);
+			canvasData.bubblerList = StyleService.convertDataToStyle($scope.bubblerList);
+
 			shareCanvasDataService.shareData = canvasData;						
 			shareCanvasDataService.ready = isBasicSetting() ? true : false;
+			//shareCanvasDataService.ready = true;
+
+
 			shareCanvasDataService.refresh();			
 		}
 	}
@@ -163,40 +229,42 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	injectFunction($scope);	
 
 	//LOAD DATA
+	/**/
 	$scope.$watch("topic" , function(){		
 		$scope.isLoadding = true;		
 		$scope.bg = [];
 		$scope.frame = [];
 		$scope.adornment = [];
-		$scope.bubbler = [];
-		$timeout(function(){
-			$q.all([
-				$http.get("data/" + $scope.topic + ".json").success(function(data){				
-					$scope.bg = data.bg;
-					$scope.frame = data.frame;
-					$scope.adornment = data.adornment;
-					$scope.bubbler = data.bubbler;			
-				}),
-				$http.get("data/graffiti.json").success(function(data){
-					$scope.graffiti = data.graffiti;
-				})
-		    ]).then(function(){
-		        $scope.isLoadding = false;
-		    });
-		} , 300);
-		
+		$scope.bubbler = [];		
+		$q.all([
+			$http.get("data/" + $scope.topic + ".json").success(function(data){				
+				$scope.bg = data.bg;
+				$scope.frame = data.frame;
+				$scope.adornment = data.adornment;
+				$scope.bubbler = data.bubbler;			
+			}),
+			$http.get("data/graffiti.json").success(function(data){
+				$scope.graffiti = data.graffiti;
+			})
+	    ]).then(function(){
+	    	$timeout(function(){
+	        	$scope.isLoadding = false;
+	        } , 300);
+	    });		
 	});	
+	
+	/**/
 		
 }]);
 
 app.controller('PreviewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService' , 
 	function ($scope , $timeout , shareCanvasDataService) {
-	
+
 		shareCanvasDataService.refresh = function(){			
 			$scope.adornmentList = [];
 			$scope.bubblerList = [];
-			//timeout force $digest
-			$timeout(function(){
+			//using timeout to force $digest
+			$timeout(function(){				
 				$scope.selected_bg = shareCanvasDataService.shareData.selected_bg;
 				$scope.selected_frame = shareCanvasDataService.shareData.selected_frame;
 				$scope.adornmentList = shareCanvasDataService.shareData.adornmentList;

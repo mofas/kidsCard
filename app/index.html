@@ -92,7 +92,7 @@
                     <div class="subMenuBtn topic5"  ng-click="topic = 'special'"></div>
                 </div>
             </div>
-            <div class="loadingOverlay" ng-show="isLoadding">
+            <div class="loadingOverlay" ng-class="{'hide' : !isLoadding}">
                 <div class="loading"></div>
             </div>
         </div>
@@ -103,13 +103,14 @@
                         <div class="frame" ng-style="selected_frame">
 
                             <!-- adornment -->
-                            <span ng-cloak class="adornment_item displayItem" ng-repeat="adornment in adornmentList" transformable transform-data="adornment">
-                                <div class="adornmentImg" ng-style="originalData.style"></div>
+                            <span ng-cloak class="adornment_item displayItem" ng-repeat="adornment in adornmentList" transform-data="adornment" ng-style="adornment.style">
+                                <div class="adornmentImg" ng-style="adornment.inner.style">
+                                </div>
                             </span>
                             
                             <!--  bubbler -->
-                            <span ng-cloak class="bubbler_item displayItem" ng-repeat="bubbler in bubblerList" transformable transform-data="bubbler">
-                                <textarea ng-cloak class="bubblerText" ng-style="originalData.style" ng-model="originalData.text" readonly>
+                            <span ng-cloak class="bubbler_item displayItem" ng-repeat="bubbler in bubblerList" transform-data="bubbler" ng-style="bubbler.style">
+                                <textarea ng-cloak class="bubblerText" ng-style="bubbler.inner.style" ng-model="bubbler.text" readonly>
                                     </textarea>                                
                             </span>
                         </div>
