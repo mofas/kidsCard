@@ -1,0 +1,34 @@
+[
+
+	{
+		"name" : "simple",
+		"categoryBtn": "",
+		"list":
+		[
+			{			
+				"style": { "border" : "4px dashed #FF88A",  "border-radius" : "35px", "background": "#FFC1D1"},
+				"thumb": "images/bubbler/001.png"
+			},
+			{			
+				"style": { "border" : "4px dashed #FFB19",  "border-radius" : "35px", "background": "#FFD0C1"},
+				"thumb": "images/bubbler/002.png"
+			},
+			{			
+				"style": { "border" : "4px dashed #93E69",  "border-radius" : "35px", "background": "#BDF1C0"},
+				"thumb": "images/bubbler/003.png"
+			},
+			{			
+				"style": { "border" : "4px dashed #93C2E",  "border-radius" : "35px", "background": "#BDDBF1"},
+				"thumb": "images/bubbler/004.png"
+			},
+			{			
+				"style": { "border" : "4px dashed #BE93E",  "border-radius" : "35px", "background": "#D7BDF1"},
+				"thumb": "images/bubbler/005.png"
+			},
+			{			
+				"style": { "border" : "4px dashed #FF88A6", "border-radius" : "100px", "background": "#FFC1D1"},
+				"thumb": "images/bubbler/006.png"
+			}
+		]
+	}
+]

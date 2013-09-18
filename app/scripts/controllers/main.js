@@ -7,8 +7,9 @@ app.service('shareCanvasDataService', [ function () {
 }]);
 
 app.service('StyleService', [ function () {
-	return {				
-		getBGStyle : function(bg){									
+	return {		
+
+		getBGStyle : function(bg){					
 			if(bg === "transparent"){
 				return { 'background' : 'transparent'}
 			}			
@@ -21,7 +22,7 @@ app.service('StyleService', [ function () {
 			//IMAGES
 			else{		
 				return{
-					'background' : 'url(' + bg + ') no-repeat',
+					'background-image' : 'url(' + bg + ')',
 				}
 			}
 		},
@@ -104,23 +105,29 @@ app.controller('MainCtrl' , [ '$scope' , 'shareCanvasDataService' , function($sc
 app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
 	function ($scope , $http , $q , $timeout , StyleService , shareCanvasDataService) {
 
-	var changePageSizeEvent = function(){		
-		if($scope.openSection === "adornment"){
-			$scope.pageSize = 24;	
-		}
-		else{
-			$scope.pageSize = 8;
-		}
+	var changePageSizeEvent = function(){								
+		// if($scope.openSection === "adornment"){
+		// 	$scope.pageSize = 24;	
+		// }
+		// else{
+		$scope.pageSize = 8;
+		// }
+		$scope.numberOfPages = Math.ceil($scope.itemList.length/$scope.pageSize);			
 	}
 
 	var initData = function($scope){
 		//function
 		$scope.isStart = false;
-		$scope.topic = "simple";
+		$scope.topic = null;
+		$scope.lastTopic = null;
 		$scope.isWindowOpen = false;		
-		$scope.openSection = null;
+		$scope.lastOpenSection = null;
+		$scope.openSection = "bg";
 		$scope.adornmentIndex = 0;
 		$scope.isLoadding = true;
+
+		$scope.rawItemListObj = {};
+		$scope.itemList = [];
 
 		$scope.currentPage = 0;
 		$scope.numberOfPages = 0;
@@ -137,17 +144,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	}
 
 	var injectFunction = function($scope){		
-		$scope.$watch("openSection" , function(){			
-			var targetSection = $scope[$scope.openSection];						
-			if(targetSection != null){
-				changePageSizeEvent();
-				$scope.numberOfPages = Math.ceil($scope[$scope.openSection].length/$scope.pageSize);
-			}
-			else{
-				$scope.numberOfPages = 0;
-			}			
-		});
-
+							
 
 		$scope.startFn = function(){						
 			$scope.isStart = true;			
@@ -180,12 +177,37 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 			$scope.bubblerList = [];
 		}
 
+
+
+		$scope.selectItem = function(item){
+			console.log(item);
+			console.log(item.src);
+			if($scope.openSection == "bg"){
+				$scope.selectBackground(item.src);
+			}
+			else if($scope.openSection == "frame"){
+				$scope.selectFrame(item.src);
+			}
+			else if($scope.openSection == "adornment"){
+				$scope.addAdornment(item);
+			}
+			else if($scope.openSection == "bubbler"){
+				$scope.addBubbler(item);
+			}
+			else if($scope.openSection == "graffiti"){
+
+			}
+		}
+
 		$scope.selectBackground = function(src){				
-			$scope.selected_bg = StyleService.getBGStyle(src);			
+			$scope.selected_bg = $scope.getBGObj(src);
 		}
 
 		$scope.selectFrame = function(src){		
-			$scope.selected_frame = StyleService.getBGStyle(src);
+			$scope.selected_frame = $scope.getBGObj(src);
+		}
+		$scope.getBGObj = function(src){
+			return StyleService.getBGStyle(src);	
 		}
 
 		$scope.addAdornment = function(item){
@@ -270,32 +292,63 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	initData($scope);
 	injectFunction($scope);	
 
-	//LOAD DATA	
-	$scope.$watch("topic" , function(){		
-		$scope.isLoadding = true;		
-		$scope.bg = [];
-		$scope.frame = [];
-		$scope.adornment = [];
-		$scope.bubbler = [];		
-		$q.all([
-			$http.get("data/" + $scope.topic + ".json").success(function(data){				
-				$scope.bg = data.bg;
-				$scope.frame = data.frame;
-				$scope.adornment = data.adornment;
-				$scope.bubbler = data.bubbler;	
-				//refresh pageNo				
-				if($scope.openSection != null){
-					$scope.numberOfPages = Math.ceil($scope[$scope.openSection].length/$scope.pageSize);
+
+	var changeTopic = function(){
+		$scope.lastTopic = $scope.topic;
+		if($scope.rawItemListObj.length > 0){
+			angular.forEach($scope.rawItemListObj , function(obj){					
+				if(obj.name === $scope.topic){
+					$scope.itemList = obj.list;					
 				}
-				$scope.currentPage = 0;
-			}),
-			$http.get("data/graffiti.json").success(function(data){
-				$scope.graffiti = data.graffiti;
-			})
-	    ]).then(function(){	    
-        	$scope.isLoadding = false;	        
-	    });		
+			});			 
+		}
+
+		console.log($scope.itemList);
+
+		//refresh pageNo							
+		$scope.currentPage = 0;
+		changePageSizeEvent();		
+	}
+
+	//LOAD DATA	
+	$scope.$watch("openSection+topic" , function(){		
+		$scope.isLoadding = true;						
+
+		if($scope.lastOpenSection != $scope.openSection){			
+			$http.get("data/" + $scope.openSection + ".json").success(function(data){				
+				$scope.rawItemListObj = data;
+				if(data[0] != null){
+					$scope.topic = data[0].name;
+					changeTopic();
+				}
+				$scope.isLoadding = false;
+			});	    
+			$scope.lastOpenSection = $scope.openSection;
+		}
+		else if($scope.lastTopic != $scope.topic){			
+			changeTopic();
+			$scope.isLoadding = false;
+		}
+		else{
+			$scope.isLoadding = false;	
+		}
 	});	
+
+
+	// $scope.$watch("topic" , function(){
+		
+	// 	if($scope.topic != null && $scope.rawItemListObj.length > 0){
+	// 		angular.forEach($scope.rawItemListObj , function(obj){				
+	// 			if(obj.name === $scope.topic){
+	// 				$scope.itemList = obj.list;
+	// 			}
+	// 		});			 
+	// 	}
+
+	// 	//refresh pageNo							
+	// 	$scope.currentPage = 0;
+	// 	changePageSizeEvent();
+	// });
 		
 }]);
 

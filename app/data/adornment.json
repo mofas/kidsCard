@@ -1,0 +1,56 @@
+[
+
+	{
+		"name" : "yame",
+		"categoryBtn": "images/adornment/button_3-1.png",
+		"list":
+		[	
+			{"thumb":"images/adornment/3-1/001.png","src":"images/adornment/3-1/001-1.png"},
+			{"thumb":"images/adornment/3-1/002.png","src":"images/adornment/3-1/002-1.png"},
+			{"thumb":"images/adornment/3-1/003.png","src":"images/adornment/3-1/003-1.png"},
+			{"thumb":"images/adornment/3-1/004.png","src":"images/adornment/3-1/004-1.png"},
+			{"thumb":"images/adornment/3-1/005.png","src":"images/adornment/3-1/005-1.png"},
+			{"thumb":"images/adornment/3-1/006.png","src":"images/adornment/3-1/006-1.png"},
+			{"thumb":"images/adornment/3-1/007.png","src":"images/adornment/3-1/007-1.png"}
+		]
+	},
+	{
+		"name" : "friends",
+		"categoryBtn": "images/adornment/button_3-2.png",
+		"list":
+		[	
+			{"thumb":"images/adornment/3-2/001.png","src":"images/adornment/3-2/001-1.png"},
+			{"thumb":"images/adornment/3-2/002.png","src":"images/adornment/3-2/002-1.png"},
+			{"thumb":"images/adornment/3-2/003.png","src":"images/adornment/3-2/003-1.png"},
+			{"thumb":"images/adornment/3-2/004.png","src":"images/adornment/3-2/004-1.png"},
+			{"thumb":"images/adornment/3-2/005.png","src":"images/adornment/3-2/005-1.png"}	
+		]
+	},
+	{
+		"name" : "cute",
+		"categoryBtn": "images/adornment/button_3-3.png",
+		"list":
+		[	
+			{"thumb":"images/adornment/3-3/001.png","src":"images/adornment/3-3/001-1.png"},
+			{"thumb":"images/adornment/3-3/002.png","src":"images/adornment/3-3/002-1.png"},
+			{"thumb":"images/adornment/3-3/003.png","src":"images/adornment/3-3/003-1.png"},
+			{"thumb":"images/adornment/3-3/004.png","src":"images/adornment/3-3/004-1.png"},
+			{"thumb":"images/adornment/3-3/005.png","src":"images/adornment/3-3/005-1.png"},
+			{"thumb":"images/adornment/3-3/006.png","src":"images/adornment/3-3/006-1.png"},
+			{"thumb":"images/adornment/3-3/007.png","src":"images/adornment/3-3/007-1.png"},
+			{"thumb":"images/adornment/3-3/008.png","src":"images/adornment/3-3/008-1.png"},
+			{"thumb":"images/adornment/3-3/009.png","src":"images/adornment/3-3/009-1.png"},
+			{"thumb":"images/adornment/3-3/010.png","src":"images/adornment/3-3/010-1.png"},
+			{"thumb":"images/adornment/3-3/011.png","src":"images/adornment/3-3/011-1.png"},
+			{"thumb":"images/adornment/3-3/012.png","src":"images/adornment/3-3/012-1.png"},
+			{"thumb":"images/adornment/3-3/013.png","src":"images/adornment/3-3/013-1.png"}			
+		]
+	},
+	{
+		"name" : "special",
+		"categoryBtn": "images/adornment/button_3-4.png",
+		"list":
+		[				
+		]
+	}
+]

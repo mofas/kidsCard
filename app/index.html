@@ -46,7 +46,17 @@
                     </div>
                     <div class="window" ng-class="{'open' : isWindowOpen }">
                         <div class="closeBtn" ng-click="closeWindow();"></div>
-                        <div class="bg section" ng-class="{'open' : openSection == 'bg' }">
+                        <div class="section {{openSection}}">                            
+                            <div class="item" 
+                                ng-repeat="item in itemList | startFrom: currentPage*pageSize  | limitTo:pageSize">
+                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectItem(item);" images-load-animation>
+                                
+                            </div>
+                            <div class="well empty" ng-class="{'show': frame.length < 1 }">
+                                現在還沒有東西可以用
+                            </div>
+                        </div>
+                        <!-- <div class="bg section" ng-class="{'open' : openSection == 'bg' }">
                             <div class="item" ng-repeat="item in bg | startFrom: currentPage*pageSize  | limitTo:pageSize">
                                 <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectBackground('{{item.src}}');" images-load-animation>                                
                             </div>
@@ -80,7 +90,7 @@
                         </div>
                         <div class="graffiti section" ng-class="{'open' : openSection == 'graffiti' }">
                             <div class="well empty show">現在還沒有東西可以用</div>
-                        </div>
+                        </div> -->
                         
                         <ul class="pagination">                                        
                             <li ng-repeat="n in [] | range:numberOfPages" ng-click="setCurrentPage($index)" ng-class="{'selected': $index == currentPage }">
@@ -118,8 +128,15 @@
                 <div class="btnWrap">
                     <div class="navBtn navLeft"></div>
                     <div class="navBtn navRight"></div>
-                    <div class="objWrap clearfix">
-                        <div class="subMenuBtn topic1"  
+                    <div class="objWrap clearfix">                        
+                        <div ng-repeat="category in rawItemListObj" class="subMenuBtn" 
+                            ng-class="{'selected' : topic == category.name }"
+                            ng-click="selectTopic(category.name)"
+                            ng-style="getBGObj(category.categoryBtn)">
+                        </div>
+
+
+                        <!-- <div class="subMenuBtn topic1"  
                             ng-class="{'selected' : topic == 'simple'}"
                             ng-click="topic = 'simple'"></div>
                         <div class="subMenuBtn topic2"  
@@ -131,7 +148,7 @@
                         <div class="subMenuBtn topic4"  
                             ng-class="{'selected' : topic == 'special'}"
                             ng-click="topic = 'special'"></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>            
         </div>
