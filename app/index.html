@@ -7,11 +7,11 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/bootstrap.css">
-    <link rel="stylesheet" href="styles/icon.css">
+    <link rel="stylesheet" href="styles/bootstrap.css">    
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 </head>
@@ -20,9 +20,9 @@
     <!-- Add your site or application content here -->
     <div ng-view=""></div>
     <div class="container" ng-controller="MainCtrl">        
-        <div id="cardFactory" ng-controller="CardFactoryCtrl">  
-            <div class="clearfix">
-                <div class="workingArea">
+        <div id="cardFactory" ng-controller="CardFactoryCtrl" click-once="startFn">  
+            <div class="clearfix">                
+                <div class="workingArea" ng-class="{'hiddenWelcome' : isStart }">
                     <div class="canvas" ng-style="selected_bg" >
                         <div class="frame" ng-style="selected_frame" >
                             <!-- adornment -->
@@ -48,7 +48,7 @@
                         <div class="closeBtn" ng-click="closeWindow();"></div>
                         <div class="bg section" ng-class="{'open' : openSection == 'bg' }">
                             <div class="item" ng-repeat="item in bg | startFrom: currentPage*pageSize  | limitTo:pageSize">
-                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectBackground('{{item.src}}');">                                
+                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectBackground('{{item.src}}');" images-load-animation>                                
                             </div>
                             <div class="well empty" ng-class="{'show': bg.length < 1 }">
                                 現在還沒有東西可以用
@@ -56,7 +56,7 @@
                         </div>
                         <div class="frame section" ng-class="{'open' : openSection == 'frame' }">
                             <div class="item" ng-repeat="item in frame | startFrom: currentPage*pageSize  | limitTo:pageSize">
-                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectFrame('{{item.src}}');">
+                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectFrame('{{item.src}}');" images-load-animation>
                             </div>
                             <div class="well empty" ng-class="{'show': frame.length < 1 }">
                                 現在還沒有東西可以用
@@ -64,7 +64,7 @@
                         </div>
                         <div class="adornment section" ng-class="{'open' : openSection == 'adornment' }">
                             <div class="item" ng-repeat="item in adornment | startFrom: currentPage*pageSize  | limitTo:pageSize">
-                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="addAdornment(item);">
+                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="addAdornment(item);" images-load-animation>
                             </div>
                             <div class="well empty" ng-class="{'show': adornment.length < 1 }">
                                 現在還沒有東西可以用
@@ -72,7 +72,7 @@
                         </div>
                         <div class="bubbler section" ng-class="{'open' : openSection == 'bubbler' }">
                             <div class="item" ng-repeat="item in bubbler | startFrom: currentPage*pageSize  | limitTo:pageSize">
-                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="addBubbler(item);">
+                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="addBubbler(item);" images-load-animation>
                             </div>
                             <div class="well empty" ng-class="{'show': bubbler.length < 1 }">
                                 現在還沒有東西可以用
@@ -93,24 +93,45 @@
                     </div>
                 </div>                
                 <div class="menu">
-                    <div class="menuBtn functionBtn1" ng-click="openSectionWindow('bg');"></div>
-                    <div class="menuBtn functionBtn2" ng-click="openSectionWindow('frame');"></div>
-                    <div class="menuBtn functionBtn3" ng-click="openSectionWindow('adornment');"></div>
-                    <div class="menuBtn functionBtn4" ng-click="openSectionWindow('bubbler');"></div>
+                    <div class="menuBtn functionBtn1" 
+                        ng-class="{'completed' : selected_bg.background != 'transparent' }"
+                        ng-click="openSectionWindow('bg');">                    
+                    </div>
+                    <div class="menuBtn functionBtn2" 
+                        ng-class="{'completed' : selected_frame.background != 'transparent' }"
+                        ng-click="openSectionWindow('frame');">
+                    </div>
+                    <div class="menuBtn functionBtn3" 
+                        ng-click="openSectionWindow('adornment');">
+                        <span ng-cloak class="limitCount">{{adornmentList.length}}/{{adornmentLimit}}</span>
+                    </div>
+                    <div class="menuBtn functionBtn4" 
+                        ng-click="openSectionWindow('bubbler');">
+                        <span ng-cloak class="limitCount">{{bubblerList.length}}/{{bubblerLimit}}</span>
+                    </div>
                     <div class="menuBtn functionBtn5" ng-click="openSectionWindow('graffiti');"></div>
                     <div class="menuBtn functionBtn6" ng-click="reset();"></div>
                     <div class="menuBtn submitBtn" ng-click="preview(); openPreview();"></div>
                 </div>
             </div>
             <div class="subMenu" ng-class="{'open': isWindowOpen }">
-                <div class="navBtn navLeft"></div>
-                <div class="navBtn navRight"></div>
-                <div class="objWrap clearfix">
-                    <div class="subMenuBtn topic1" ng-click="topic = 'simple'"></div>
-                    <div class="subMenuBtn topic2"  ng-click="topic = 'activity'"></div>
-                    <div class="subMenuBtn topic3"  ng-click="topic = 'subject'"></div>
-                    <div class="subMenuBtn topic4"  ng-click="topic = 'mail'"></div>
-                    <div class="subMenuBtn topic5"  ng-click="topic = 'special'"></div>
+                <div class="btnWrap">
+                    <div class="navBtn navLeft"></div>
+                    <div class="navBtn navRight"></div>
+                    <div class="objWrap clearfix">
+                        <div class="subMenuBtn topic1"  
+                            ng-class="{'selected' : topic == 'simple'}"
+                            ng-click="topic = 'simple'"></div>
+                        <div class="subMenuBtn topic2"  
+                            ng-class="{'selected' : topic == 'subject'}"
+                            ng-click="topic = 'subject'"></div>
+                        <div class="subMenuBtn topic3"  
+                            ng-class="{'selected' : topic == 'mail'}"
+                            ng-click="topic = 'mail'"></div>
+                        <div class="subMenuBtn topic4"  
+                            ng-class="{'selected' : topic == 'special'}"
+                            ng-click="topic = 'special'"></div>
+                    </div>
                 </div>
             </div>            
         </div>
@@ -183,6 +204,7 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/directives/directive.js"></script>
     <script src="scripts/directives/ui.js"></script>
     <script src="scripts/factories/utility.js"></script>
     <script src="scripts/factories/filter.js"></script>

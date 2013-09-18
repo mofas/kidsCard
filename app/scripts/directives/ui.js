@@ -362,9 +362,9 @@ ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable'
 
 		template:
 		'<span class="adjustable">' + 
-			'<span class="btn btn-default delBtn" ng-click="del();" data-icon="&#xe002;"></span>' + 			
-			'<span class="btn btn-default roteateBtn" data-icon="&#xe003;"></span>' + 		
-			'<span class="btn btn-default resizeBtn" data-icon="&#xe000;"></span>' +
+			'<span class="ad_btn delBtn" ng-click="del();"></span>' + 			
+			'<span class="ad_btn roteateBtn"></span>' + 		
+			'<span class="ad_btn resizeBtn"></span>' +
 			'<span class="wrap" ng-transclude></span>' +
 		'</span>',       
 		replace: true,     		

@@ -105,7 +105,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	function ($scope , $http , $q , $timeout , StyleService , shareCanvasDataService) {
 
 	var changePageSizeEvent = function(){		
-		if($scope.openSection === "bg" || $scope.openSection === "adornment"){
+		if($scope.openSection === "adornment"){
 			$scope.pageSize = 24;	
 		}
 		else{
@@ -115,6 +115,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 
 	var initData = function($scope){
 		//function
+		$scope.isStart = false;
 		$scope.topic = "simple";
 		$scope.isWindowOpen = false;		
 		$scope.openSection = null;
@@ -123,8 +124,10 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 
 		$scope.currentPage = 0;
 		$scope.numberOfPages = 0;
-		$scope.pageSize = 24;  //bg and adornment is 24, frame and bubbler is 8
+		$scope.pageSize = 24;  //adornment is 24, bg frame and bubbler is 8
 
+		$scope.adornmentLimit = 10;
+		$scope.bubblerLimit = 5;
 
 		//canvas
 		$scope.selected_bg = { "background" : "transparent" };
@@ -133,8 +136,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 		$scope.bubblerList = [];
 	}
 
-	var injectFunction = function($scope){
-
+	var injectFunction = function($scope){		
 		$scope.$watch("openSection" , function(){			
 			var targetSection = $scope[$scope.openSection];						
 			if(targetSection != null){
@@ -146,10 +148,15 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 			}			
 		});
 
+
+		$scope.startFn = function(){						
+			$scope.isStart = true;			
+			$scope.$apply();			
+		}
+
 		$scope.setCurrentPage = function($index){
 			$scope.currentPage = $index;
-		}
-		
+		}		
 
 		$scope.closeWindow = function(){
 			$scope.isWindowOpen = false;
@@ -182,13 +189,18 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 		}
 
 		$scope.addAdornment = function(item){
+			$scope.closeWindow();
+			if($scope.adornmentList.length >= $scope.adornmentLimit){
+				alert("你已經用了太多的裝飾品囉");
+				return;
+			}
 			var newObj = { 
 				id: $scope.adornmentIndex++,
 				src: item.src,
 				style: StyleService.getBGStyle(item.src)		
 			}
 			$scope.adornmentList.push(newObj);		
-			$scope.closeWindow();
+			
 		}
 
 		$scope.removeAdornment = function(id){
@@ -203,12 +215,16 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 
 
 		$scope.addBubbler = function(item){
+			$scope.closeWindow();
+			if($scope.bubblerList.length >= $scope.bubblerLimit){
+				alert("你已經用了太多的對話框囉");
+				return;
+			}
 			var newObj = { 
 				id: $scope.adornmentIndex++,
 				style: item.style
 			}
-			$scope.bubblerList.push(newObj);		
-			$scope.closeWindow();
+			$scope.bubblerList.push(newObj);					
 		}
 
 		$scope.removeBubbler = function(id){

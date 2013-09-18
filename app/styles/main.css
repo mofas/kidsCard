@@ -17,21 +17,40 @@ textarea{
     height: 600px;
     padding: 10px;
     background: #62422e;
-    position: relative;
-    overflow: hidden;
+    position: relative; 
+    overflow: hidden;   
 }
 #cardFactory .workingArea{
     float:left;
     width: 710px;
     height: 470px;    
-    position: relative;
-    outline: 3px solid rgba(255,255,255,0.2);
+    position: relative;            
+    box-shadow: inset 0 0 10px 2px rgba(0,0,0,0.5);    
+    overflow: hidden;
+    border-radius: 10px;
+}
+#cardFactory .workingArea:after{
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url('img/welcome.jpg') no-repeat 50% 50%;
+    z-index: 0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    opacity: 1; 
+}
+#cardFactory .workingArea.hiddenWelcome:after{
+    opacity: 0; 
 }
 #cardFactory .canvas{
     width: 100%;
-    height: 100%;    
-    overflow: hidden;
+    height: 100%;        
     position: relative;
+    z-index: 1;   
 }
 #cardFactory .frame{
     width: 100%;
@@ -124,14 +143,15 @@ textarea{
     color: #fff;
     opacity: 0;
     box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.6);
+    visibility: hidden;
 }
-#cardFactory .section .empty.show{
+#cardFactory .section .empty.show{    
     opacity: 1;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
+    visibility: visible;
 }
-
 #cardFactory .item{
     cursor: pointer;
     float: left;
@@ -140,6 +160,7 @@ textarea{
     margin: 15px;
     position: relative;
     box-shadow: 3px 3px 3px 0 rgba(0,0,0,0.5);
+    background: #fff url('img/iml.gif') 50% 50% no-repeat;
 }
 #cardFactory .item img{
     width: 100%;
@@ -148,14 +169,18 @@ textarea{
     right: 0;
     top: 0;
     bottom: 0;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
 }
+#cardFactory .bg .item,
 #cardFactory .frame .item,
 #cardFactory .bubbler .item{
     margin: 14px 6px;
     width: 150px;    
     height: 100px;
     background: #fff;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 #cardFactory .menu{
     margin-left: 720px;
@@ -167,44 +192,57 @@ textarea{
 #cardFactory .menu .menuBtn{
     width: 200px;
     height: 50px;
-    margin: 0 10px 10px 10px;        
-    overflow: hidden;
+    margin: 0 10px 10px 10px;            
     cursor: pointer;
+    background: url('img/btn_bg.png') no-repeat 0 0;
+    position: relative;
 }
-#cardFactory .menu .functionBtn1{
+#cardFactory .menu .menuBtn:hover{
+    background: url('img/btn_bg.png') no-repeat 100% 0;
+}
+
+#cardFactory .menu .menuBtn:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+#cardFactory .menu .functionBtn1:after{
     background: url('img/btn_1.png') no-repeat 0 0;
 }
-#cardFactory .menu .functionBtn2{
+#cardFactory .menu .functionBtn2:after{
     background: url('img/btn_2.png') no-repeat 0 0;
 }
-#cardFactory .menu .functionBtn3{
+#cardFactory .menu .functionBtn3:after{
     background: url('img/btn_3.png') no-repeat 0 0;
 }
-#cardFactory .menu .functionBtn4{
+#cardFactory .menu .functionBtn4:after{
     background: url('img/btn_4.png') no-repeat 0 0;
 }
-#cardFactory .menu .functionBtn5{
+#cardFactory .menu .functionBtn5:after{
     background: url('img/btn_5.png') no-repeat 0 0;
 }
-#cardFactory .menu .functionBtn6{
+#cardFactory .menu .functionBtn6:after{
     background: url('img/btn_6.png') no-repeat 0 0;
 }
-#cardFactory .menu .functionBtn1:hover{
+#cardFactory .menu .functionBtn1.completed:after{
     background: url('img/btn_1.png') no-repeat 100% 0;
 }
-#cardFactory .menu .functionBtn2:hover{
+#cardFactory .menu .functionBtn2.completed:after{
     background: url('img/btn_2.png') no-repeat 100% 0;
 }
-#cardFactory .menu .functionBtn3:hover{
+#cardFactory .menu .functionBtn3.completed:after{
     background: url('img/btn_3.png') no-repeat 100% 0;
 }
-#cardFactory .menu .functionBtn4:hover{
+#cardFactory .menu .functionBtn4.completed:after{
     background: url('img/btn_4.png') no-repeat 100% 0;
 }
-#cardFactory .menu .functionBtn5:hover{
+#cardFactory .menu .functionBtn5.completed:after{
     background: url('img/btn_5.png') no-repeat 100% 0;
 }
-#cardFactory .menu .functionBtn6:hover{
+#cardFactory .menu .functionBtn6.completed:after{
     background: url('img/btn_6.png') no-repeat 100% 0;
 }
 #cardFactory .menu .submitBtn{
@@ -216,18 +254,47 @@ textarea{
     background: url('img/btn_7.png') no-repeat 100% 0;
 }
 
+#cardFactory .menu .limitCount{
+    position: relative;
+    z-index: 10;
+    left: 2px;
+    top: 25px;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 20px;
+    color: #fff100;
+    text-shadow: 2px 0 2px #000,
+                    -2px 0 2px #000,
+                    0 -2px 2px #000,
+                    0 2px 2px #000;
+}
+
+/*!
+*   SUBMENU
+*/
+
+
 #cardFactory .subMenu{
-    margin: 10px 0;        
     height: 100px;
     width: 100%;
+    background: url('img/topic_bg.png') no-repeat 70px 0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+}
+#cardFactory .subMenu.open{
+    background: url('img/topic_bg.png') no-repeat 70px 100px;
+}
+#cardFactory .subMenu .btnWrap{
+    margin: 10px 0;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
     -webkit-transform: translateY(150px);
     -ms-transform: translateY(150px);
     transform: translateY(150px);
+    height: 100%;    
 }
-#cardFactory .subMenu.open{
+#cardFactory .subMenu.open .btnWrap{
     -webkit-transform: translateY(0px);
     -ms-transform: translateY(0px);
     transform: translateY(0px);   
@@ -235,40 +302,60 @@ textarea{
 #cardFactory .subMenu .navBtn{
     width: 30px;
     height: 100%;
+    cursor: pointer;
+}
+#cardFactory .subMenu .objWrap{
+    margin: 0 auto;
+    width: 880px;
 }
 #cardFactory .subMenu .navLeft{
-    background: rgba(30,30,0,0.5);
+    background: url('img/la.png') no-repeat 0 50%;
     float: left;
 }
+#cardFactory .subMenu .navLeft:hover{
+    background: url('img/la.png') no-repeat 100% 50%;
+}
 #cardFactory .subMenu .navRight{
-    background: rgba(30,30,0,0.5);   
+    background: url('img/ra.png') no-repeat 0 50%;
     float: right;
+}
+#cardFactory .subMenu .navRight:hover{
+    background: url('img/ra.png') no-repeat 100% 50%;
 }
 #cardFactory .subMenuBtn{
     width: 150px;
     height: 100px;
     margin: 0 13px;
-    float: left;    
+    float: left;
+    cursor: pointer;
 }
 #cardFactory .subMenuBtn.topic1{
-    background: url('img/subMenu_btn_1.png') no-repeat 50% 50%;
-    cursor: pointer;
+    background: url('img/subMenu_btn_1.png') no-repeat 0 50%;    
+}
+#cardFactory .subMenuBtn.topic1:hover,
+#cardFactory .subMenuBtn.topic1.selected{
+    background: url('img/subMenu_btn_1.png') no-repeat 100% 50%;
 }
 #cardFactory .subMenuBtn.topic2{
-    background: url('img/subMenu_btn_2.png') no-repeat 50% 50%;
-    cursor: pointer;
+    background: url('img/subMenu_btn_2.png') no-repeat 0 50%;    
+}
+#cardFactory .subMenuBtn.topic2:hover,
+#cardFactory .subMenuBtn.topic2.selected{
+    background: url('img/subMenu_btn_2.png') no-repeat 100% 50%;
 }
 #cardFactory .subMenuBtn.topic3{
-    background: url('img/subMenu_btn_3.png') no-repeat 50% 50%;
-    cursor: pointer;
+    background: url('img/subMenu_btn_3.png') no-repeat 0 50%;    
+}
+#cardFactory .subMenuBtn.topic3:hover,
+#cardFactory .subMenuBtn.topic3.selected{
+    background: url('img/subMenu_btn_3.png') no-repeat 100% 50%;
 }
 #cardFactory .subMenuBtn.topic4{
-    background: url('img/subMenu_btn_4.png') no-repeat 50% 50%;
-    cursor: pointer;
+    background: url('img/subMenu_btn_4.png') no-repeat 0 50%;    
 }
-#cardFactory .subMenuBtn.topic5{
-    background: url('img/subMenu_btn_5.png') no-repeat 50% 50%;
-    cursor: pointer;
+#cardFactory .subMenuBtn.topic4:hover,
+#cardFactory .subMenuBtn.topic4.selected{
+    background: url('img/subMenu_btn_4.png') no-repeat 100% 50%;
 }
 
 
@@ -390,6 +477,7 @@ textarea{
     position: relative;     
     overflow: hidden;
     position: relative;
+    border-radius: 10px;
 }
 #preview .frame{
     width: 100%;
@@ -469,39 +557,46 @@ textarea{
     top: -20px;
     bottom: -20px;
     right: -20px;
-    border: 2px dotted #666;
+    border: 2px dotted #ddd;
 
 }
-.adjustable .btn{    
+.adjustable .ad_btn{    
     position: absolute;
-    width: 44px;
-    height: 44px;
-    line-height: 34px;
-    font-size: 18px;    
+    width: 30px;
+    height: 30px;    
     border-radius: 50%;
     z-index: 6; 
     opacity: 0;
     display: none;
+    cursor: pointer;
 }
-.adjustable.select .btn{
+.adjustable.select .ad_btn{
     opacity: 1;
-    display: block;
+    display: block;    
 }
 .adjustable .delBtn{
-    right: -40px;
-    top: -40px;
+    right: -35px;
+    top: -35px;
+    background: url('img/delete_btn.png') no-repeat 0 50%;
 }
-.adjustable .resetBtn{
-    left: -40px;
-    top: -40px;
+.adjustable .delBtn:hover{
+    background: url('img/delete_btn.png') no-repeat 100% 50%;
 }
 .adjustable .roteateBtn{
-    left: -40px;
-    bottom: -40px;
+    left: -35px;
+    bottom: -35px;
+    background: url('img/rotate_btn.png') no-repeat 0 50%;
+}
+.adjustable .roteateBtn:hover{
+    background: url('img/rotate_btn.png') no-repeat 100% 50%;
 }
 .adjustable .resizeBtn{
-    right: -40px;
-    bottom: -40px;
+    right: -35px;
+    bottom: -35px;
+    background: url('img/resize_btn.png') no-repeat 0 50%;
+}
+.adjustable .resizeBtn:hover{
+    background: url('img/resize_btn.png') no-repeat 100% 50%;
 }
 .adjustable > .wrap{
     width: 100%;
