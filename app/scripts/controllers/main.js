@@ -94,11 +94,13 @@ app.controller('MainCtrl' , [ '$scope' , 'shareCanvasDataService' , function($sc
 
 	$scope.openPreview = function () {		
 		if(shareCanvasDataService.ready != false){
-			$scope.previewMode = true;	
+			$scope.previewMode = true;
+			document.body.style.overflow = "hidden";
 		}		
 	}
 	$scope.closePreview = function() {
 		$scope.previewMode = false;
+		document.body.style.overflow = "auto";
 	}
 }]);
 
@@ -171,17 +173,15 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 		}
 
 		$scope.reset = function(){
-			$scope.selected_bg = "transparent";
-			$scope.selected_frame = "transparent";
+			$scope.selected_bg = { "background" : "transparent" };
+			$scope.selected_frame = { "background" : "transparent" };
 			$scope.adornmentList = [];
 			$scope.bubblerList = [];
 		}
 
 
 
-		$scope.selectItem = function(item){
-			console.log(item);
-			console.log(item.src);
+		$scope.selectItem = function(item){			
 			if($scope.openSection == "bg"){
 				$scope.selectBackground(item.src);
 			}
@@ -302,8 +302,9 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 				}
 			});			 
 		}
-
-		console.log($scope.itemList);
+		else{
+			$scope.itemList = [];
+		}
 
 		//refresh pageNo							
 		$scope.currentPage = 0;
@@ -314,13 +315,13 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	$scope.$watch("openSection+topic" , function(){		
 		$scope.isLoadding = true;						
 
-		if($scope.lastOpenSection != $scope.openSection){			
+		if($scope.lastOpenSection != $scope.openSection){
 			$http.get("data/" + $scope.openSection + ".json").success(function(data){				
-				$scope.rawItemListObj = data;
+				$scope.rawItemListObj = data;				
 				if(data[0] != null){
-					$scope.topic = data[0].name;
-					changeTopic();
+					$scope.topic = data[0].name;					
 				}
+				changeTopic();
 				$scope.isLoadding = false;
 			});	    
 			$scope.lastOpenSection = $scope.openSection;

@@ -44,15 +44,14 @@
                             </span>
                         </div>
                     </div>
-                    <div class="window" ng-class="{'open' : isWindowOpen }">
+                    <div class="window transition" ng-class="{'open' : isWindowOpen }">
                         <div class="closeBtn" ng-click="closeWindow();"></div>
                         <div class="section {{openSection}}">                            
                             <div class="item" 
                                 ng-repeat="item in itemList | startFrom: currentPage*pageSize  | limitTo:pageSize">
-                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectItem(item);" images-load-animation>
-                                
-                            </div>
-                            <div class="well empty" ng-class="{'show': frame.length < 1 }">
+                                <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectItem(item);" images-load-animation>                                
+                            </div>                            
+                            <div class="well empty" ng-class="{'show': itemList.length < 1 }">
                                 現在還沒有東西可以用
                             </div>
                         </div>
@@ -94,11 +93,11 @@
                         
                         <ul class="pagination">                                        
                             <li ng-repeat="n in [] | range:numberOfPages" ng-click="setCurrentPage($index)" ng-class="{'selected': $index == currentPage }">
-                                <span></span>
+                                
                             </li>
                         </ul>                        
                     </div>
-                    <div class="loadingOverlay" ng-class="{'show' : !isLoadding}">
+                    <div class="loadingOverlay transition" ng-class="{'show' : !isLoadding}">
                         <div class="loading"></div>
                     </div>
                 </div>                
@@ -152,8 +151,8 @@
                 </div>
             </div>            
         </div>
-        <div id="preview" ng-controller="PreviewCtrl" ng-class="{'open': previewMode}">
-            <div class="previewOverlay">
+        <div id="preview" class="transition" ng-controller="PreviewCtrl" ng-class="{'open': previewMode}">
+            <div class="previewOverlay transition">
                 <div class="canvasWrap">
                     <div class="canvas" ng-style="selected_bg" ng-click="refresh();"  ng-if="previewMode">
                         <div class="frame" ng-style="selected_frame">
@@ -191,6 +190,22 @@
                                     <input type="text" class="form-control" name="inputEmail" value="">
                                 </div>
                             </div>
+                        </div>  
+                        <div class="form-group">               
+                            <div class="control-group">             
+                                <label class="col-lg-2 control-label">收件人</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" name="inputEmail" value="">
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="form-group">               
+                            <div class="control-group">             
+                                <label class="col-lg-2 control-label">收件人</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" name="inputEmail" value="">
+                                </div>
+                            </div>
                         </div>                        
 
                         <div class="form-group function-group">
@@ -210,6 +225,7 @@
 
     <!-- build:js scripts/modules.js -->    
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <!--
     <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
