@@ -477,6 +477,10 @@ textarea{
     visibility: hidden;
     opacity: 0;    
     overflow-y: auto;
+    /** fix safari bug **/    
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    transition: opacity 0.5s;
 }
 #preview.open{
     z-index: 600;
@@ -491,19 +495,22 @@ textarea{
     border-radius: 5px;    
     -webkit-transform: translateY(10%);
     -ms-transform: translateY(10%);    
-    transform: translateY(10%);
+    transform: translateY(10%);        
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
 }
 #preview.open .previewOverlay{
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);    
-    transform: translateY(0);
+    transform: translateY(0);    
 }
 #preview .canvasWrap{
     margin: 0 auto 20px auto;
     padding: 5px;
     background: #62422E;
     border-radius: 10px;
-    height: 500px;
+    height: 500px;    
 }
 #preview .canvas{    
     margin: 10px auto;
@@ -513,14 +520,27 @@ textarea{
     overflow: hidden;
     position: relative;
     border-radius: 10px;
+    position: relative;
 }
 #preview .frame{
     width: 100%;
     height: 100%;
 }
 #preview .sendForm{
-    width: 600px;
+    width: 480px;
     margin: 0 auto;
+    padding-left: 50px;
+    position: relative;
+}
+#preview .sendForm:after{
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 250px;
+    height: 250px;
+    left: -220px;
+    top: -10px;
+    background: url('img/stamp.png');
 }
 #preview .sendForm .function-group {
     text-align: center;

@@ -298,7 +298,7 @@ ui.service('selectCtrl', ['$document', function ($document) {
     return ctrl;
 }]);
 
-
+/**
 ui.directive('transformable', [ '$timeout' , 'transform' , function($timeout , transform){
 
 	return {
@@ -333,6 +333,7 @@ ui.directive('transformable', [ '$timeout' , 'transform' , function($timeout , t
 	}
 
 }]);
+**/
 
 
 

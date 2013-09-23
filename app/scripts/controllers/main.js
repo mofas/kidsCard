@@ -148,11 +148,6 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	var injectFunction = function($scope){		
 							
 
-		$scope.startFn = function(){						
-			$scope.isStart = true;			
-			$scope.$apply();			
-		}
-
 		$scope.setCurrentPage = function($index){
 			$scope.currentPage = $index;
 		}		
@@ -166,6 +161,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 
 		$scope.openSectionWindow = function(target){		
 			$scope.openWindow();
+			$scope.isStart = true;
 			$scope.openSection = target;		
 		}
 		$scope.selectTopic = function(topic){

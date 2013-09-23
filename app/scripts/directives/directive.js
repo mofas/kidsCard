@@ -15,7 +15,7 @@ app.directive('imagesLoadAnimation', function () {
 		}
 	}
 });
-
+/**
 app.directive('clickOnce', function () {        
 	return {
 		scope:{
@@ -27,6 +27,8 @@ app.directive('clickOnce', function () {
 				element.unbind("click" , clickFn);	
 			}
 			element.bind("click" , clickFn);
-		}
+		},
+		replace: false
 	}
 });
+**/
