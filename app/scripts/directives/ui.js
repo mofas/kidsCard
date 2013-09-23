@@ -94,6 +94,7 @@ ui.factory("rotatable" , [ '$document', 'throttle' , 'transform' ,
 				event.preventDefault();
 				event.stopPropagation();
 				//reset
+				rotate_mouseup();
 				startX = event.screenX;
 				startY = event.screenY;
 				x = 0;
@@ -183,6 +184,7 @@ ui.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 			event.preventDefault();
 			event.stopPropagation();
 			//reset
+			resize_mouseup();
 			startX = event.screenX;
 			startY = event.screenY;
 			x = 0;
@@ -210,6 +212,7 @@ ui.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 	return function(triggerDOM , targetDOM , data){		
 
 		var 
+			touchTarget = null,
 			x = 0,
 			y = 0,
 			startOffsetX = 0,
@@ -217,12 +220,36 @@ ui.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 			startX = 0,
 			startY = 0;
 
-		var drag_mousemove = function(event) {
-			y = event.screenY - startY;
-			x = event.screenX - startX;			
+		var drag_start = function(initX , initY){
+			x = 0;
+		    y = 0;
+		    startOffsetX = data.offsetX;
+		    startOffsetY = data.offsetY;
+		    startX = initX;
+		    startY = initY;		    
+		}
+
+		var drag_mousemove = function(e) {						
+			y = e.screenY - startY;
+			x = e.screenX - startX;			
 			data.offsetX = startOffsetX + x;
 			data.offsetY = startOffsetY + y;
-			transform(targetDOM , data);
+			transform(targetDOM , data);			
+			e.preventDefault();
+		}
+
+		var drag_touchmove = function(e){			
+			y = e.targetTouches[0].clientY - startY;
+			x = e.targetTouches[0].clientX - startX;
+			data.offsetX = startOffsetX + x;
+			data.offsetY = startOffsetY + y;
+  			transform(targetDOM , data);  			
+		}
+
+		var drag_touchend = function(){
+			touchTarget.removeEventListener('touchmove', drag_touchmove);
+    		touchTarget.removeEventListener('touchend', drag_touchend);
+    		touchTarget.removeEventListener('touchcancel', drag_touchend);			
 		}
 
 		var drag_mouseup = function(){
@@ -234,14 +261,22 @@ ui.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 
 		angular.element(triggerDOM).on('mousedown', function(event) {		    
 		    //reset
-		    startX = event.screenX;
-		    startY = event.screenY;		    
-		    x = 0;
-		    y = 0;
-		    startOffsetX = data.offsetX;
-		    startOffsetY = data.offsetY;
+		    drag_mouseup();
+		    drag_start(event.screenX , event.screenY);		    
 		    $document.on('mousemove', throttle_drag_mousemove);
 		    $document.on('mouseup', drag_mouseup);
+		    event.preventDefault();
+		});
+
+		//touchEvent
+		angular.element(triggerDOM).on('touchstart', function(e) {		    
+		    //reset		    
+		    drag_start(e.targetTouches[0].clientX , e.targetTouches[0].clientY);
+		    touchTarget = e.target;
+		    e.target.addEventListener('touchmove', drag_touchmove, false);
+    		e.target.addEventListener('touchend', drag_touchend, false);
+    		e.target.addEventListener('touchcancel', drag_touchend, false);
+		    event.preventDefault();
 		});
 	}    
 }]);
