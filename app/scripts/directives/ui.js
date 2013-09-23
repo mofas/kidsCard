@@ -112,6 +112,7 @@ ui.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 	return function(triggerDOM , targetDOM , data){	
 
 		var 
+			shifted = false,
 			startX = 0,
 			startY = 0,
 			x = 0,
@@ -128,19 +129,34 @@ ui.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 		
 		var resize_mousemove = function(event) {				
 			y = event.screenY - startY;
-			x = event.screenX - startX;				
+			x = event.screenX - startX;			
 			stretchW = (x*cosTheta + y*sinTheta);
 			stretchH = (-x*sinTheta + y*cosTheta);
 
-			//check size limit
-			if( !((startW + stretchW*2) < data.minW || (startW + stretchW*2) > data.maxW) ){
-				data.offsetX = startOffsetX - stretchW;
-				data.W = startW + stretchW*2;
+
+			//maintain ratio
+			if(shifted){
+				//get middle of y and x;
+				stretchW = stretchH = (stretchW+stretchH)/2;
+				if( !( (startW + stretchW*2) < data.minW || (startW + stretchW*2) > data.maxW ||
+					(startH + stretchH*2) < data.minH || (startH + stretchH*2) > data.maxH ) ){
+						data.offsetX = startOffsetX - stretchW;
+						data.W = startW + stretchW*2;
+						data.offsetY = startOffsetY - stretchH;			
+						data.H = startH + stretchH*2;
+				}
 			}
-			if( !((startH + stretchH*2) < data.minH || (startH + stretchH*2) > data.maxH) ){
-				data.offsetY = startOffsetY - stretchH;			
-				data.H = startH + stretchH*2;		
-			}
+			else{
+				//check size limit
+				if( !((startW + stretchW*2) < data.minW || (startW + stretchW*2) > data.maxW) ){
+					data.offsetX = startOffsetX - stretchW;
+					data.W = startW + stretchW*2;
+				}
+				if( !((startH + stretchH*2) < data.minH || (startH + stretchH*2) > data.maxH) ){
+					data.offsetY = startOffsetY - stretchH;			
+					data.H = startH + stretchH*2;		
+				}	
+			}								
 							
 			targetDOM.css({				
 				'width': data.W + "px",
@@ -176,6 +192,11 @@ ui.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 		var resize_mouseup = function() {
 			$document.unbind('mousemove', resize_mousemove);
 			$document.unbind('mouseup', resize_mouseup);
+			$document.unbind('keypress' , resize_keypress);
+		}
+
+		var resize_keypress = function(event){			
+			shifted = event.shiftKey;
 		}
 
 		var throttle_resize_mousemove = throttle(resize_mousemove , 16);
@@ -201,7 +222,7 @@ ui.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 
 			$document.on('mousemove', resize_mousemove);
 			$document.on('mouseup', resize_mouseup);
-			
+			$document.on('keyup keydown' , resize_keypress);
 		});		
 
 	}    
@@ -400,7 +421,7 @@ ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable'
 		'<span class="adjustable">' + 
 			'<span class="ad_btn delBtn" ng-click="del();"></span>' + 			
 			'<span class="ad_btn roteateBtn"></span>' + 		
-			'<span class="ad_btn resizeBtn"></span>' +
+			'<span class="ad_btn resizeBtn" title="按住shift鍵同時托著滑鼠可以維持形狀"></span>' +
 			'<span class="wrap" ng-transclude></span>' +
 		'</span>',       
 		replace: true,     		

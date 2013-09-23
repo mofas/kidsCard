@@ -94,10 +94,11 @@
                         <div class="navBtn navLeft"></div>
                         <div class="navBtn navRight"></div>
                         <div class="objWrap clearfix">                        
-                            <div ng-repeat="category in rawItemListObj" class="subMenuBtn" 
+                            <div ng-repeat="category in categoryList" class="subMenuBtn" 
                                 ng-class="{'selected' : topic == category.name }"
                                 ng-click="selectTopic(category.name)"
-                                ng-style="getBGObj(category.categoryBtn)">
+                                ng-style="getBGObj(category.categoryBtn)"
+                                >                                
                             </div>
                     </div>
                 </div>            

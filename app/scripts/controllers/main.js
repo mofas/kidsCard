@@ -129,6 +129,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 		$scope.isLoadding = true;
 
 		$scope.rawItemListObj = {};
+		$scope.categoryList = [];
 		$scope.itemList = [];
 
 		$scope.currentPage = 0;
@@ -289,37 +290,45 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	injectFunction($scope);	
 
 
-	var changeTopic = function(){
+	var changeTopic = function(){		
 		$scope.lastTopic = $scope.topic;
 		if($scope.rawItemListObj.length > 0){
-			angular.forEach($scope.rawItemListObj , function(obj){					
+			angular.forEach($scope.rawItemListObj , function(obj){
 				if(obj.name === $scope.topic){
-					$scope.itemList = obj.list;					
+					$scope.itemList = obj.list;
 				}
 			});			 
 		}
 		else{
 			$scope.itemList = [];
-		}
-
+		}		
 		//refresh pageNo							
 		$scope.currentPage = 0;
 		changePageSizeEvent();		
 	}
 
+	var changeSection = function(){
+		$scope.categoryList = [];
+		$http.get("data/" + $scope.openSection + ".json").success(function(data){				
+			$scope.rawItemListObj = data;				
+			if(data[0] != null){
+				$scope.topic = data[0].name;
+				angular.forEach($scope.rawItemListObj , function(obj){					
+					$scope.categoryList.push({ name : obj.name , categoryBtn: obj.categoryBtn });					
+				});
+			}
+			changeTopic();
+			$scope.isLoadding = false;
+		});	
+	}
+
 	//LOAD DATA	
 	$scope.$watch("openSection+topic" , function(){		
-		$scope.isLoadding = true;						
+		$scope.isLoadding = true;		
 
+		//change section
 		if($scope.lastOpenSection != $scope.openSection){
-			$http.get("data/" + $scope.openSection + ".json").success(function(data){				
-				$scope.rawItemListObj = data;				
-				if(data[0] != null){
-					$scope.topic = data[0].name;					
-				}
-				changeTopic();
-				$scope.isLoadding = false;
-			});	    
+			changeSection();
 			$scope.lastOpenSection = $scope.openSection;
 		}
 		else if($scope.lastTopic != $scope.topic){			
@@ -331,21 +340,6 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 		}
 	});	
 
-
-	// $scope.$watch("topic" , function(){
-		
-	// 	if($scope.topic != null && $scope.rawItemListObj.length > 0){
-	// 		angular.forEach($scope.rawItemListObj , function(obj){				
-	// 			if(obj.name === $scope.topic){
-	// 				$scope.itemList = obj.list;
-	// 			}
-	// 		});			 
-	// 	}
-
-	// 	//refresh pageNo							
-	// 	$scope.currentPage = 0;
-	// 	changePageSizeEvent();
-	// });
 		
 }]);
 

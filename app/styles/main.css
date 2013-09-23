@@ -206,15 +206,6 @@ textarea{
     top: 0;
     bottom: 0;
 }
-/*#cardFactory .bg .item,
-#cardFactory .frame .item,
-#cardFactory .bubbler .item{
-    margin: 14px 6px;
-    width: 150px;    
-    height: 100px;
-    background: #fff;
-    border-radius: 10px;
-}*/
 #cardFactory .menu{
     margin-left: 720px;
     padding: 10px 0;
@@ -362,6 +353,26 @@ textarea{
     float: left;
     cursor: pointer;
     background-position: 0 50%;
+}
+#cardFactory .subMenuBtn.ng-enter,
+#cardFactory .subMenuBtn.ng-leave{            
+    -webkit-transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+    -moz-transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+}
+#cardFactory .subMenuBtn.ng-enter,
+#cardFactory .subMenuBtn.ng-leave.ng-leave-active{
+    -webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);    
+    transform: scale(0.75);
+    opacity: 0;
+}
+#cardFactory .subMenuBtn.ng-enter.ng-enter-active,
+#cardFactory .subMenuBtn.ng-leave{
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);    
+    transform: scale(1);
+    opacity: 1;
 }
 #cardFactory .subMenuBtn:hover,
 #cardFactory .subMenuBtn.selected{
