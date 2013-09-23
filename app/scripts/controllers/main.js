@@ -372,6 +372,11 @@ app.controller('PreviewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService'
 				"adornmentList" : $scope.adornmentList,
 				"bubblerList" : $scope.bubblerList
 			}
-			alert("以下資訊會送往後端儲存:" + JSON.stringify(saveObj));			
+			alert("以下資訊會送往後端儲存:" + JSON.stringify(saveObj));
+			console.log(JSON.stringify(saveObj));
+		}
+
+		$scope.sendMail = function(){
+			alert("功能尚未完成,敬請期待");
 		}
 }]);

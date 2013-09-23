@@ -358,7 +358,7 @@ textarea{
 #cardFactory .subMenuBtn{
     width: 150px;
     height: 100px;
-    margin: 0 13px;
+    margin: 0 35px;
     float: left;
     cursor: pointer;
     background-position: 0 50%;
@@ -368,36 +368,6 @@ textarea{
     background-position: 100% 50%;
     background-repeat: repeat-x;
 }
-/*#cardFactory .subMenuBtn.topic1{
-    background: url('img/subMenu_btn_1.png') no-repeat 0 50%;    
-}
-#cardFactory .subMenuBtn.topic1:hover,
-#cardFactory .subMenuBtn.topic1.selected{
-    background: url('img/subMenu_btn_1.png') no-repeat 100% 50%;
-}
-#cardFactory .subMenuBtn.topic2{
-    background: url('img/subMenu_btn_2.png') no-repeat 0 50%;    
-}
-#cardFactory .subMenuBtn.topic2:hover,
-#cardFactory .subMenuBtn.topic2.selected{
-    background: url('img/subMenu_btn_2.png') no-repeat 100% 50%;
-}
-#cardFactory .subMenuBtn.topic3{
-    background: url('img/subMenu_btn_3.png') no-repeat 0 50%;    
-}
-#cardFactory .subMenuBtn.topic3:hover,
-#cardFactory .subMenuBtn.topic3.selected{
-    background: url('img/subMenu_btn_3.png') no-repeat 100% 50%;
-}
-#cardFactory .subMenuBtn.topic4{
-    background: url('img/subMenu_btn_4.png') no-repeat 0 50%;    
-}
-#cardFactory .subMenuBtn.topic4:hover,
-#cardFactory .subMenuBtn.topic4.selected{
-    background: url('img/subMenu_btn_4.png') no-repeat 100% 50%;
-}
-*/
-
 
 .adornment_item{    
     display: block;    
