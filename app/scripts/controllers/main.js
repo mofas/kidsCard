@@ -308,7 +308,7 @@ app.controller('CardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'Sty
 	}
 
 	var changeSection = function(){
-		$scope.categoryList = [];
+		$scope.categoryList = [];		
 		$http.get("data/" + $scope.openSection + ".json").success(function(data){				
 			$scope.rawItemListObj = data;				
 			if(data[0] != null){

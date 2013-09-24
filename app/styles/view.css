@@ -1,0 +1,102 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body , html{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #62422E;
+}
+#cardView{
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 710px;
+    height: 470px;
+}
+
+#cardView .canvas{    
+    position: relative;    
+    width: 710px;
+    height: 470px;            
+    overflow: hidden;    
+    border-radius: 10px;    
+}
+#cardView .frame{
+    width: 100%;
+    height: 100%;
+}
+
+.adornment_item {
+    display: block;
+    width: 250px;
+    height: 250px;
+    position: relative;
+    z-index: 51;
+}
+.adornmentImg {
+    width: 250px;
+    height: 250px;
+    -webkit-animation: play .8s steps(2) infinite;
+    -ms-animation: play .8s steps(2) infinite;
+    animation: play .8s steps(2) infinite;
+    background-repeat: no-repeat;
+}
+@-webkit-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@-moz-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@-ms-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@-o-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+.bubbler_item {
+    display: block;
+    width: 300px;
+    height: 150px;
+    position: relative;
+}
+.displayItem {
+    position: absolute;
+    min-width: 50px;
+    min-height: 50px;
+    left: 0;
+    top: 0;
+}
+#cardView .bubblerText {
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    z-index: 52;
+    font-size: 30px;
+    line-height: 45px;
+    font-family: "微軟正黑體";
+    resize: none;
+    overflow: hidden;
+    border: 0;
+}

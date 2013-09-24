@@ -1,0 +1,50 @@
+<!doctype html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css(.tmp) styles/view.css -->    
+    <link rel="stylesheet" href="styles/view.css">
+    <!-- endbuild -->
+</head>
+<body ng-app="kidsCardView">
+    
+    <!-- Add your site or application content here -->
+    <div ng-view="" ng-controller="ViewCtrl" id="cardView">        
+        <div class="canvas" ng-style="selected_bg">
+            <div class="frame" ng-style="selected_frame">
+                <!-- adornment -->
+                <span ng-cloak class="adornment_item displayItem" ng-repeat="adornment in adornmentList" transform-data="adornment" ng-style="adornment.style">
+                    <div class="adornmentImg" ng-style="adornment.inner.style">
+                    </div>
+                </span>                    
+                <!--  bubbler -->
+                <span ng-cloak class="bubbler_item displayItem" ng-repeat="bubbler in bubblerList" transform-data="bubbler" ng-style="bubbler.style">
+                    <textarea ng-cloak class="bubblerText" ng-style="bubbler.inner.style" ng-model="bubbler.text" readonly>
+                        </textarea>                                
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- build:js scripts/modules.js -->    
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>    
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/view.js -->
+    <script src="scripts/view.js"></script>    
+    <!-- endbuild -->
+
+
+</body>
+</html>

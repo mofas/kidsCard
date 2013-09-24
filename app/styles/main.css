@@ -496,12 +496,10 @@ textarea{
 #preview .canvas{    
     margin: 10px auto;
     width: 710px;
-    height: 470px;        
-    position: relative;     
-    overflow: hidden;
-    position: relative;
-    border-radius: 10px;
-    position: relative;
+    height: 470px; 
+    position: relative;      
+    overflow: hidden;    
+    border-radius: 10px;    
 }
 #preview .frame{
     width: 100%;

@@ -1,0 +1,104 @@
+{
+	"selected_bg": {
+		"background-image":"url(images/bg/1-1/007-1.jpg)"
+	},
+	"selected_frame": {
+		"background-image":"url(images/frame/2-3/007-1.png)"
+	},
+	"adornmentList":[
+		{
+			"id":0,
+			"style": {
+				"width":"179.568px",
+				"height":"185.256px",
+				"-moz-transform":"translate(160.216px,71.372px) rotate(328.3deg) scale( 1,1)",
+				"-webkit-transform":"translate(160.216px,71.372px) rotate(328.3deg) scale( 1,1)",
+				"-o-transform":"translate(160.216px,71.372px) rotate(328.3deg) scale( 1,1)",
+				"-ms-transform":"translate(160.216px,71.372px) rotate(328.3deg) scale( 1,1)"
+			},
+			"inner": {
+				"style": {
+					"background-image":"url(images/adornment/3-1/004-1.png)",
+					"-moz-transform":"translate(-35.215999999999994px,-32.372px) rotate(0deg) scale( 0.718272,0.741024)",
+					"-webkit-transform":"translate(-35.215999999999994px,-32.372px) rotate(0deg) scale( 0.718272,0.741024)",
+					"-o-transform":"translate(-35.215999999999994px,-32.372px) rotate(0deg) scale( 0.718272,0.741024)",
+					"-ms-transform":"translate(-35.215999999999994px,-32.372px) rotate(0deg) scale( 0.718272,0.741024)"		
+				},
+				"$$hashKey":"05G"
+			}
+		},
+		{
+			"id":1,
+			"style": {
+				"width":"140px",
+				"height":"142px",
+				"-moz-transform":"translate(495px,139px) rotate(0deg) scale( 1,1)",
+				"-webkit-transform":"translate(495px,139px) rotate(0deg) scale( 1,1)",
+				"-o-transform":"translate(495px,139px) rotate(0deg) scale( 1,1)",
+				"-ms-transform":"translate(495px,139px) rotate(0deg) scale( 1,1)"
+			},
+			"inner": {
+				"style": {
+					"background-image":"url(images/adornment/3-3/008-1.png)",
+					"-moz-transform":"translate(-55px,-54px) rotate(0deg) scale( 0.56,0.568)",
+					"-webkit-transform":"translate(-55px,-54px) rotate(0deg) scale( 0.56,0.568)",
+					"-o-transform":"translate(-55px,-54px) rotate(0deg) scale( 0.56,0.568)",
+					"-ms-transform":"translate(-55px,-54px) rotate(0deg) scale( 0.56,0.568)"
+				}
+			},
+			"$$hashKey":"05H"
+		},
+		{
+			"id":3,
+			"style": {
+				"-moz-transform":"translate(385px,-72px) rotate(0deg) scale( 1,1)",
+				"-webkit-transform":"translate(385px,-72px) rotate(0deg) scale( 1,1)",
+				"-o-transform":"translate(385px,-72px) rotate(0deg) scale( 1,1)",
+				"-ms-transform":"translate(385px,-72px) rotate(0deg) scale( 1,1)"
+			},
+			"inner": {
+				"style": { 
+					"background-image":"url(images/adornment/3-4/007-1.png)"
+				}
+			},
+			"$$hashKey":"05I"
+		},
+		{
+			"id":4,
+			"style": {
+				"-moz-transform":"translate(71px,-78px) rotate(0deg) scale( 1,1)",
+				"-webkit-transform":"translate(71px,-78px) rotate(0deg) scale( 1,1)",
+				"-o-transform":"translate(71px,-78px) rotate(0deg) scale( 1,1)",
+				"-ms-transform":"translate(71px,-78px) rotate(0deg) scale( 1,1)"
+			},
+			"inner": { 
+				"style": {
+					"background-image":"url(images/adornment/3-4/008-1.png)"
+				}
+			},
+			"$$hashKey":"05J"
+		}
+	],
+	"bubblerList":[
+		{
+			"id":2,
+			"style": {
+				"width":"600px",
+				"height":"80px",
+				"-moz-transform":"translate(60px,323px) rotate(0deg) scale( 1,1)",
+				"-webkit-transform":"translate(60px,323px) rotate(0deg) scale( 1,1)",
+				"-o-transform":"translate(60px,323px) rotate(0deg) scale( 1,1)",
+				"-ms-transform":"translate(60px,323px) rotate(0deg) scale( 1, 1)"
+			},
+			"inner": {
+				"style": {
+					"border":"4px dashed #FFB19",
+					"border-radius":"35px",
+					"background":"#FFD0C1"
+				}
+			},
+			"text":"妳好嗎,我很好.How are you? I fine.",
+			"$$hashKey":"05O"
+		}
+	]
+} 
