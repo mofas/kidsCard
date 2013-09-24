@@ -286,7 +286,8 @@ ui.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 		    drag_start(event.screenX , event.screenY);		    
 		    $document.on('mousemove', throttle_drag_mousemove);
 		    $document.on('mouseup', drag_mouseup);
-		    event.preventDefault();
+		    //event.preventDefault();
+
 		});
 
 		//touchEvent
@@ -307,7 +308,7 @@ ui.service('selectCtrl', ['$document', function ($document) {
     var ctrl = {};
 
 	var cancelSelectEvent = function(e){		
-		if(e.toElement === ctrl.$parentDOM){	
+		if(e.target === ctrl.$parentDOM){	
 			if(ctrl.perviousSelected != null){		
 				ctrl.perviousSelected.removeClass("select");
 				ctrl.perviousSelected = null;
