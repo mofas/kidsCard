@@ -145,8 +145,8 @@ module.exports = function (grunt) {
             expand: true,
             cwd: '<%= yeoman.app %>',
             src: [
-              'styles/{,*/}*.{png,jpg,jpeg}',
-              'images/*/{,*/}*.{png,jpg,jpeg}'
+              'styles/*/{,*/}*.{png,jpg,jpeg}'//,
+              //'images/*/{,*/}*.{png,jpg,jpeg}'
             ],
             dest: '<%= yeoman.dist %>'
             
@@ -303,6 +303,10 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin'
+  ]);
+
+  grunt.registerTask('compressImg', [    
+    'imagemin'
   ]);
 
   grunt.registerTask('default', [

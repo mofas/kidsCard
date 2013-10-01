@@ -1,3 +1,115 @@
+
+
+
+/*!
+*   index
+*/
+
+
+#index{
+    
+}
+
+#index .portal{
+    margin: 0 auto 180px auto;    
+    width: 940px;
+    height: 573px;
+    position: relative;    
+}
+
+#index .portalImg{
+    width: 940px;
+    height: 573px;
+    background: url('img/index/portal.png');
+    position: absolute;        
+} 
+#index .link{
+    position: absolute;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: 0 0;    
+}
+#index .link:after{
+    content: "";
+    position: absolute;
+    z-index: -1;
+}
+#index .link:hover:after{
+    background-position: 100% 0;
+}
+#index .link1{
+    top: 56px;
+    left: 72px;
+    width: 205px;
+    height: 278px;
+}
+#index .link1:after{    
+    width: 205px;
+    height: 278px;    
+    background-image: url('img/index/link_1.png');        
+}
+#index .link2{
+    top: 230px;
+    left: -20px;
+    width: 269px;
+    height: 191px;    
+}
+#index .link2:after{    
+    width: 269px;
+    height: 191px;    
+    background-image: url('img/index/link_2.png');        
+}
+#index .link3{
+    top: 410px;
+    left: 100px;
+    width: 257px;
+    height: 143px;    
+}
+#index .link3:after{    
+    width: 257px;
+    height: 143px;    
+    background-image: url('img/index/link_3.png');        
+}
+#index .link4{
+    top: 60px;
+    right: 80px;
+    width: 212px;
+    height: 212px;    
+}
+#index .link4:after{    
+    width: 212px;
+    height: 212px;  
+    background-image: url('img/index/link_4.png');        
+}
+#index .link5{
+    top: 240px;
+    right: 80px;
+    width: 244px;
+    height: 161px;    
+}
+#index .link5:after{    
+    width: 244px;
+    height: 161px;
+    background-image: url('img/index/link_5.png');        
+}
+#index .link6{
+    top: 400px;
+    right: 120px;
+    width: 260px;
+    height: 144px;
+}
+#index .link6:after{
+    width: 260px;
+    height: 144px;
+    background-image: url('img/index/link_6.png');
+}
+
+
+
+
+
+
+
 /*!
 *   CARD FACTORY
 */
@@ -40,7 +152,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background: url('img/welcome.jpg') no-repeat 50% 50%;
+    background: url('img/card/welcome.jpg') no-repeat 50% 50%;
     z-index: 0;    
     opacity: 1; 
 }
@@ -192,18 +304,18 @@
     padding: 10px 0;
     width: 220px;
     height: 470px;
-    background: url('img/menu_bg.png') no-repeat 50% 50%;
+    background: url('img/card/menu_bg.png') no-repeat 50% 50%;
 }
 #cardFactory .menu .menuBtn{
     width: 200px;
     height: 50px;
     margin: 0 10px 10px 10px;            
     cursor: pointer;
-    background: url('img/btn_bg.png') no-repeat 0 0;
+    background: url('img/card/btn_bg.png') no-repeat 0 0;
     position: relative;
 }
 #cardFactory .menu .menuBtn:hover{
-    background: url('img/btn_bg.png') no-repeat 100% 0;
+    background: url('img/card/btn_bg.png') no-repeat 100% 0;
 }
 #cardFactory .menu .menuBtn:after{
     content: "";
@@ -214,48 +326,48 @@
     height: 100%;
 }
 #cardFactory .menu .functionBtn1:after{
-    background: url('img/btn_1.png') no-repeat 0 0;
+    background: url('img/card/btn_1.png') no-repeat 0 0;
 }
 #cardFactory .menu .functionBtn2:after{
-    background: url('img/btn_2.png') no-repeat 0 0;
+    background: url('img/card/btn_2.png') no-repeat 0 0;
 }
 #cardFactory .menu .functionBtn3:after{
-    background: url('img/btn_3.png') no-repeat 0 0;
+    background: url('img/card/btn_3.png') no-repeat 0 0;
 }
 #cardFactory .menu .functionBtn4:after{
-    background: url('img/btn_4.png') no-repeat 0 0;
+    background: url('img/card/btn_4.png') no-repeat 0 0;
 }
 #cardFactory .menu .functionBtn5:after{
-    background: url('img/btn_5.png') no-repeat 0 0;
+    background: url('img/card/btn_5.png') no-repeat 0 0;
 }
 #cardFactory .menu .functionBtn6:after{
-    background: url('img/btn_6.png') no-repeat 0 0;
+    background: url('img/card/btn_6.png') no-repeat 0 0;
 }
 #cardFactory .menu .functionBtn1.completed:after{
-    background: url('img/btn_1.png') no-repeat 100% 0;
+    background: url('img/card/btn_1.png') no-repeat 100% 0;
 }
 #cardFactory .menu .functionBtn2.completed:after{
-    background: url('img/btn_2.png') no-repeat 100% 0;
+    background: url('img/card/btn_2.png') no-repeat 100% 0;
 }
 #cardFactory .menu .functionBtn3.completed:after{
-    background: url('img/btn_3.png') no-repeat 100% 0;
+    background: url('img/card/btn_3.png') no-repeat 100% 0;
 }
 #cardFactory .menu .functionBtn4.completed:after{
-    background: url('img/btn_4.png') no-repeat 100% 0;
+    background: url('img/card/btn_4.png') no-repeat 100% 0;
 }
 #cardFactory .menu .functionBtn5.completed:after{
-    background: url('img/btn_5.png') no-repeat 100% 0;
+    background: url('img/card/btn_5.png') no-repeat 100% 0;
 }
 #cardFactory .menu .functionBtn6.completed:after{
-    background: url('img/btn_6.png') no-repeat 100% 0;
+    background: url('img/card/btn_6.png') no-repeat 100% 0;
 }
 #cardFactory .menu .submitBtn{
     height: 90px;
-    background: url('img/btn_7.png') no-repeat 0 0;   
+    background: url('img/card/btn_7.png') no-repeat 0 0;   
 }
 #cardFactory .menu .submitBtn:hover{
     height: 90px;
-    background: url('img/btn_7.png') no-repeat 100% 0;
+    background: url('img/card/btn_7.png') no-repeat 100% 0;
 }
 #cardFactory .menu .limitCount{
     position: relative;
@@ -278,13 +390,13 @@
 #cardFactory .subMenu{
     height: 100px;
     width: 100%;
-    background: url('img/topic_bg.png') no-repeat 70px 0;
+    background: url('img/card/topic_bg.png') no-repeat 70px 0;
     transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     -webkit-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     -moz-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 }
 #cardFactory .subMenu.open{
-    background: url('img/topic_bg.png') no-repeat 70px 100px;
+    background: url('img/card/topic_bg.png') no-repeat 70px 100px;
 }
 #cardFactory .subMenu .btnWrap{
     margin: 10px 0;
@@ -311,18 +423,18 @@
     width: 880px;
 }
 #cardFactory .subMenu .navLeft{
-    background: url('img/la.png') no-repeat 0 50%;
+    background: url('img/card/la.png') no-repeat 0 50%;
     float: left;
 }
 #cardFactory .subMenu .navLeft:hover{
-    background: url('img/la.png') no-repeat 100% 50%;
+    background: url('img/card/la.png') no-repeat 100% 50%;
 }
 #cardFactory .subMenu .navRight{
-    background: url('img/ra.png') no-repeat 0 50%;
+    background: url('img/card/ra.png') no-repeat 0 50%;
     float: right;
 }
 #cardFactory .subMenu .navRight:hover{
-    background: url('img/ra.png') no-repeat 100% 50%;
+    background: url('img/card/ra.png') no-repeat 100% 50%;
 }
 #cardFactory .subMenuBtn{
     width: 150px;
@@ -494,7 +606,7 @@
     height: 250px;
     left: -220px;
     top: -10px;
-    background: url('img/stamp.png');
+    background: url('img/card/stamp.png');
 }
 #preview .sendForm .function-group {
     text-align: center;
@@ -529,7 +641,7 @@
     margin: auto;
     width: 52px;
     height: 52px;        
-    background: #000 url(img/fal.gif) no-repeat 50% 50%;    
+    background: #000 url('img/fal.gif') no-repeat 50% 50%;    
     border-radius: 10px;
 }
 
@@ -584,26 +696,26 @@
 .adjustable .delBtn{
     right: -35px;
     top: -35px;
-    background: url('img/delete_btn.png') no-repeat 0 50%;
+    background: url('img/card/delete_btn.png') no-repeat 0 50%;
 }
 .adjustable .delBtn:hover{
-    background: url('img/delete_btn.png') no-repeat 100% 50%;
+    background: url('img/card/delete_btn.png') no-repeat 100% 50%;
 }
 .adjustable .roteateBtn{
     left: -35px;
     bottom: -35px;
-    background: url('img/rotate_btn.png') no-repeat 0 50%;
+    background: url('img/card/rotate_btn.png') no-repeat 0 50%;
 }
 .adjustable .roteateBtn:hover{
-    background: url('img/rotate_btn.png') no-repeat 100% 50%;
+    background: url('img/card/rotate_btn.png') no-repeat 100% 50%;
 }
 .adjustable .resizeBtn{
     right: -35px;
     bottom: -35px;
-    background: url('img/resize_btn.png') no-repeat 0 50%;
+    background: url('img/card/resize_btn.png') no-repeat 0 50%;
 }
 .adjustable .resizeBtn:hover{
-    background: url('img/resize_btn.png') no-repeat 100% 50%;
+    background: url('img/card/resize_btn.png') no-repeat 100% 50%;
 }
 .adjustable > .wrap{
     width: 100%;
