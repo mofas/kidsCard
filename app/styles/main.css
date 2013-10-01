@@ -1,644 +1,70 @@
 body {
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
+  background: #fafafa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
 }
 textarea{
-    border: 0;
+  border: 0;
 }
 
-.transition,
-#cardFactory .workingArea:after,
-#cardFactory .window .pagination li.selected span,
-#cardFactory .section .empty.show,
-#cardFactory .item img{
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
+ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
-[ng-cloak]{
-    display: none;
+#menu{
+	
 }
+#menu .linkList{
 
-#cardFactory{
-    margin: 50px auto;
-    width: 960px;
-    height: 600px;
-    padding: 10px;
-    background: #62422e;
-    position: relative; 
-    overflow: hidden;   
-    -webkit-touch-callout: none;
-    -webkit-user-select: none; 
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
-#cardFactory .workingArea{
-    float:left;
-    width: 710px;
-    height: 470px;    
-    position: relative;            
-    box-shadow: inset 0 0 10px 2px rgba(0,0,0,0.5);    
-    overflow: hidden;
-    border-radius: 10px;
-}
-#cardFactory .workingArea:after{
-    content: " ";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: url('img/welcome.jpg') no-repeat 50% 50%;
-    z-index: 0;    
-    opacity: 1; 
-}
-#cardFactory .workingArea.hiddenWelcome:after{
-    opacity: 0; 
-}
-#cardFactory .canvas{
-    width: 100%;
-    height: 100%;        
-    position: relative;
-    z-index: 1;   
-}
-#cardFactory .frame{
-    width: 100%;
-    height: 100%;    
-}
-
-#cardFactory .window{
-    position: absolute;
-    z-index: -1;
-    top: 50px;
-    left: 10px;
-    right: 10px;
-    bottom: 50px;
-    height: 310px;    
-    padding: 10px 20px 50px 20px;
-    opacity: 0;    
-    -webkit-transform: scale(2);
-    -ms-transform: scale(2);
-    -o-transform: scale(2);
-    transform: scale(2);
-}
-#cardFactory .window.open{    
-    z-index: 200;
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
-    -o-transform: scale(1);
-    transform: scale(1);    
-    opacity: 1;
-}
-#cardFactory .window .closeBtn{
-    position: absolute;
-    right: 14px;
-    top: -7px;
-    width: 28px;
-    height: 28px;
-    background: url('img/closeBtn.png') no-repeat;
-    cursor: pointer;
-}
-
-#cardFactory .window .pagination{
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -20px;    
-    text-align: center;    
-}
-#cardFactory .window .pagination li{    
-    position: relative;
-    width: 20px;
-    height: 20px;
-    margin: 0 10px;    
-    border-radius: 100%;    
-    cursor: pointer;
-    display: inline-block;    
-    background: #fff;
-    box-shadow: inset 0 2px 5px 0 rgba(0, 0, 0, 0.5);    
-}
-#cardFactory .window .pagination li:after{
-    content: "";
-    position: absolute;
-    left: 1px;
-    top: 2px;
-    width: 18px;
-    height: 18px;
-    padding: 0;    
-    border-radius: 50%;        
-}
-#cardFactory .window .pagination li.selected:after{    
-    background: rgb(191,210,85);
-    background: -moz-linear-gradient(-45deg,  rgba(191,210,85,1) 0%, rgba(142,185,42,1) 50%, rgba(114,170,0,1) 51%, rgba(158,203,45,1) 100%);
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(191,210,85,1)), color-stop(50%,rgba(142,185,42,1)), color-stop(51%,rgba(114,170,0,1)), color-stop(100%,rgba(158,203,45,1)));
-    background: -webkit-linear-gradient(-45deg,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%);
-    background: -o-linear-gradient(-45deg,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%);
-    background: -ms-linear-gradient(-45deg,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%);
-    background: linear-gradient(135deg,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=1 );
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
-}
-
-#cardFactory .window .section{
-    width: 100%;
-    height: 100%;        
-    overflow: hidden;
-}
-#cardFactory .section .empty{
-    width: 200px;
-    height: 60px;    
-    margin: 120px auto;
-    text-align: center;
-    background: #CE4E4E;
-    color: #fff;
-    opacity: 0;
-    box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.6);
-    visibility: hidden;
-}
-#cardFactory .section .empty.show{    
-    opacity: 1;    
-    visibility: visible;
-}
-#cardFactory .item{    
-    float: left;
-    margin: 14px 6px;
-    width: 150px;    
-    height: 100px;    
-    border-radius: 10px;
-    position: relative;
-    box-shadow: 3px 3px 3px 0 rgba(0,0,0,0.5);
-    background: #fff url('img/iml.gif') 50% 50% no-repeat;
-    cursor: pointer;
-}
-
-#cardFactory .item.ng-enter,
-#cardFactory .item.ng-leave {    
-    -webkit-transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
-    -moz-transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;    
-    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
-}
-#cardFactory .item.ng-enter{
-    -webkit-transform: scale(0.75);
-    -moz-transform: scale(0.75);    
-    transform: scale(0.75);
-}
-#cardFactory .item.ng-enter.ng-enter-active {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);    
-    transform: scale(1);
-}
-#cardFactory .item.ng-leave{
-    display: none;
-}
-#cardFactory .item.ng-leave.ng-leave-active{
-    
-}
-
-
-#cardFactory .item img{
-    width: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-#cardFactory .menu{
-    margin-left: 720px;
-    padding: 10px 0;
-    width: 220px;
-    height: 470px;
-    background: url('img/menu_bg.png') no-repeat 50% 50%;
-}
-#cardFactory .menu .menuBtn{
-    width: 200px;
-    height: 50px;
-    margin: 0 10px 10px 10px;            
-    cursor: pointer;
-    background: url('img/btn_bg.png') no-repeat 0 0;
-    position: relative;
-}
-#cardFactory .menu .menuBtn:hover{
-    background: url('img/btn_bg.png') no-repeat 100% 0;
-}
-
-#cardFactory .menu .menuBtn:after{
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
-#cardFactory .menu .functionBtn1:after{
-    background: url('img/btn_1.png') no-repeat 0 0;
-}
-#cardFactory .menu .functionBtn2:after{
-    background: url('img/btn_2.png') no-repeat 0 0;
-}
-#cardFactory .menu .functionBtn3:after{
-    background: url('img/btn_3.png') no-repeat 0 0;
-}
-#cardFactory .menu .functionBtn4:after{
-    background: url('img/btn_4.png') no-repeat 0 0;
-}
-#cardFactory .menu .functionBtn5:after{
-    background: url('img/btn_5.png') no-repeat 0 0;
-}
-#cardFactory .menu .functionBtn6:after{
-    background: url('img/btn_6.png') no-repeat 0 0;
-}
-#cardFactory .menu .functionBtn1.completed:after{
-    background: url('img/btn_1.png') no-repeat 100% 0;
-}
-#cardFactory .menu .functionBtn2.completed:after{
-    background: url('img/btn_2.png') no-repeat 100% 0;
-}
-#cardFactory .menu .functionBtn3.completed:after{
-    background: url('img/btn_3.png') no-repeat 100% 0;
-}
-#cardFactory .menu .functionBtn4.completed:after{
-    background: url('img/btn_4.png') no-repeat 100% 0;
-}
-#cardFactory .menu .functionBtn5.completed:after{
-    background: url('img/btn_5.png') no-repeat 100% 0;
-}
-#cardFactory .menu .functionBtn6.completed:after{
-    background: url('img/btn_6.png') no-repeat 100% 0;
-}
-#cardFactory .menu .submitBtn{
-    height: 90px;
-    background: url('img/btn_7.png') no-repeat 0 0;   
-}
-#cardFactory .menu .submitBtn:hover{
-    height: 90px;
-    background: url('img/btn_7.png') no-repeat 100% 0;
-}
-
-#cardFactory .menu .limitCount{
-    position: relative;
-    z-index: 10;
-    left: 2px;
-    top: 25px;
-    font-family: 'Varela Round', sans-serif;
-    font-size: 20px;
-    color: #fff100;
-    text-shadow: 2px 0 2px #000,
-                    -2px 0 2px #000,
-                    0 -2px 2px #000,
-                    0 2px 2px #000;
-}
-
-/*!
-*   SUBMENU
-*/
-
-
-#cardFactory .subMenu{
-    height: 100px;
-    width: 100%;
-    background: url('img/topic_bg.png') no-repeat 70px 0;
-    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    -webkit-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    -moz-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-}
-#cardFactory .subMenu.open{
-    background: url('img/topic_bg.png') no-repeat 70px 100px;
-}
-#cardFactory .subMenu .btnWrap{
-    margin: 10px 0;
-    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    -webkit-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    -moz-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    -webkit-transform: translateY(150px);
-    -ms-transform: translateY(150px);
-    transform: translateY(150px);
-    height: 100%;    
-}
-#cardFactory .subMenu.open .btnWrap{
-    -webkit-transform: translateY(0px);
-    -ms-transform: translateY(0px);
-    transform: translateY(0px);   
-}
-#cardFactory .subMenu .navBtn{
-    width: 30px;
-    height: 100%;
-    cursor: pointer;
-}
-#cardFactory .subMenu .objWrap{
-    margin: 0 auto;
-    width: 880px;
-}
-#cardFactory .subMenu .navLeft{
-    background: url('img/la.png') no-repeat 0 50%;
-    float: left;
-}
-#cardFactory .subMenu .navLeft:hover{
-    background: url('img/la.png') no-repeat 100% 50%;
-}
-#cardFactory .subMenu .navRight{
-    background: url('img/ra.png') no-repeat 0 50%;
-    float: right;
-}
-#cardFactory .subMenu .navRight:hover{
-    background: url('img/ra.png') no-repeat 100% 50%;
-}
-#cardFactory .subMenuBtn{
-    width: 150px;
-    height: 100px;
-    margin: 0 35px;
-    float: left;
-    cursor: pointer;
-    background-position: 0 50%;
-}
-#cardFactory .subMenuBtn.ng-enter,
-#cardFactory .subMenuBtn.ng-leave{            
-    -webkit-transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
-    -moz-transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
-    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
-}
-#cardFactory .subMenuBtn.ng-enter,
-#cardFactory .subMenuBtn.ng-leave.ng-leave-active{
-    -webkit-transform: scale(0.75);
-    -moz-transform: scale(0.75);    
-    transform: scale(0.75);
-    opacity: 0;
-}
-#cardFactory .subMenuBtn.ng-enter.ng-enter-active,
-#cardFactory .subMenuBtn.ng-leave{
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);    
-    transform: scale(1);
-    opacity: 1;
-}
-#cardFactory .subMenuBtn:hover,
-#cardFactory .subMenuBtn.selected{
-    background-position: 100% 50%;
-    background-repeat: repeat-x;
-}
-
-.adornment_item{    
-    display: block;    
-    width: 250px;
-    height: 250px;        
-    position: relative;
-    z-index: 51;
-}
-.adornmentImg{
-    width: 250px;
-    height: 250px;
-    -webkit-animation: play .8s steps(2) infinite;
-    -moz-animation: play .8s steps(2) infinite;
-    -ms-animation: play .8s steps(2) infinite;
-    -o-animation: play .8s steps(2) infinite;
-    animation: play .8s steps(2) infinite;
-    background-repeat: no-repeat;
-}
-@-webkit-keyframes play {
-   from { background-position:    0px; }
-     to { background-position: -500px; }
-}
-
-@-moz-keyframes play {
-   from { background-position:    0px; }
-     to { background-position: -500px; }
-}
-
-@-ms-keyframes play {
-   from { background-position:    0px; }
-     to { background-position: -500px; }
-}
-
-@-o-keyframes play {
-   from { background-position:    0px; }
-     to { background-position: -500px; }
-}
-
-@keyframes play {
-   from { background-position:    0px; }
-     to { background-position: -500px; }
-}
-
-.bubbler_item{
-    display: block;    
-    width: 300px;
-    height: 150px;            
-    position: relative;
-}
-.bubblerText{
-    padding: 20px;
-    width: 100%;
-    height: 100%;
-    z-index: 52;
-    font-size: 30px;
-    line-height: 45px;
-    font-family: "微軟正黑體";
-    resize: none;
-    overflow: hidden;
-}
-
-
-/*!
-*   PREVIEW
-*/
-
-
-
-#preview{    
-    position: fixed;    
-    background: rgba(0,0,0,0.5);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;    
-    z-index: -1;
-    visibility: hidden;
-    opacity: 0;    
-    overflow-y: auto;
-    /** fix safari bug **/    
-    -webkit-transition: opacity 0.5s;
-    -moz-transition: opacity 0.5s;
-    transition: opacity 0.5s;
-}
-#preview.open{
-    z-index: 600;
-    visibility: visible;
-    opacity: 1;
-}
-#preview .previewOverlay{    
-    margin: 50px auto;
-    width: 960px;
-    background: #fff;
-    padding: 10px;
-    border-radius: 5px;    
-    -webkit-transform: translateY(10%);
-    -ms-transform: translateY(10%);    
-    transform: translateY(10%);        
-    -webkit-transition: -webkit-transform 0.5s;
-    -moz-transition: all 0.5s;
-    transition: all 0.5s;
-}
-#preview.open .previewOverlay{
-    -webkit-transform: translateY(0);
-    -ms-transform: translateY(0);    
-    transform: translateY(0);    
-}
-#preview .canvasWrap{
-    margin: 0 auto 20px auto;
-    padding: 5px;
-    background: #62422E;
-    border-radius: 10px;
-    height: 500px;    
-}
-#preview .canvas{    
-    margin: 10px auto;
-    width: 710px;
-    height: 470px; 
-    position: relative;      
-    overflow: hidden;    
-    border-radius: 10px;    
-}
-#preview .frame{
-    width: 100%;
-    height: 100%;
-}
-#preview .sendForm{
-    width: 480px;
-    margin: 0 auto;
-    padding-left: 50px;
-    position: relative;
-}
-#preview .sendForm:after{
-    content: "";
-    position: absolute;
-    z-index: 1;
-    width: 250px;
-    height: 250px;
-    left: -220px;
-    top: -10px;
-    background: url('img/stamp.png');
-}
-#preview .sendForm .function-group {
-    text-align: center;
+#menu .linkList > li{	
+	float:left;
+	margin: 0 20px;
 }
 
 
 
 /*!
-*   Loading
+*   FOOTER
 */
-.loadingOverlay{
-    position: absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom: 0;    
-    z-index: 1001;
-    opacity: 1;
-    visibility: visible;    
+#footer{	
+	margin: 0 auto;	
+	width: 960px;
 }
-.loadingOverlay.show{    
-    opacity: 0;
-    visibility: hidden;
+#footer .logo{
+	float: left;
+	width: 160px;
+	height: 60px;
+	position: relative;
 }
-.loadingOverlay .loading{  
-    position: absolute;  
-    top:0;
-    left:0;
-    right:0;
-    bottom: 0;
-    margin: auto;
-    width: 52px;
-    height: 52px;        
-    background: #000 url(img/fal.gif) no-repeat 50% 50%;    
-    border-radius: 10px;
+#footer .logo a{
+	position: absolute;
+	display: block;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;	
+	width: 150px;	
+	height: 60px;
 }
-
-
-/*!
-*  UI
-*/
-.adjustable,
-.displayItem{    
-    position: absolute;
-    min-width: 50px;
-    min-height: 50px;
-    left: 0;
-    top: 0;
+#footer .linkList{
+	width: 800px;
+	padding: 5px 100px;
+	float: right;
+	display: block;
 }
-.displayItem,
-.displayItem textarea{ 
-    -webkit-touch-callout: none;
-    -webkit-user-select: none; 
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+#footer .linkList > li{
+	float: left;
+	margin: 0 30px;
 }
-.adjustable.select{
-    z-index: 100;
+#footer .linkList a{
+	color: #333;
 }
-.adjustable.select:after{
-    z-index: 2;
-    content: "";
-    position: absolute;
-    left: -20px;
-    top: -20px;
-    bottom: -20px;
-    right: -20px;
-    border: 2px dotted #ddd;
-
+#footer .copyRight{
+	width: 800px;
+	padding: 5px 0;
+	float: right;
+	text-align: center;
 }
-.adjustable .ad_btn{    
-    position: absolute;
-    width: 30px;
-    height: 30px;    
-    border-radius: 50%;
-    z-index: 6; 
-    opacity: 0;
-    display: none;
-    cursor: pointer;
-}
-.adjustable.select .ad_btn{
-    opacity: 1;
-    display: block;    
-}
-.adjustable .delBtn{
-    right: -35px;
-    top: -35px;
-    background: url('img/delete_btn.png') no-repeat 0 50%;
-}
-.adjustable .delBtn:hover{
-    background: url('img/delete_btn.png') no-repeat 100% 50%;
-}
-.adjustable .roteateBtn{
-    left: -35px;
-    bottom: -35px;
-    background: url('img/rotate_btn.png') no-repeat 0 50%;
-}
-.adjustable .roteateBtn:hover{
-    background: url('img/rotate_btn.png') no-repeat 100% 50%;
-}
-.adjustable .resizeBtn{
-    right: -35px;
-    bottom: -35px;
-    background: url('img/resize_btn.png') no-repeat 0 50%;
-}
-.adjustable .resizeBtn:hover{
-    background: url('img/resize_btn.png') no-repeat 100% 50%;
-}
-.adjustable > .wrap{
-    width: 100%;
-    height: 100%;
-    display: block;
-    overflow: hidden;
-}
-.adjustable.select > .wrap{
-    position: absolute;
-    z-index: 101;
-}
-
-
-

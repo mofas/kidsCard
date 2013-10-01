@@ -11,175 +11,23 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/bootstrap.css">    
+    <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/page.css">
     <!-- endbuild -->
 </head>
 <body ng-app="kidsCardApp">
     
     <!-- Add your site or application content here -->
-    <div ng-view="">
-        <h1 style="text-align: center">Version: alpha.1.4.7</h1>
-        <div class="container" ng-controller="MainCtrl">        
-            <div id="cardFactory" ng-controller="CardFactoryCtrl">  
-                <div class="clearfix">
-                    <div class="workingArea" ng-class="{'hiddenWelcome' : isStart }">
-                        <div class="canvas" ng-style="selected_bg" >
-                            <div class="frame" ng-style="selected_frame" >
-                                <!-- adornment -->
-                                <span ng-cloak class="adornment_item" 
-                                    adjustable obj="adornment" del-callback="removeAdornment"
-                                    min-w="50" min-h="50" max-w="250" max-h="250" resize-inner="true"
-                                    ng-repeat="adornment in adornmentList">
-                                    <div class="adornmentImg" ng-style="adornment.style">
-                                    </div>
-                                </span>
-                                
-                                <!--  bubbler -->
-                                <span ng-cloak class="bubbler_item" 
-                                    adjustable  obj="bubbler" del-callback="removeBubbler"
-                                    min-w="100" min-h="50" max-w="600" max-h="300"
-                                    ng-repeat="bubbler in bubblerList">                                
-                                        <textarea ng-cloak class="bubblerText" ng-style="bubbler.style" ng-model="bubbler.text" autofocus="true" ng-trim="false">
-                                        </textarea>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="window transition" ng-class="{'open' : isWindowOpen }">
-                            <div class="closeBtn" ng-click="closeWindow();"></div>
-                            <div class="section {{openSection}}">                            
-                                <div class="item" 
-                                    ng-repeat="item in itemList | startFrom: currentPage*pageSize  | limitTo:pageSize">
-                                    <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectItem(item);" images-load-animation>                                
-                                </div>                            
-                                <div class="well empty" ng-class="{'show': itemList.length < 1 }">
-                                    現在還沒有東西可以用
-                                </div>
-                            </div>
-                            
-                            <ul class="pagination">                                        
-                                <li ng-repeat="n in [] | range:numberOfPages" ng-click="setCurrentPage($index)" ng-class="{'selected': $index == currentPage }">
-                                    
-                                </li>
-                            </ul>                        
-                        </div>
-                        <div class="loadingOverlay transition" ng-class="{'show' : !isLoadding}">
-                            <div class="loading"></div>
-                        </div>
-                    </div>                
-                    <div class="menu">
-                        <div class="menuBtn functionBtn1" 
-                            ng-class="{'completed' : selected_bg.background != 'transparent' }"
-                            ng-click="openSectionWindow('bg');">                    
-                        </div>
-                        <div class="menuBtn functionBtn2" 
-                            ng-class="{'completed' : selected_frame.background != 'transparent' }"
-                            ng-click="openSectionWindow('frame');">
-                        </div>
-                        <div class="menuBtn functionBtn3" 
-                            ng-click="openSectionWindow('adornment');">
-                            <span ng-cloak class="limitCount">{{adornmentList.length}}/{{adornmentLimit}}</span>
-                        </div>
-                        <div class="menuBtn functionBtn4" 
-                            ng-click="openSectionWindow('bubbler');">
-                            <span ng-cloak class="limitCount">{{bubblerList.length}}/{{bubblerLimit}}</span>
-                        </div>
-                        <div class="menuBtn functionBtn5" ng-click="openSectionWindow('graffiti');"></div>
-                        <div class="menuBtn functionBtn6" ng-click="reset();"></div>
-                        <div class="menuBtn submitBtn" ng-click="preview(); openPreview();"></div>
-                    </div>
-                </div>
-                <div class="subMenu" ng-class="{'open': isWindowOpen }">
-                    <div class="btnWrap">
-                        <div class="navBtn navLeft"></div>
-                        <div class="navBtn navRight"></div>
-                        <div class="objWrap clearfix">                        
-                            <div ng-repeat="category in categoryList" class="subMenuBtn" 
-                                ng-class="{'selected' : topic == category.name }"
-                                ng-click="selectTopic(category.name)"
-                                ng-style="getBGObj(category.categoryBtn)"
-                                >                                
-                            </div>
-                    </div>
-                </div>            
-            </div>
-            <div id="preview"ng-controller="PreviewCtrl" ng-class="{'open': previewMode}">
-                <div class="previewOverlay">
-                    <div class="canvasWrap">
-                        <div class="canvas" ng-style="selected_bg" ng-if="previewMode">
-                            <div class="frame" ng-style="selected_frame">
-
-                                <!-- adornment -->
-                                <span ng-cloak class="adornment_item displayItem" ng-repeat="adornment in adornmentList" transform-data="adornment" ng-style="adornment.style">
-                                    <div class="adornmentImg" ng-style="adornment.inner.style">
-                                    </div>
-                                </span>
-                                
-                                <!--  bubbler -->
-                                <span ng-cloak class="bubbler_item displayItem" ng-repeat="bubbler in bubblerList" transform-data="bubbler" ng-style="bubbler.style">
-                                    <textarea ng-cloak class="bubblerText" ng-style="bubbler.inner.style" ng-model="bubbler.text" readonly>
-                                        </textarea>                                
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sendForm">
-                        <form class="form-horizontal">
-
-                            <div class="form-group">               
-                                <div class="control-group">             
-                                    <label class="col-lg-2 control-label">主旨</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" class="form-control" name="inputEmail" value="">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">               
-                                <div class="control-group">             
-                                    <label class="col-lg-2 control-label">收件人</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" class="form-control" name="inputEmail" value="">
-                                    </div>
-                                </div>
-                            </div>  
-                            <div class="form-group">               
-                                <div class="control-group">             
-                                    <label class="col-lg-2 control-label">收件人</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" class="form-control" name="inputEmail" value="">
-                                    </div>
-                                </div>
-                            </div>  
-                            <div class="form-group">               
-                                <div class="control-group">             
-                                    <label class="col-lg-2 control-label">收件人</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" class="form-control" name="inputEmail" value="">
-                                    </div>
-                                </div>
-                            </div>                        
-
-                            <div class="form-group function-group">
-                                <div class="msgText"></div>
-                                <div class="row">
-                                    <button class="btn btn-danger btn-lg" ng-click="closePreview()">返回修改</button>
-                                    <button class="btn btn-info btn-lg" ng-click="sendMail();">確認寄出</button>
-                                    <button class="btn btn-info btn-lg" ng-click="save();">儲存到我的卡片櫃</button>
-                                    
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div ng-view="">        
+        
     </div>
 
 
 
     <!-- build:js scripts/modules.js -->    
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <!--
     <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
@@ -192,10 +40,14 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
+
     <script src="scripts/directives/directive.js"></script>
     <script src="scripts/directives/ui.js"></script>
+
     <script src="scripts/factories/utility.js"></script>
     <script src="scripts/factories/filter.js"></script>
+
+    <script src="scripts/services/service.js"></script>
     <!-- endbuild -->
 
 
