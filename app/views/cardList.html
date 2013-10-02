@@ -1,6 +1,21 @@
 <div ng-include="'views/header.html'" class="clearfix"></div>
 <div ng-include="'views/menu.html'" class="clearfix"></div>
-<div class="container">
-	<h4>卡片列表</h4>	
+<div class="frameWrap">
+	<div id="cardList">
+		<ul class="list clearfix">
+			<li ng-repeat="item in list">				
+				<img ng-src="{{item.thumb}}" ng-click="viewCard(item.link)">
+			</li>
+		</ul>
+		<ul class="pagination"> 
+			<li ng-show="$base > 0" ng-click="prevPage();">PREV</li>
+      <li ng-repeat="n in [] | range:numberOfPages | startFrom: $base | limitTo:10"
+    		ng-click="setCurrentPage($base+$index)" 
+    		ng-class="{'selected': ($base+$index) == currentPage }">
+      	{{$base+$index+1}}
+      </li>
+      <li ng-show="$base < numberOfPages-10 " ng-click="nextPage();">NEXT</li>
+    </ul>
+	</div>
 </div>
 <div ng-include="'views/footer.html'" class="clearfix"></div>

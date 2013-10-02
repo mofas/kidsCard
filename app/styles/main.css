@@ -24,6 +24,18 @@ ul{
 	padding: 0;
 	margin: 0;
 }
+
+.frameWrap{
+	width: 990px;
+	height: 630px;
+	padding: 15px;
+	margin: 10px auto 50px auto;
+	background: url('img/frame_bg.jpg');
+	overflow: hidden;
+	border-radius: 15px;
+	position: relative;
+}
+
 #header{
 	width: 940px;
 	height: 30px;
@@ -57,17 +69,108 @@ ul{
 
 
 #menu{
-
+	margin: 23px auto;
+	width: 740px;
+	padding: 0 10px;
+	height: 56px;
+	position: relative;
+	background: url('img/menu_bg.jpg') repeat-x;
 }
-#menu .linkList{
-
+#menu:before,
+#menu:after{
+	content: "";
+	position: absolute;
+	width: 22px;
+	height: 56px;
+	top: 0;
+}
+#menu:before{
+	left: -22px;
+	background: url('img/menu_left.png') no-repeat;	
+}
+#menu:after{
+	right: -22px;
+	background: url('img/menu_right.png') no-repeat;		
+}
+#menu .topDecoration{
+	position: absolute;
+	width: 766px;
+	height: 22px;
+	top: -22px;
+	left: -20px;	
+	background: url('img/menu_top.png') no-repeat;
+}
+#menu .linkList.left{
+	float: left;
+}
+#menu .linkList.right{
+	float: right;
 }
 #menu .linkList > li{	
+	display: block;
 	float:left;
-	margin: 0 20px;
+	margin: 0 4px;
+	height: 56px;		
+	background-image: url('img/menu_btn.png');
+	background-repeat: no-repeat;
+	overflow: hidden;		
 }
-
-
+#menu .linkList > li > a{
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+#menu .logo{
+	position: absolute;
+	left: 50%;	
+	top: -20px;	
+	margin-left: -68px;
+	width: 141px;
+	height: 97px;
+	background: url('img/menu_logo.png') no-repeat;
+}
+#menu .linkList .link1{
+	width: 110px;
+	background-position: 0 50%;
+}
+#menu .linkList .link1:hover{	
+	background-position: -740px 50%;
+}
+#menu .linkList .link2{
+	width: 88px;
+	background-position: -120px 50%;
+}
+#menu .linkList .link2:hover{	
+	background-position: -860px 50%;
+}
+#menu .linkList .link3{
+	width: 66px;
+	background-position: -220px 50%;
+}
+#menu .linkList .link3:hover{	
+	background-position: -960px 50%;
+}
+#menu .linkList .link4{
+	width: 88px;
+	background-position: -456px 50%;
+}
+#menu .linkList .link4:hover{	
+	background-position: -1196px 50%;
+}
+#menu .linkList .link5{
+	width: 90px;
+	background-position: -556px 50%;
+}
+#menu .linkList .link5:hover{	
+	background-position: -1296px 50%;
+}
+#menu .linkList .link6{
+	width: 82px;
+	background-position: -660px 50%;
+}
+#menu .linkList .link6:hover{	
+	background-position: -1400px 50%;
+}
 
 /*!
 *   FOOTER

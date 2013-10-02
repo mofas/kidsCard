@@ -1,6 +1,6 @@
 <div ng-include="'views/header.html'" class="clearfix"></div>
 <div ng-include="'views/menu.html'" class="clearfix"></div>
-<div class="container">    
+<div class="frameWrap">    
     <div id="cardFactory" ng-controller="cardFactoryCtrl">  
         <div class="clearfix">
             <div class="workingArea" ng-class="{'hiddenWelcome' : isStart }">
@@ -39,9 +39,8 @@
                     
                     <ul class="pagination">                                        
                         <li ng-repeat="n in [] | range:numberOfPages" ng-click="setCurrentPage($index)" ng-class="{'selected': $index == currentPage }">
-                            
                         </li>
-                    </ul>                        
+                    </ul>
                 </div>
                 <div class="loadingOverlay transition" ng-class="{'show' : !isLoadding}">
                     <div class="loading"></div>

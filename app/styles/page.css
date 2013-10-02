@@ -1,22 +1,41 @@
-
-
-
 /*!
-*   index
+*   INDEX
 */
-
-
-#index{
-    
-}
 
 #index .portal{
     margin: 0 auto 180px auto;    
     width: 940px;
     height: 573px;
-    position: relative;    
+    position: relative;
 }
-
+#index .decoration{
+    position: absolute;
+    top: -65px;
+    left: -10px;
+    width: 142px;
+    height: 241px;
+    background: url('img/index/decoration.png') no-repeat 0 0;
+    -webkit-animation: decorAnim .8s steps(2) infinite;
+    -moz-animation: decorAnim .8s steps(2) infinite;
+    -ms-animation: decorAnim .8s steps(2) infinite;    
+    animation: decorAnim .8s steps(2) infinite;
+}
+@-webkit-keyframes decorAnim {
+   from { background-position:    0px; }
+     to { background-position: 200%; }
+}
+@-moz-keyframes decorAnim {
+   from { background-position:    0px; }
+     to { background-position: 200%; }
+}
+@-ms-keyframes decorAnim {
+   from { background-position:    0px; }
+     to { background-position: 200%; }
+}
+@keyframes decorAnim {
+   from { background-position:    0px; }
+     to { background-position: 200%; }
+}
 #index .portalImg{
     width: 940px;
     height: 573px;
@@ -105,10 +124,117 @@
 }
 
 
+/*!
+*   REAWRD
+*/
+#reward{
+    width: 960px;
+    height: 600px;
+    background: url('img/reward_bg.jpg') no-repeat;
+}
 
 
+/*!
+*   TOPLIST
+*/
+#topList{
+    width: 960px;
+    height: 600px;
+    background: url('img/topList_bg.jpg') no-repeat;
+}
+#topList .scoreTable{
+    margin: 0 auto;
+    width: 720px;    
+    font-family: "微軟正黑體";    
+}
+#topList .scoreTable th,td{
+    text-align: center;    
+}
+#topList .scoreTable .thead{
+    border-bottom: 3px dashed #643e30;        
+}
+#topList .scoreTable th{    
+    padding: 10px 0;    
+    font-size: 28px; 
+    color: #643e30;    
+    text-shadow: 2px 0 #edd8b9,
+                    -2px 0 #edd8b9,
+                    0 2px #edd8b9,
+                    0 -2px #edd8b9;
+}
+#topList .scoreTable tr{    
+    height: 50px;
+    font-size: 20px;
+    color: #643e30;
+    font-weight: bold;
+}
 
 
+/*!
+*   CARDLIST
+*/
+#cardList{
+    width: 960px;
+    height: 600px;
+    background: url('img/cardList_bg.jpg') no-repeat;
+}
+#cardList .list{
+    width: 850px;
+    height: 540px;
+    padding: 10px 0;
+    margin: 0 auto;    
+}
+#cardList .list li{
+    float: left;
+    padding: 5px;
+    width: 160px;
+    height: 110px;
+    background: #fbbe01;
+    margin: 8px 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);    
+    cursor: pointer;
+}
+#cardList .list li img{
+    border-radius: 5px;
+}
+
+#cardList .pagination{
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;    
+    text-align: center;    
+}
+#cardList .pagination li{    
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "微軟正黑體";
+    color: #666;
+    text-shadow: 0 2px 0 rgba(255,255,255,1),
+                    0 -2px 0 rgba(255,255,255,1),
+                    2px 0 0 rgba(255,255,255,1),
+                    -2px 0 0 rgba(255,255,255,1);
+}
+#cardList .pagination li:hover,
+#cardList .pagination li.selected{
+    color: #f80;
+}
+
+
+/*!
+*   COLLECTTASK
+*/
+#collectTask{
+    width: 960px;
+    height: 600px;
+    background: #fff;    
+}
 
 /*!
 *   CARD FACTORY
@@ -123,7 +249,7 @@
     -moz-transition: all 0.5s;
 }
 #cardFactory{
-    margin: 50px auto;
+    margin: 0 auto;
     width: 960px;
     height: 600px;
     padding: 10px;

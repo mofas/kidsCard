@@ -1,6 +1,19 @@
 <div ng-include="'views/header.html'" class="clearfix"></div>
 <div ng-include="'views/menu.html'" class="clearfix"></div>
-<div class="container">
-	<h4>排行榜</h4>	
+<div class="frameWrap">
+	<div id="topList">
+		<table class="scoreTable">
+			<tr class="thead">
+				<th>排名</th>
+				<th>帳號</th>
+				<th>得分</th>
+			</tr>
+			<tr ng-repeat="item in list">
+				<td>{{$index+1}}</td>
+				<td>{{item.name}}</td>
+				<td>{{item.score}}</td>
+			</tr>
+		</table>
+	</div>
 </div>
 <div ng-include="'views/footer.html'" class="clearfix"></div>

@@ -10,18 +10,107 @@ var controller = angular.module('kidsCardApp.controllers', ['utility' , 'service
 controller.controller('IndexPageCtrl', [ function () {
 		
 }]);
+
+
 controller.controller('collectTaskPageCtrl', [ function () {
 		
 }]);
+
+
 controller.controller('giftBoxPageCtrl', [ function () {
 		
 }]);
-controller.controller('cardListPageCtrl', [ function () {
-		
+
+
+controller.controller('cardListPageCtrl', [ '$scope' , '$http' , function ($scope , $http) {	
+	$scope.$base = 0;
+
+
+	$scope.setCurrentPage = function($index){			
+		$scope.currentPage = $index;
+		while(($index - $scope.$base > 7)){
+			$scope.$base += 1;
+		}
+		while( $index - $scope.$base < 2 && $scope.$base > 0){				
+			$scope.$base -= 1;
+		}			
+	}
+
+	$scope.prevPage = function(){
+		$scope.$base = ($scope.$base - 10 < 0) ? 0 : $scope.$base - 10;			
+		$scope.currentPage = $scope.$base;
+	}
+	$scope.nextPage = function(){
+		$scope.$base = ($scope.$base + 20 > $scope.numberOfPages) ? $scope.numberOfPages - 10 : $scope.$base + 10;			
+		$scope.currentPage = $scope.$base;
+	}
+
+	$scope.numberOfPages = 0;
+	$scope.currentPage = 0;
+
+	$scope.viewCard = function(dataHerf){
+		console.log(dataHerf);
+	}
+
+	$scope.$watch("currentPage" , function(){		
+		$http.get("data/card_list.json?currentPage=" + $scope.currentPage).success(function(data){
+			$scope.list = data.list;
+			$scope.numberOfPages = data.numberOfPages;
+		});
+	});	
+
+
+
 }]);
-controller.controller('topListPageCtrl', [ function () {
-		
+
+
+controller.controller('topListPageCtrl', [ '$scope' , function ($scope) {
+		$scope.list = [
+			{
+				"name" : "小番薯姊姊",
+				"score" : 955687
+			},
+			{
+				"name" : "小番薯姊姊",
+				"score" : 946565
+			},
+			{
+				"name" : "小番薯姊姊",
+				"score" : 936658
+			},
+			{
+				"name" : "小番薯姊姊",
+				"score" : 925889
+			},
+			{
+				"name" : "小番薯姊姊",
+				"score" : 912585
+			},
+			{
+				"name" : "小番薯姊姊",
+				"score" : 885787
+			},
+			{
+				"name" : "小番薯姊姊",
+				"score" : 856565
+			},
+			{
+				"name" : "太扯了,都是小番薯姊姊",
+				"score" : 484848
+			},
+			{
+				"name" : "太扯了,都是小番薯姊姊",
+				"score" : 234234
+			},
+			{
+				"name" : "太扯了,都是小番薯姊姊",
+				"score" : 123213
+			}
+		];
+
 }]);
+
+
 controller.controller('rewardPageCtrl', [ function () {
 		
 }]);
