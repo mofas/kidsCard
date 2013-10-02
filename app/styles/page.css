@@ -214,6 +214,9 @@
 }
 #cardList .list li img{
     border-radius: 5px;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    transition: opacity 0.5s;
 }
 
 #cardList .pagination{
@@ -294,6 +297,16 @@
 #giftBox .statistics .item{
     float: left;
     margin-right: 20px;
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;    
+    background: #FFF url(img/iml.gif) 50% 50% no-repeat;
+    box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.5);    
+}
+#giftBox .statistics .item img{
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    transition: opacity 0.5s;
 }
 
 #giftBox .giftCount{
