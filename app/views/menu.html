@@ -1,14 +1,26 @@
-<div id="menu">
+<div id="menu" ng-controller="menuCtrl">
 	<div class="topDecoration"></div>
 	<ul class="linkList clearfix left">
-		<li class="link1"><a href="#collectTask"></a></li>
-		<li class="link2"><a href="#cardFactory"></a></li>
-		<li class="link3"><a href="#giftBox"></a></li>		
+		<li class="link1" ng-class="{'selected' : currentLoaction == '/collectTask'}">
+			<a href="#collectTask"></a>
+		</li>
+		<li class="link2" ng-class="{'selected' : currentLoaction == '/cardFactory'}">
+			<a href="#cardFactory"></a>
+		</li>
+		<li class="link3" ng-class="{'selected' : currentLoaction == '/giftBox'}">
+			<a href="#giftBox"></a></
+			li>		
 	</ul>
 	<ul class="linkList clearfix right">
-		<li class="link4"><a href="#cardList"></a></li>
-		<li class="link5"><a href="#topList"></a></li>
-		<li class="link6"><a href="#reward"></a></li>
+		<li class="link4" ng-class="{'selected' : currentLoaction == '/cardList'}">
+			<a href="#cardList"></a>
+		</li>
+		<li class="link5" ng-class="{'selected' : currentLoaction == '/topList'}">
+			<a href="#topList"></a>
+		</li>
+		<li class="link6" ng-class="{'selected' : currentLoaction == '/reward'}">
+			<a href="#reward"></a>
+		</li>
 	</ul>
 	<div class="logo"></div>
 </div>

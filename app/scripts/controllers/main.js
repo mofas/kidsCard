@@ -216,7 +216,10 @@ controller.controller('cardFactoryPageCtrl' , [ '$scope' , 'shareCanvasDataServi
 
 
 
-
+controller.controller('menuCtrl', [ '$scope' , '$location' , function($scope , $location){
+	console.log($location.$$url);
+	$scope.currentLoaction = $location.$$url;
+}]);
 
 
 

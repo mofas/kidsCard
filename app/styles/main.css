@@ -45,9 +45,9 @@ ul{
   transition: all 0.3s;   
 }
 #ngView.ng-enter-active .frameWrap{	
-	-webkit-transform: scale(1.01);
-  -moz-transform: scale(1.01);
-  transform: scale(1.01);  	
+	-webkit-transform: translate(0,-10px);
+  -moz-transform: translate(0,-10px);
+  transform: translate(0,-10px);  	  
 }
 
 #header{
@@ -150,42 +150,48 @@ ul{
 	width: 110px;
 	background-position: 0 50%;
 }
-#menu .linkList .link1:hover{	
+#menu .linkList .link1:hover,
+#menu .linkList .link1.selected{
 	background-position: -740px 50%;
 }
 #menu .linkList .link2{
 	width: 88px;
 	background-position: -120px 50%;
 }
-#menu .linkList .link2:hover{	
+#menu .linkList .link2:hover,
+#menu .linkList .link2.selected{
 	background-position: -860px 50%;
 }
 #menu .linkList .link3{
 	width: 66px;
 	background-position: -220px 50%;
 }
-#menu .linkList .link3:hover{	
+#menu .linkList .link3:hover,
+#menu .linkList .link3.selected{
 	background-position: -960px 50%;
 }
 #menu .linkList .link4{
 	width: 88px;
 	background-position: -456px 50%;
 }
-#menu .linkList .link4:hover{	
+#menu .linkList .link4:hover,
+#menu .linkList .link4.selected{
 	background-position: -1196px 50%;
 }
 #menu .linkList .link5{
 	width: 90px;
 	background-position: -556px 50%;
 }
-#menu .linkList .link5:hover{	
+#menu .linkList .link5:hover,
+#menu .linkList .link5.selected{
 	background-position: -1296px 50%;
 }
 #menu .linkList .link6{
 	width: 82px;
 	background-position: -660px 50%;
 }
-#menu .linkList .link6:hover{	
+#menu .linkList .link6:hover,
+#menu .linkList .link6.selected{
 	background-position: -1400px 50%;
 }
 
