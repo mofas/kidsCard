@@ -267,6 +267,86 @@
     background: #fff;    
 }
 
+
+
+
+/*!
+*   GIFTBOX
+*/
+#giftBox{
+    width: 960px;
+    height: 600px;
+    background: url('img/giftBox/bg.jpg') no-repeat;    
+}
+
+#giftBox .statistics{
+    margin: 0 0 0 300px;    
+    padding-top: 40px;
+    width: 700px;
+    height: 460px;    
+}
+
+#giftBox .section{
+    height: 70px;
+    width: 100%;
+    margin: 30px 0;
+}
+#giftBox .statistics .item{
+    float: left;
+    margin-right: 20px;
+}
+
+#giftBox .giftCount{
+    width: 100%;
+    padding-top: 20px;
+    height: 100px;
+    text-align: center;
+}
+
+#giftBox .giftBox{
+    display: inline-block;
+    position: relative;
+    width: 180px;
+    height: 80px;
+    padding-left: 105px;
+    cursor: pointer;
+    text-align: left;
+    line-height: 90px;
+    font-size: 28px;
+    font-family: "微軟正黑體";
+    font-weight: bold;
+    color: #e6d5b7;        
+    text-shadow: 2px 0 2px #88674a,
+                    -2px 0 2px #88674a,
+                    0 -2px 2px #88674a,
+                    0 2px 2px #88674a;
+}
+#giftBox .giftBox:before{
+    content: "X";
+    position: absolute;
+    left: 80px;
+}
+#giftBox .giftBox1{
+    background: url('img/giftBox/giftBox_1.png') no-repeat;
+}
+#giftBox .giftBox2{
+    background: url('img/giftBox/giftBox_2.png') no-repeat;
+}
+#giftBox .giftBox3{
+    background: url('img/giftBox/giftBox_3.png') no-repeat;
+}
+#giftBox .giftBox4{
+    background: url('img/giftBox/giftBox_4.png') no-repeat;
+}
+
+
+
+
+
+
+
+
+
 /*!
 *   CARD FACTORY
 */

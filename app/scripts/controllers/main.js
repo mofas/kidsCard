@@ -17,8 +17,65 @@ controller.controller('collectTaskPageCtrl', [ function () {
 }]);
 
 
-controller.controller('giftBoxPageCtrl', [ function () {
-		
+controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
+		$scope.gfitBg = [
+			{
+				"src" : "images/bg/gift/d_bg_1.png"
+			},
+			{
+				"src" : "images/bg/gift/d_bg_2.png"
+			},
+			{
+				"src" : "images/bg/gift/d_bg_3.png"
+			}
+		];
+
+		$scope.gfitFrame = [
+			{
+				"src" : "images/frame/gift/d_frame_1.png"
+			},
+			{
+				"src" : "images/frame/gift/d_frame_2.png"
+			},
+			{
+				"src" : "images/frame/gift/d_frame_3.png"
+			}
+		];
+
+		$scope.gfitAdornment = [
+			{
+				"src" : "images/adornment/gift/d_adornment_1.png"
+			},
+			{
+				"src" : "images/adornment/gift/d_adornment_2.png"
+			},
+			{
+				"src" : "images/adornment/gift/d_adornment_3.png"
+			},
+			{
+				"src" : "images/adornment/gift/d_adornment_4.png"
+			},
+			{
+				"src" : "images/adornment/gift/d_adornment_5.png"
+			},
+			{
+				"src" : "images/adornment/gift/d_adornment_6.png"
+			}
+		];
+
+		$scope.giftSpecial = [
+			{
+				"src" : "images/special/gift/d_sp.png"
+			},
+			{
+				"src" : "images/special/gift/d_sp.png"
+			},
+			{
+				"src" : "images/special/gift/d_sp.png"
+			}
+		];
+
+
 }]);
 
 
