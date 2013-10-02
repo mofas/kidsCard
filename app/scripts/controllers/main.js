@@ -23,8 +23,7 @@ controller.controller('giftBoxPageCtrl', [ function () {
 
 
 controller.controller('cardListPageCtrl', [ '$scope' , '$http' , function ($scope , $http) {	
-	$scope.$base = 0;
-
+	$scope.$base = 0;	
 
 	$scope.setCurrentPage = function($index){			
 		$scope.currentPage = $index;
@@ -48,11 +47,31 @@ controller.controller('cardListPageCtrl', [ '$scope' , '$http' , function ($scop
 	$scope.numberOfPages = 0;
 	$scope.currentPage = 0;
 
-	$scope.viewCard = function(dataHerf){
-		console.log(dataHerf);
+
+
+
+	$scope.viewCard = function(dataHerf){		
+		$http.get(dataHerf).success(function(data){						
+			$scope.selected_bg = data.selected_bg;
+			$scope.selected_frame =	data.selected_frame;
+			$scope.adornmentList = data.adornmentList;
+			$scope.bubblerList = data.bubblerList;
+			$scope.openWindow();
+		});	
+	}
+	$scope.openWindow = function(){
+		$scope.cardViewWrap = $scope.cardViewWrap || angular.element(document.getElementById("cardViewWrap"));
+		$scope.cardViewWrap.addClass("open");
+		$scope.previewMode = true;
 	}
 
-	$scope.$watch("currentPage" , function(){		
+	$scope.closeWindow = function(){		
+		$scope.cardViewWrap.removeClass("open");
+		$scope.previewMode = false;
+	}
+
+	$scope.$watch("currentPage" , function(){
+		$scope.list = [];
 		$http.get("data/card_list.json?currentPage=" + $scope.currentPage).success(function(data){
 			$scope.list = data.list;
 			$scope.numberOfPages = data.numberOfPages;

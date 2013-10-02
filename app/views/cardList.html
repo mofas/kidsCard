@@ -8,14 +8,23 @@
 			</li>
 		</ul>
 		<ul class="pagination"> 
-			<li ng-show="$base > 0" ng-click="prevPage();">PREV</li>
+			<li ng-show="$base > 0" 
+				ng-click="prevPage();" class="icon-caret-left"></li>
       <li ng-repeat="n in [] | range:numberOfPages | startFrom: $base | limitTo:10"
     		ng-click="setCurrentPage($base+$index)" 
     		ng-class="{'selected': ($base+$index) == currentPage }">
       	{{$base+$index+1}}
       </li>
-      <li ng-show="$base < numberOfPages-10 " ng-click="nextPage();">NEXT</li>
+      <li ng-show="$base < numberOfPages-10 " 
+      	ng-click="nextPage();" class="icon-caret-right"></li>
     </ul>
+	</div>
+</div>
+
+<div id="cardViewWrap">	
+	<div id="cardView">
+		<div class="closeBtn" ng-click="closeWindow();"></div>
+		<div ng-include="'views/cardView.html'"></div>
 	</div>
 </div>
 <div ng-include="'views/footer.html'" class="clearfix"></div>

@@ -181,8 +181,8 @@
 #cardList .list{
     width: 850px;
     height: 540px;
-    padding: 10px 0;
-    margin: 0 auto;    
+    padding: 10px 0;    
+    margin: 0 auto;
 }
 #cardList .list li{
     float: left;
@@ -194,6 +194,23 @@
     border-radius: 5px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);    
     cursor: pointer;
+}
+#cardList .list li.ng-enter{    
+    -webkit-transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+    -moz-transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;    
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;    
+}
+#cardList .list li.ng-enter{
+    -webkit-transform: translate(0, 50px);
+    -moz-transform: translate(0, 50px);    
+    transform: translate(0, 50px);
+    opacity: 0;
+}
+#cardList .list li.ng-enter.ng-enter-active{
+    -webkit-transform: translate(0,0);
+    -moz-transform: translate(0,0);    
+    transform: translate(0,0);
+    opacity: 1;
 }
 #cardList .list li img{
     border-radius: 5px;
@@ -224,6 +241,20 @@
 #cardList .pagination li:hover,
 #cardList .pagination li.selected{
     color: #f80;
+}
+#cardList .pagination li.icon-caret-left,
+#cardList .pagination li.icon-caret-right{
+    font-family: 'fontawesome';    
+}
+#cardViewWrap .closeBtn {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    z-index: 100;
+    width: 28px;
+    height: 28px;
+    background: url('img/closeBtn.png') no-repeat;
+    cursor: pointer;
 }
 
 
@@ -595,7 +626,7 @@
     background-position: 100% 50%;
     background-repeat: repeat-x;
 }
-
+/*
 .adornment_item{    
     display: block;    
     width: 250px;
@@ -653,7 +684,7 @@
     font-family: "微軟正黑體";
     resize: none;
     overflow: hidden;
-}
+}*/
 
 
 /*!
@@ -775,21 +806,12 @@
 /*!
 *  UI
 */
-.adjustable,
-.displayItem{    
+.adjustable{    
     position: absolute;
     min-width: 50px;
     min-height: 50px;
     left: 0;
     top: 0;
-}
-.displayItem,
-.displayItem textarea{ 
-    -webkit-touch-callout: none;
-    -webkit-user-select: none; 
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 .adjustable.select{
     z-index: 100;

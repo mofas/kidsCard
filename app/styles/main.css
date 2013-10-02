@@ -196,6 +196,7 @@ ul{
 	right: 0;	
 	width: 180px;	
 	height: 72px;
+	z-index: -1;
 }
 #footer .linkList{
 	width: 540px;
@@ -215,4 +216,174 @@ ul{
 	padding: 5px 0;
 	float: right;
 	text-align: center;
+}
+
+
+
+/*!
+*   CARDVIEW
+*/
+
+#cardViewWrap{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+	display: none;
+	opacity: 0;	
+}
+
+#cardViewWrap.open{
+	display: block;
+	opacity: 1;
+}
+
+#cardView{
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 710px;
+    height: 470px;
+}
+#cardView .canvas{    
+    position: relative;    
+    width: 710px;
+    height: 470px;            
+    overflow: hidden;    
+    border-radius: 10px;     
+}
+#cardView .canvas.ng-enter,
+#cardView .canvas.ng-leave{      
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;   
+}
+#cardView .canvas.ng-enter{
+    -webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);    
+    transform: scale(0.75);
+    opacity: 0;
+}
+#cardView .canvas.ng-enter.ng-enter-active{
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);    
+    transform: scale(1);
+    opacity: 1;
+}
+
+#cardView .frame{
+    width: 100%;
+    height: 100%;
+}
+
+.adornment_item {
+    display: block;
+    width: 250px;
+    height: 250px;
+    position: relative;
+    z-index: 51;
+}
+.adornmentImg {
+    width: 250px;
+    height: 250px;
+    -webkit-animation: play .8s steps(2) infinite;
+    -ms-animation: play .8s steps(2) infinite;
+    animation: play .8s steps(2) infinite;
+    background-repeat: no-repeat;
+}
+@-webkit-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@-moz-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@-ms-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@-o-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+@keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -500px; }
+}
+
+.bubbler_item {
+    display: block;
+    width: 300px;
+    height: 150px;
+    position: relative;
+}
+.displayItem {
+    position: absolute;
+    min-width: 50px;
+    min-height: 50px;
+    left: 0;
+    top: 0;
+}
+.displayItem,
+.displayItem textarea{ 
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.bubblerText {
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    z-index: 52;
+    font-size: 30px;
+    line-height: 45px;
+    font-family: "微軟正黑體";
+    resize: none;
+    overflow: hidden;
+    border: 0;
+}
+
+
+
+
+
+
+@font-face {
+	font-family: 'fontawesome';
+	src:url('fonts/fontawesome.eot');
+	src:url('fonts/fontawesome.eot?#iefix') format('embedded-opentype'),
+		url('fonts/fontawesome.woff') format('woff'),
+		url('fonts/fontawesome.ttf') format('truetype'),
+		url('fonts/fontawesome.svg#fontawesome') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.icon-caret-left, .icon-caret-right {
+	font-family: 'fontawesome';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-caret-left:before {
+	content: "\f0d9";
+}
+.icon-caret-right:before {
+	content: "\f0da";
 }
