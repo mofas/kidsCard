@@ -107,19 +107,19 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 		/***************************************************************/
 		if (type === 'bg') {
 			var rI = Math.floor(Math.random()*$scope.bg.giftThumb.length);
-			$scope.openBoxMessage = "特殊背景" + (rI+1);			
+			$scope.openBoxMessage = "恭喜你得到可愛背景囉！";
 			$scope.bg.giftThumb[rI].src = $scope.bg.giftThumb[rI].src.replace("d_" , "");
 		} else if (type === 'frame') {
 			var rI = Math.floor(Math.random()*$scope.frame.giftThumb.length);
-			$scope.openBoxMessage = "特殊邊框" + (rI+1);			
+			$scope.openBoxMessage = "恭喜你得到可愛邊框囉！";
 			$scope.frame.giftThumb[rI].src = $scope.frame.giftThumb[rI].src.replace("d_" , "");
 		} else if (type === 'adornment') {
 			var rI = Math.floor(Math.random()*$scope.adornment.giftThumb.length);
-			$scope.openBoxMessage = "特殊裝飾品" + (rI+1);			
+			$scope.openBoxMessage = "恭喜你得到可愛裝飾品囉！";
 			$scope.adornment.giftThumb[rI].src = $scope.adornment.giftThumb[rI].src.replace("d_" , "");
 		} else if (type === 'special') {			
 			var rI = Math.floor(Math.random()*$scope.special.giftThumb.length);			
-			$scope.openBoxMessage = "特殊寵物箱" + (rI+1);
+			$scope.openBoxMessage = "恭喜呀米得到新寵物囉！";
 			$scope.special.giftThumb[rI].src = $scope.special.giftThumb[rI].src.replace("d_sp" , "sp_"+(rI+1) );
 		}
 		/***************************************************************/
@@ -135,7 +135,7 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 }]);
 
 
-controller.controller('cardListPageCtrl', [ '$scope' , '$http' , function ($scope , $http) {	
+controller.controller('cardListPageCtrl', [ '$scope' , '$http' , 'synScopeAndData' ,  function ($scope , $http , synScopeAndData) {	
 	$scope.$base = 0;	
 
 	$scope.setCurrentPage = function($index){			
@@ -165,10 +165,12 @@ controller.controller('cardListPageCtrl', [ '$scope' , '$http' , function ($scop
 
 	$scope.viewCard = function(dataHerf){		
 		$http.get(dataHerf).success(function(data){						
-			$scope.selected_bg = data.selected_bg;
-			$scope.selected_frame =	data.selected_frame;
-			$scope.adornmentList = data.adornmentList;
-			$scope.bubblerList = data.bubblerList;
+			// $scope.selected_bg = data.selected_bg;
+			// $scope.selected_frame =	data.selected_frame;
+			// $scope.adornmentList = data.adornmentList;
+			// $scope.bubblerList = data.bubblerList;
+			// $scope.graffitiList = data.graffitiList;
+			synScopeAndData($scope, data);
 			$scope.openWindow();
 		});	
 	}
@@ -292,7 +294,7 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 			$scope.isWindowOpen = false;		
 			$scope.lastOpenSection = null;
 			$scope.openSection = "bg";
-			$scope.adornmentIndex = 0;
+			$scope.adjustObjIndex = 0;
 			$scope.isLoadding = true;
 
 			$scope.rawItemListObj = {};
@@ -305,12 +307,14 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 
 			$scope.adornmentLimit = 10;
 			$scope.bubblerLimit = 5;
+			$scope.graffitiLimit = 1;
 
 			// Canvas
 			$scope.selected_bg = { "background" : "transparent" };
 			$scope.selected_frame = { "background" : "transparent" };
 			$scope.adornmentList = [];
 			$scope.bubblerList = [];
+			$scope.graffitiList = [];
 		}
 
 		var injectFunction = function($scope){		
@@ -342,6 +346,7 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 				$scope.selected_frame = { "background" : "transparent" };
 				$scope.adornmentList = [];
 				$scope.bubblerList = [];
+				$scope.graffitiList = [];
 			}
 
 			$scope.selectItem = function(item){			
@@ -354,7 +359,7 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 				} else if($scope.openSection == "bubbler") {
 					$scope.addBubbler(item);
 				} else if($scope.openSection == "graffiti") {
-					//TODO
+					$scope.addGraffiti(item);
 				}
 			}
 
@@ -377,7 +382,7 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 					return;
 				}
 				var newObj = { 
-					id: $scope.adornmentIndex++,
+					id: $scope.adjustObjIndex++,
 					src: item.src,
 					style: StyleService.getBGStyle(item.src)		
 				}
@@ -401,7 +406,7 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 					return;
 				}
 				var newObj = { 
-					id: $scope.adornmentIndex++,
+					id: $scope.adjustObjIndex++,
 					style: item.style
 				}
 				$scope.bubblerList.push(newObj);					
@@ -416,6 +421,33 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 				});
 				$scope.bubblerList.splice(index , 1);			
 			}
+
+			$scope.addGraffiti = function(item){
+				$scope.closeWindow();
+				if($scope.graffitiList.length >= $scope.graffitiLimit){
+					alert("只能使用一張塗鴉唷");
+					return;
+				}
+				var newObj = { 
+					id: $scope.adjustObjIndex++,
+					src: item.src,
+					style: StyleService.getBGStyle(item.src)
+				}
+				$scope.graffitiList.push(newObj);					
+			}
+
+			$scope.removeGraffiti = function(id){
+				var index = null;
+				angular.forEach($scope.graffitiList , function(obj , i){		 	
+					if( obj.id == id){
+						index = i;
+					}
+				});
+				$scope.graffitiList.splice(index , 1);			
+			}
+
+
+			
 
 			var isBasicSetting = function(){
 				if($scope.selected_bg.background == "transparent"){
@@ -437,6 +469,7 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 
 				canvasData.adornmentList = StyleService.convertDataToStyle($scope.adornmentList);
 				canvasData.bubblerList = StyleService.convertDataToStyle($scope.bubblerList);
+				canvasData.graffitiList = StyleService.convertDataToStyle($scope.graffitiList);
 
 				shareCanvasDataService.shareData = canvasData;						
 				shareCanvasDataService.ready = isBasicSetting() ? true : false;				
@@ -466,14 +499,16 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 
 }]);
 
-controller.controller('previewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService' , 
-	function ($scope , $timeout , shareCanvasDataService) {
+controller.controller('previewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService' , 'synScopeAndData' ,
+	function ($scope , $timeout , shareCanvasDataService , synScopeAndData) {
 
 		shareCanvasDataService.refresh = function(){						
-			$scope.selected_bg = shareCanvasDataService.shareData.selected_bg;
-			$scope.selected_frame = shareCanvasDataService.shareData.selected_frame;
-			$scope.adornmentList = shareCanvasDataService.shareData.adornmentList;
-			$scope.bubblerList = shareCanvasDataService.shareData.bubblerList;								
+			// $scope.selected_bg = shareCanvasDataService.shareData.selected_bg;
+			// $scope.selected_frame = shareCanvasDataService.shareData.selected_frame;
+			// $scope.adornmentList = shareCanvasDataService.shareData.adornmentList;
+			// $scope.bubblerList = shareCanvasDataService.shareData.bubblerList;
+			// $scope.graffitiList = shareCanvasDataService.shareData.graffitiList;			
+			synScopeAndData($scope , shareCanvasDataService.shareData);
 		}		
 
 		$scope.save = function(){
@@ -481,7 +516,8 @@ controller.controller('previewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataS
 				"selected_bg" : $scope.selected_bg,
 				"selected_frame" : $scope.selected_frame,
 				"adornmentList" : $scope.adornmentList,
-				"bubblerList" : $scope.bubblerList
+				"bubblerList" : $scope.bubblerList,
+				"graffitiList" : $scope.graffitiList,
 			}
 			alert("以下資訊會送往後端儲存:" + JSON.stringify(saveObj));
 			console.log(JSON.stringify(saveObj));

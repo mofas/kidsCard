@@ -95,6 +95,16 @@ services.service('StyleService', [ function () {
 	
 }]);
 
+services.factory('synScopeAndData', [ function () {
+	return function($scope , data){
+		$scope.selected_bg = data.selected_bg;
+		$scope.selected_frame =	data.selected_frame;
+		$scope.adornmentList = data.adornmentList;
+		$scope.bubblerList = data.bubblerList;
+		$scope.graffitiList = data.graffitiList;
+	}
+}]);
+
 
 services.factory('TopListDataLoader', [ '$http' , '$q', function($http , $q){
   return function(){    	

@@ -21,6 +21,15 @@
                                 <textarea ng-cloak class="bubblerText" ng-style="bubbler.style" ng-model="bubbler.text" autofocus="true" ng-trim="false">
                                 </textarea>
                         </span>
+
+                        <!--  graffti -->
+                        <span ng-cloak class="graffiti_item" 
+                            adjustable  obj="graffiti" del-callback="removeGraffiti"
+                            min-w="200" min-h="155" max-w="400" max-h="310" resize-inner="true"
+                            ng-repeat="graffiti in graffitiList">
+                            <div class="graffitiImg" ng-style="graffiti.style">
+                            </div>
+                        </span>
                     </div>
                 </div>
                 <div class="window transition" ng-class="{'open' : isWindowOpen }">
@@ -61,7 +70,9 @@
                     ng-click="openSectionWindow('bubbler');">
                     <span ng-cloak class="limitCount">{{bubblerList.length}}/{{bubblerLimit}}</span>
                 </div>
-                <div class="menuBtn functionBtn5" ng-click="openSectionWindow('graffiti');"></div>
+                <div class="menuBtn functionBtn5" ng-click="openSectionWindow('graffiti');">
+                    <span ng-cloak class="limitCount">{{graffitiList.length}}/{{graffitiLimit}}</span>
+                </div>
                 <div class="menuBtn functionBtn6" ng-click="reset();"></div>
                 <div class="menuBtn submitBtn" ng-click="preview(); openPreview();"></div>
             </div>

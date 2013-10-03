@@ -314,13 +314,16 @@
     height: 100px;
     text-align: center;
 }
-
-#giftBox .giftBox{
+#giftBox .giftBoxWrap{
     display: inline-block;
-    position: relative;
+    position: relative;    
     width: 180px;
     height: 80px;
-    padding-left: 105px;
+}
+#giftBox .giftBox{
+    width: 180px;
+    height: 80px;      
+    padding-left: 105px; 
     cursor: pointer;
     text-align: left;
     line-height: 90px;
@@ -405,16 +408,16 @@
      to { background-position: -500px; }
 }
 
-#giftBox .giftBox1 .openBoxAnimation{
+#giftBox .openBoxAnimation.giftAnimation1{
     background-image: url('img/giftBox/openBox_1.png');
 }
-#giftBox .giftBox2 .openBoxAnimation{
+#giftBox .openBoxAnimation.giftAnimation2{
     background-image: url('img/giftBox/openBox_2.png');
 }
-#giftBox .giftBox3 .openBoxAnimation{
+#giftBox .openBoxAnimation.giftAnimation3{
     background-image: url('img/giftBox/openBox_3.png');
 }
-#giftBox .giftBox4 .openBoxAnimation{
+#giftBox .openBoxAnimation.giftAnimation4{
     background-image: url('img/giftBox/openBox_4.png');
 }
 
@@ -616,6 +619,7 @@
     box-shadow: 3px 3px 3px 0 rgba(0,0,0,0.5);
     background: #fff url('img/iml.gif') 50% 50% no-repeat;
     cursor: pointer;
+    overflow: hidden;
 }
 #cardFactory .item.ng-enter,
 #cardFactory .item.ng-leave {    

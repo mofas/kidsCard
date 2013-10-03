@@ -29,21 +29,29 @@
 
 
 			<div class="giftCount">
-				<div ng-click="openBox('bg')" class="giftBox giftBox1">
-					{{bg.giftBoxCount}}					
-					<div class="openBoxAnimation" ng-class="{'open': openBoxMode === 'bg' }"></div>
+				<div class="giftBoxWrap">
+					<div class="giftBox giftBox1" ng-click="openBox('bg')" >
+						{{bg.giftBoxCount}}	
+					</div>					
+					<div class="openBoxAnimation giftAnimation1" ng-class="{'open': openBoxMode === 'bg' }"></div>
 				</div>
-				<div ng-click="openBox('frame')" class="giftBox giftBox2">
-					{{frame.giftBoxCount}}
-					<div class="openBoxAnimation" ng-class="{'open': openBoxMode === 'frame' }"></div>
+				<div class="giftBoxWrap">
+					<div ng-click="openBox('frame')" class="giftBox giftBox2">
+						{{frame.giftBoxCount}}						
+					</div>
+					<div class="openBoxAnimation giftAnimation2" ng-class="{'open': openBoxMode === 'frame' }"></div>
 				</div>
-				<div ng-click="openBox('adornment')" class="giftBox giftBox3">
-					{{adornment.giftBoxCount}}
-					<div class="openBoxAnimation" ng-class="{'open': openBoxMode === 'adornment' }"></div>
+				<div class="giftBoxWrap">
+					<div ng-click="openBox('adornment')" class="giftBox giftBox3">
+						{{adornment.giftBoxCount}}						
+					</div>
+					<div class="openBoxAnimation giftAnimation3" ng-class="{'open': openBoxMode === 'adornment' }"></div>
 				</div>
-				<div ng-click="openBox('special')" class="giftBox giftBox4">
-					{{special.giftBoxCount}}
-					<div class="openBoxAnimation" ng-class="{'open': openBoxMode === 'special' }"></div>
+				<div class="giftBoxWrap">
+					<div ng-click="openBox('special')" class="giftBox giftBox4">
+						{{special.giftBoxCount}}						
+					</div>
+					<div class="openBoxAnimation giftAnimation4" ng-class="{'open': openBoxMode === 'special' }"></div>
 				</div>
 			</div>
 

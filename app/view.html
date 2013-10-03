@@ -20,16 +20,29 @@
     <div ng-view="" ng-controller="ViewCtrl" id="cardView">        
         <div class="canvas" ng-style="selected_bg">
             <div class="frame" ng-style="selected_frame">
+
+
                 <!-- adornment -->
                 <span ng-cloak class="adornment_item displayItem" ng-repeat="adornment in adornmentList" transform-data="adornment" ng-style="adornment.style">
                     <div class="adornmentImg" ng-style="adornment.inner.style">
                     </div>
                 </span>                    
+
                 <!--  bubbler -->
                 <span ng-cloak class="bubbler_item displayItem" ng-repeat="bubbler in bubblerList" transform-data="bubbler" ng-style="bubbler.style">
                     <textarea ng-cloak class="bubblerText" ng-style="bubbler.inner.style" ng-model="bubbler.text" readonly>
                         </textarea>                                
                 </span>
+                
+                <!--  graffti -->
+                <span ng-cloak class="graffiti_item displayItem"
+                    transform-data="graffiti" ng-style="graffiti.style"
+                    ng-repeat="graffiti in graffitiList">
+                    <div class="graffitiImg" ng-style="graffiti.inner.style">
+                    </div>
+                </span>
+
+
             </div>
         </div>
     </div>
@@ -42,7 +55,8 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/view.js -->
-    <script src="scripts/view.js"></script>    
+    <script src="scripts/view.js"></script>
+    <script src="scripts/services/service.js"></script>
     <!-- endbuild -->
 
 

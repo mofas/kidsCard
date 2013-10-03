@@ -12,5 +12,15 @@
             <textarea ng-cloak class="bubblerText" ng-style="bubbler.inner.style" ng-model="bubbler.text" readonly>
                 </textarea>
         </span>
+
+
+        <!--  graffti -->
+        <span ng-cloak class="graffiti_item displayItem"
+            transform-data="graffiti" ng-style="graffiti.style"
+            ng-repeat="graffiti in graffitiList">
+            <div class="graffitiImg" ng-style="graffiti.inner.style">
+            </div>
+        </span>
+        
     </div>
 </div>

@@ -11,10 +11,10 @@
 			"style": {
 				"width":"179.568px",
 				"height":"185.256px",
-				"-moz-transform":"translate(160.216px,71.372px) rotate(328.3deg) scale( 1,1)",
-				"-webkit-transform":"translate(160.216px,71.372px) rotate(328.3deg) scale( 1,1)",
-				"-o-transform":"translate(160.216px,71.372px) rotate(328.3deg) scale( 1,1)",
-				"-ms-transform":"translate(160.216px,71.372px) rotate(328.3deg) scale( 1,1)"
+				"-moz-transform":"translate(20.216px,71.372px) rotate(328.3deg) scale( 1,1)",
+				"-webkit-transform":"translate(20.216px,71.372px) rotate(328.3deg) scale( 1,1)",
+				"-o-transform":"translate(20.216px,71.372px) rotate(328.3deg) scale( 1,1)",
+				"-ms-transform":"translate(20.216px,71.372px) rotate(328.3deg) scale( 1,1)"
 			},
 			"inner": {
 				"style": {
@@ -100,5 +100,28 @@
 			"text":"妳好嗎,我很好.How are you? I fine.",
 			"$$hashKey":"05O"
 		}
-	]
+	],
+	"graffitiList":[
+		{
+			"id":1,
+			"style": {
+				"width":"300px",
+				"height":"210px",
+				"-moz-transform":"translate(210px,108px) rotate(0deg) scale( 1,1)",
+				"-webkit-transform":"translate(210px,108px) rotate(0deg) scale( 1, 1)",
+				"-o-transform":"translate(210px,108px) rotate(0deg) scale( 1, 1)",
+				"-ms-transform":"translate(210px,108px) rotate(0deg) scale( 1, 1)"
+			},
+			"inner": {
+				"style": {
+					"background-image":"url(http://p1-kids.yamedia.tw/MjE4NjA5NmtpZHM=/0b1524d1287dfb41.jpg?w=400)",
+					"-moz-transform":"translate(-50px,-50px) rotate(0deg) scale( 0.75, 0.6774193548387096)",
+					"-webkit-transform":"translate(-50px,-50px) rotate(0deg) scale( 0.75, 0.6774193548387096)",
+					"-o-transform":"translate(-50px,-50px) rotate(0deg) scale( 0.75, 0.6774193548387096)",
+					"-ms-transform":"translate(-50px,-50px) rotate(0deg) scale( 0.75, 0.6774193548387096)"
+				}
+			},
+			"$$hashKey":"039"			
+		}
+	]	
 } 

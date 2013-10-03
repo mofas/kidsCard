@@ -409,8 +409,17 @@ ul{
     border: 0;
 }
 
-
-
+.graffiti_item {
+    display: block;
+    width: 400px;
+    height: 310px;
+    position: relative;
+    z-index: 55;
+}
+.graffitiImg {
+	width: 400px;
+	height: 310px;	
+}
 
 
 
