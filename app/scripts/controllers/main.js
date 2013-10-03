@@ -20,7 +20,7 @@ controller.controller('collectTaskPageCtrl', [ function () {
 controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 
 	$scope.bg = {
-		giftBoxCount : 99,		
+		giftBoxCount : 3,		
 		giftThumb : [
 			{
 				"src" : "images/bg/gift/d_bg_1.png"
@@ -50,7 +50,7 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 	};
 
 	$scope.adornment = {
-		giftBoxCount : 5,		
+		giftBoxCount : 51,		
 		giftThumb: [
 			{
 				"src" : "images/adornment/gift/d_adornment_1.png"
@@ -105,13 +105,21 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 		/*  DEMO CODE
 		/***************************************************************/
 		if (type === 'bg') {
-			$scope.openBoxMessage = "愛心特殊背景";
+			var rI = Math.floor(Math.random()*$scope.bg.giftThumb.length);
+			$scope.openBoxMessage = "特殊背景" + (rI+1);			
+			$scope.bg.giftThumb[rI].src = $scope.bg.giftThumb[rI].src.replace("d_" , "");
 		} else if (type === 'frame') {
-			$scope.openBoxMessage = "猴子框";
+			var rI = Math.floor(Math.random()*$scope.frame.giftThumb.length);
+			$scope.openBoxMessage = "特殊邊框" + (rI+1);			
+			$scope.frame.giftThumb[rI].src = $scope.frame.giftThumb[rI].src.replace("d_" , "");
 		} else if (type === 'adornment') {
-			$scope.openBoxMessage = "蛋糕裝飾品";
-		} else if (type === 'special') {
-			$scope.openBoxMessage = "寵物龍";
+			var rI = Math.floor(Math.random()*$scope.adornment.giftThumb.length);
+			$scope.openBoxMessage = "特殊裝飾品" + (rI+1);			
+			$scope.adornment.giftThumb[rI].src = $scope.adornment.giftThumb[rI].src.replace("d_" , "");
+		} else if (type === 'special') {			
+			var rI = Math.floor(Math.random()*$scope.special.giftThumb.length);			
+			$scope.openBoxMessage = "特殊寵物箱" + (rI+1);
+			$scope.special.giftThumb[rI].src = $scope.special.giftThumb[rI].src.replace("d_sp" , "sp_"+(rI+1) );
 		}
 		/***************************************************************/
 		
