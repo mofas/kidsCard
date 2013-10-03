@@ -5,9 +5,9 @@ var app = express();
 // Configuration
 
 app.configure(function(){
-  app.set('views', __dirname + '/app');  
+  app.set('views', __dirname + '/dist');  
   app.use(express.bodyParser());  
-  app.use(express.static(__dirname + '/app'));
+  app.use(express.static(__dirname + '/dist'));
   app.use(app.router);
   app.engine('html', require('ejs').renderFile);
 });

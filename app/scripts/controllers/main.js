@@ -93,8 +93,9 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 	$scope.openBoxMessage = null;
 
 	$scope.openBox = function(type){
-		var count = type + '_giftBoxCount';
-		if($scope[type].giftBoxCount < 1){
+
+
+		if($scope[type].giftBoxCount < 1){			
 			return;
 		}
 		$scope[type].giftBoxCount -= 1;
