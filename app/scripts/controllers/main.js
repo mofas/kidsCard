@@ -18,7 +18,10 @@ controller.controller('collectTaskPageCtrl', [ function () {
 
 
 controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
-		$scope.gfitBg = [
+
+	$scope.bg = {
+		giftBoxCount : 99,		
+		giftThumb : [
 			{
 				"src" : "images/bg/gift/d_bg_1.png"
 			},
@@ -28,9 +31,12 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 			{
 				"src" : "images/bg/gift/d_bg_3.png"
 			}
-		];
+		]
+	};
 
-		$scope.gfitFrame = [
+	$scope.frame = {
+		giftBoxCount : 21,		
+		giftThumb: [
 			{
 				"src" : "images/frame/gift/d_frame_1.png"
 			},
@@ -40,9 +46,12 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 			{
 				"src" : "images/frame/gift/d_frame_3.png"
 			}
-		];
+		]
+	};
 
-		$scope.gfitAdornment = [
+	$scope.adornment = {
+		giftBoxCount : 5,		
+		giftThumb: [
 			{
 				"src" : "images/adornment/gift/d_adornment_1.png"
 			},
@@ -61,9 +70,12 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 			{
 				"src" : "images/adornment/gift/d_adornment_6.png"
 			}
-		];
+		]
+	};
 
-		$scope.giftSpecial = [
+	$scope.special = {
+		giftBoxCount : 6,		
+		giftThumb: [
 			{
 				"src" : "images/special/gift/d_sp.png"
 			},
@@ -73,10 +85,42 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 			{
 				"src" : "images/special/gift/d_sp.png"
 			}
-		];
+		]
+	};
 
 
-		$scope.giftBoxCount = 99;
+	$scope.openBoxMode = null;
+	$scope.openBoxMessage = null;
+
+	$scope.openBox = function(type){
+		var count = type + '_giftBoxCount';
+		if($scope[type].giftBoxCount < 1){
+			return;
+		}
+		$scope[type].giftBoxCount -= 1;
+		$scope.openBoxMode = type;
+
+		//AJAX HERE
+		/***************************************************************/
+		/*  DEMO CODE
+		/***************************************************************/
+		if (type === 'bg') {
+			$scope.openBoxMessage = "愛心特殊背景";
+		} else if (type === 'frame') {
+			$scope.openBoxMessage = "猴子框";
+		} else if (type === 'adornment') {
+			$scope.openBoxMessage = "蛋糕裝飾品";
+		} else if (type === 'special') {
+			$scope.openBoxMessage = "寵物龍";
+		}
+		/***************************************************************/
+		
+	}
+
+	$scope.closeAnimation = function(){
+		$scope.openBoxMode = null;	
+	}
+
 
 
 }]);
@@ -143,50 +187,8 @@ controller.controller('cardListPageCtrl', [ '$scope' , '$http' , function ($scop
 }]);
 
 
-controller.controller('topListPageCtrl', [ '$scope' , function ($scope) {
-		$scope.list = [
-			{
-				"name" : "小番薯姊姊",
-				"score" : 955687
-			},
-			{
-				"name" : "小番薯姊姊",
-				"score" : 946565
-			},
-			{
-				"name" : "小番薯姊姊",
-				"score" : 936658
-			},
-			{
-				"name" : "小番薯姊姊",
-				"score" : 925889
-			},
-			{
-				"name" : "小番薯姊姊",
-				"score" : 912585
-			},
-			{
-				"name" : "小番薯姊姊",
-				"score" : 885787
-			},
-			{
-				"name" : "小番薯姊姊",
-				"score" : 856565
-			},
-			{
-				"name" : "太扯了,都是小番薯姊姊",
-				"score" : 484848
-			},
-			{
-				"name" : "小番薯姊姊作弊啦",
-				"score" : 234234
-			},
-			{
-				"name" : "小番薯姊姊作弊啦",
-				"score" : 123213
-			}
-		];
-
+controller.controller('topListPageCtrl', [ '$scope' , 'data' , function ($scope , data) {	
+	$scope.list = data.list;
 }]);
 
 
@@ -229,7 +231,7 @@ controller.controller('menuCtrl', [ '$scope' , '$location' , function($scope , $
 	$scope.$on('$routeChangeStart', function(next, current) { 		  	
 		checkRoute();
 	});		
-	
+
 }]);
 
 

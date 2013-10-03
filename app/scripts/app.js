@@ -10,7 +10,7 @@ var app = angular.module('kidsCardApp', [
   'kidsCardApp.controllers'
 ]);
 
-app.config(['$routeProvider' , function ($routeProvider) {
+app.config([ '$routeProvider' , function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/index.html',
@@ -55,11 +55,11 @@ app.config(['$routeProvider' , function ($routeProvider) {
     .when('/topList', {
       templateUrl: 'views/topList.html',
       controller: 'topListPageCtrl',
-      // resolve: {
-      //   data: ['ItineraryInfoDataLoader' , function (ItineraryInfoDataLoader) {
-      //     return ItineraryInfoDataLoader();
-      //   }]
-      // }, 
+      resolve: {
+        data: ['TopListDataLoader' , function (TopListDataLoader) {
+          return TopListDataLoader();
+        }]
+      }, 
     })
     .when('/reward', {
       templateUrl: 'views/reward.html',
