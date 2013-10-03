@@ -19,9 +19,14 @@
 <body ng-app="kidsCardApp">
     
     <!-- Add your site or application content here -->
-    <div id="ngView" ng-view="">        
-        
+    <div ng-include="'views/header.html'" class="clearfix"></div>
+    <div ng-include="'views/menu.html'" class="clearfix"></div>
+    <div class="ngViewWrap">
+        <div class="viewAnimate" ng-view="">        
+            
+        </div>
     </div>
+    <div ng-include="'views/footer.html'" class="clearfix"></div>
 
 
 

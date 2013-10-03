@@ -34,20 +34,39 @@ ul{
 	overflow: hidden;
 	border-radius: 15px;
 	position: relative;
-	-webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;   
+	-webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
-
-#ngView{
-	-webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;   
+.ngViewWrap{
+	height: 880px;
+	width: 100%;
+	position: relative;
 }
-#ngView.ng-enter-active .frameWrap{	
-	-webkit-transform: translate(0,-10px);
-  -moz-transform: translate(0,-10px);
-  transform: translate(0,-10px);  	  
+.viewAnimate{
+	position: absolute;
+	width: 100%;	
+	left: 0;
+	top: 0;
+	-webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;  
+}
+.viewAnimate.ng-enter #index,
+.viewAnimate.ng-leave #index{	
+	opacity: 0;
+}
+.viewAnimate.ng-leave .frameWrap{ 
+  -webkit-transform: translate(0,0);
+  -moz-transform: translate(0,0);
+  transform: translate(0,0);
+  opacity: 1;
+}
+.viewAnimate.ng-leave-active .frameWrap{
+  -webkit-transform: translate(0,20px);
+  -moz-transform: translate(0,20px);
+  transform: translate(0,20px);
+  opacity: 0;
 }
 
 #header{
@@ -82,16 +101,27 @@ ul{
 }
 
 
-#menu{
-	margin: 23px auto;
-	width: 740px;
-	padding: 0 10px;
+#menu{	
+	margin: -56px auto 0 auto;
+	width: 740px;	
 	height: 56px;
-	position: relative;
+	padding: 0 10px;	
+	position: relative;	
 	background: url('img/menu_bg.jpg') repeat-x;
-	-webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
+	-webkit-transition: all 0.6s cubic-bezier(.77,0,.175,1);
+  -moz-transition: all 0.6s cubic-bezier(.77,0,.175,1);
+  transition: all 0.6s cubic-bezier(.77,0,.175,1);    
+  opacity: 0;
+  -webkit-transform: translate(0,-20px);
+  -moz-transform: translate(0,-20px);
+  transform: translate(0,-20px);
+}
+#menu.show{	
+	margin: 23px auto;
+  opacity: 1;
+	-webkit-transform: translate(0,0);
+  -moz-transform: translate(0,0);
+  transform: translate(0,0);
 }
 #menu:before,
 #menu:after{

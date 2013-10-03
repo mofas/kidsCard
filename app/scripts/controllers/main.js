@@ -76,6 +76,9 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 		];
 
 
+		$scope.giftBoxCount = 99;
+
+
 }]);
 
 
@@ -175,11 +178,11 @@ controller.controller('topListPageCtrl', [ '$scope' , function ($scope) {
 				"score" : 484848
 			},
 			{
-				"name" : "太扯了,都是小番薯姊姊",
+				"name" : "小番薯姊姊作弊啦",
 				"score" : 234234
 			},
 			{
-				"name" : "太扯了,都是小番薯姊姊",
+				"name" : "小番薯姊姊作弊啦",
 				"score" : 123213
 			}
 		];
@@ -216,9 +219,17 @@ controller.controller('cardFactoryPageCtrl' , [ '$scope' , 'shareCanvasDataServi
 
 
 
-controller.controller('menuCtrl', [ '$scope' , '$location' , function($scope , $location){
-	console.log($location.$$url);
-	$scope.currentLoaction = $location.$$url;
+controller.controller('menuCtrl', [ '$scope' , '$location' , function($scope , $location){	
+	var checkRoute = function(){
+		$scope.currentLoaction = $location.$$url;
+		$scope.isShow = ($scope.currentLoaction === '/index' || $scope.currentLoaction === '/' ) ? false : true;	
+	}
+
+	checkRoute();
+	$scope.$on('$routeChangeStart', function(next, current) { 		  	
+		checkRoute();
+	});		
+	
 }]);
 
 
