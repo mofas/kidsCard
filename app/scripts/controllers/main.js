@@ -17,77 +17,12 @@ controller.controller('collectTaskPageCtrl', [ function () {
 }]);
 
 
-controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
+controller.controller('giftBoxPageCtrl', [ '$scope' , 'data' , function ($scope , data) {
 
-	$scope.bg = {
-		giftBoxCount : 3,		
-		giftThumb : [
-			{
-				"src" : "images/bg/gift/d_bg_1.png"
-			},
-			{
-				"src" : "images/bg/gift/d_bg_2.png"
-			},
-			{
-				"src" : "images/bg/gift/d_bg_3.png"
-			}
-		]
-	};
-
-	$scope.frame = {
-		giftBoxCount : 21,		
-		giftThumb: [
-			{
-				"src" : "images/frame/gift/d_frame_1.png"
-			},
-			{
-				"src" : "images/frame/gift/d_frame_2.png"
-			},
-			{
-				"src" : "images/frame/gift/d_frame_3.png"
-			}
-		]
-	};
-
-	$scope.adornment = {
-		giftBoxCount : 51,		
-		giftThumb: [
-			{
-				"src" : "images/adornment/gift/d_adornment_1.png"
-			},
-			{
-				"src" : "images/adornment/gift/d_adornment_2.png"
-			},
-			{
-				"src" : "images/adornment/gift/d_adornment_3.png"
-			},
-			{
-				"src" : "images/adornment/gift/d_adornment_4.png"
-			},
-			{
-				"src" : "images/adornment/gift/d_adornment_5.png"
-			},
-			{
-				"src" : "images/adornment/gift/d_adornment_6.png"
-			}
-		]
-	};
-
-	$scope.special = {
-		giftBoxCount : 6,		
-		giftThumb: [
-			{
-				"src" : "images/special/gift/d_sp.png"
-			},
-			{
-				"src" : "images/special/gift/d_sp.png"
-			},
-			{
-				"src" : "images/special/gift/d_sp.png"
-			}
-		]
-	};
-
+	$scope.bg = data.bg;
+	$scope.frame = data.frame;
+	$scope.adornment = data.adornment;
+	$scope.special = data.special;
 
 	$scope.openBoxMode = null;
 	$scope.openBoxMessage = null;
@@ -130,13 +65,13 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , function ($scope) {
 		$scope.openBoxMode = null;	
 	}
 
-
-
 }]);
 
 
 controller.controller('cardListPageCtrl', [ '$scope' , '$http' , 'synScopeAndData' ,  function ($scope , $http , synScopeAndData) {	
-	$scope.$base = 0;	
+
+	//Pagination
+	$scope.$base = 0;
 
 	$scope.setCurrentPage = function($index){			
 		$scope.currentPage = $index;
@@ -149,27 +84,30 @@ controller.controller('cardListPageCtrl', [ '$scope' , '$http' , 'synScopeAndDat
 	}
 
 	$scope.prevPage = function(){
-		$scope.$base = ($scope.$base - 10 < 0) ? 0 : $scope.$base - 10;			
-		$scope.currentPage = $scope.$base;
+		$scope.$base = ( $scope.$base - 10 < 0 ) ? 0 : $scope.$base - 10;			
+		$scope.currentPage = ( $scope.currentPage - 10 < 0 ) ? 0 : $scope.currentPage - 10;		
 	}
 	$scope.nextPage = function(){
 		$scope.$base = ($scope.$base + 20 > $scope.numberOfPages) ? $scope.numberOfPages - 10 : $scope.$base + 10;			
-		$scope.currentPage = $scope.$base;
+		$scope.currentPage = ( $scope.currentPage + 10  >= $scope.numberOfPages ) ? $scope.numberOfPages-1 : $scope.currentPage + 10;		
 	}
 
 	$scope.numberOfPages = 0;
 	$scope.currentPage = 0;
 
 
+	$scope.$watch("currentPage" , function(){
+		$scope.list = [];
+		$http.get("data/card_list.json?currentPage=" + $scope.currentPage).success(function(data){
+			$scope.list = data.list;
+			$scope.numberOfPages = data.numberOfPages;
+		});
+	});	
 
 
+	//Popbox
 	$scope.viewCard = function(dataHerf){		
-		$http.get(dataHerf).success(function(data){						
-			// $scope.selected_bg = data.selected_bg;
-			// $scope.selected_frame =	data.selected_frame;
-			// $scope.adornmentList = data.adornmentList;
-			// $scope.bubblerList = data.bubblerList;
-			// $scope.graffitiList = data.graffitiList;
+		$http.get(dataHerf).success(function(data){
 			synScopeAndData($scope, data);
 			$scope.openWindow();
 		});	
@@ -184,15 +122,6 @@ controller.controller('cardListPageCtrl', [ '$scope' , '$http' , 'synScopeAndDat
 		$scope.cardViewWrap.removeClass("open");
 		$scope.previewMode = false;
 	}
-
-	$scope.$watch("currentPage" , function(){
-		$scope.list = [];
-		$http.get("data/card_list.json?currentPage=" + $scope.currentPage).success(function(data){
-			$scope.list = data.list;
-			$scope.numberOfPages = data.numberOfPages;
-		});
-	});	
-
 
 
 }]);
@@ -227,10 +156,9 @@ controller.controller('cardFactoryPageCtrl' , [ '$scope' , 'shareCanvasDataServi
 
 
 
-
-
-
-
+/*
+* Component Controller
+*/
 
 controller.controller('menuCtrl', [ '$scope' , '$location' , function($scope , $location){	
 	var checkRoute = function(){
@@ -244,8 +172,6 @@ controller.controller('menuCtrl', [ '$scope' , '$location' , function($scope , $
 	});		
 
 }]);
-
-
 
 controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
 	function ($scope , $http , $q , $timeout , StyleService , shareCanvasDataService) {
@@ -502,12 +428,7 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 controller.controller('previewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService' , 'synScopeAndData' ,
 	function ($scope , $timeout , shareCanvasDataService , synScopeAndData) {
 
-		shareCanvasDataService.refresh = function(){						
-			// $scope.selected_bg = shareCanvasDataService.shareData.selected_bg;
-			// $scope.selected_frame = shareCanvasDataService.shareData.selected_frame;
-			// $scope.adornmentList = shareCanvasDataService.shareData.adornmentList;
-			// $scope.bubblerList = shareCanvasDataService.shareData.bubblerList;
-			// $scope.graffitiList = shareCanvasDataService.shareData.graffitiList;			
+		shareCanvasDataService.refresh = function(){
 			synScopeAndData($scope , shareCanvasDataService.shareData);
 		}		
 

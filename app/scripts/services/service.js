@@ -104,11 +104,10 @@ services.factory('synScopeAndData', [ function () {
 	}
 }]);
 
-
-services.factory('TopListDataLoader', [ '$http' , '$q', function($http , $q){
-  return function(){    	
+services.factory('DataLoader', [ '$http' , '$q', function($http , $q){
+  return function(dataHref){    	
     var d = $q.defer();
-    $http.get("data/topList.json").success(function(data){		      	
+    $http.get(dataHref).success(function(data){		      	
     	d.resolve(data);
     }).error(function(data, status, headers, config){
     	d.reject(data);

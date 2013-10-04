@@ -19,29 +19,19 @@ app.config([ '$routeProvider' , function ($routeProvider) {
     .when('/collectTask', {
       templateUrl: 'views/collectTask.html',
       controller: 'collectTaskPageCtrl',
-      // resolve: {
-      //   data: ['ItineraryListDataLoader' , function (ItineraryListDataLoader) {
-      //     return ItineraryListDataLoader();
-      //   }]
-      // }, 
     })
     .when('/cardFactory', {
       templateUrl: 'views/cardFactory.html',
       controller: 'cardFactoryPageCtrl',
-      // resolve: {
-      //   data: ['ItineraryInfoDataLoader' , function (ItineraryInfoDataLoader) {
-      //     return ItineraryInfoDataLoader();
-      //   }]
-      // }, 
     })
     .when('/giftBox', {
       templateUrl: 'views/giftBox.html',
       controller: 'giftBoxPageCtrl',
-      // resolve: {
-      //   data: ['ItineraryInfoDataLoader' , function (ItineraryInfoDataLoader) {
-      //     return ItineraryInfoDataLoader();
-      //   }]
-      // }, 
+      resolve: {
+        data: ['DataLoader' , function (DataLoader) {
+          return DataLoader('data/giftBox.json');
+        }]
+      }, 
     })
     .when('/cardList', {
       templateUrl: 'views/cardList.html',
@@ -56,8 +46,8 @@ app.config([ '$routeProvider' , function ($routeProvider) {
       templateUrl: 'views/topList.html',
       controller: 'topListPageCtrl',
       resolve: {
-        data: ['TopListDataLoader' , function (TopListDataLoader) {
-          return TopListDataLoader();
+        data: ['DataLoader' , function (DataLoader) {
+          return DataLoader('data/topList.json');
         }]
       }, 
     })
