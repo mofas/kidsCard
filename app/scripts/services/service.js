@@ -37,7 +37,6 @@ services.service('StyleService', [ function () {
 			
 			angular.forEach(list , function(originalObj){	
 
-
 				newObj = {
 					id: originalObj.id,
 					style: {},

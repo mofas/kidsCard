@@ -37,10 +37,10 @@
      to { background-position: 200%; }
 }
 #index .portalImg{
+    position: absolute;
     width: 940px;
     height: 573px;
-    background: url('img/index/portal.png');
-    position: absolute;        
+    background: url('img/index/portal.png');    
 } 
 #index .link{
     position: absolute;
@@ -50,7 +50,9 @@
 }
 #index .link:after{
     content: "";
-    position: absolute;
+    position: absolute;    
+    width: 100%;
+    height: 100%;
     z-index: -1;
 }
 #index .link:hover:after{
@@ -62,21 +64,11 @@
     width: 205px;
     height: 278px;
 }
-#index .link1:after{    
-    width: 205px;
-    height: 278px;    
-    background-image: url('img/index/link_1.png');        
-}
 #index .link2{
     top: 230px;
     left: -20px;
     width: 269px;
     height: 191px;    
-}
-#index .link2:after{    
-    width: 269px;
-    height: 191px;    
-    background-image: url('img/index/link_2.png');        
 }
 #index .link3{
     top: 410px;
@@ -84,21 +76,11 @@
     width: 257px;
     height: 143px;    
 }
-#index .link3:after{    
-    width: 257px;
-    height: 143px;    
-    background-image: url('img/index/link_3.png');        
-}
 #index .link4{
     top: 60px;
     right: 80px;
     width: 212px;
     height: 212px;    
-}
-#index .link4:after{    
-    width: 212px;
-    height: 212px;  
-    background-image: url('img/index/link_4.png');        
 }
 #index .link5{
     top: 240px;
@@ -106,20 +88,28 @@
     width: 244px;
     height: 161px;    
 }
-#index .link5:after{    
-    width: 244px;
-    height: 161px;
-    background-image: url('img/index/link_5.png');        
-}
 #index .link6{
     top: 400px;
     right: 120px;
     width: 260px;
     height: 144px;
 }
+#index .link1:after{        
+    background-image: url('img/index/link_1.png');        
+}
+#index .link2:after{        
+    background-image: url('img/index/link_2.png');        
+}
+#index .link3:after{
+    background-image: url('img/index/link_3.png');        
+}
+#index .link4:after{     
+    background-image: url('img/index/link_4.png');        
+}
+#index .link5:after{
+    background-image: url('img/index/link_5.png');        
+}
 #index .link6:after{
-    width: 260px;
-    height: 144px;
     background-image: url('img/index/link_6.png');
 }
 
@@ -163,9 +153,9 @@
                     0 -2px #edd8b9;
 }
 #topList .scoreTable tr{    
-    height: 50px;
-    font-size: 20px;
+    height: 50px;    
     color: #643e30;
+    font-size: 20px;
     font-weight: bold;    
 }
 
@@ -177,19 +167,19 @@
     height: 600px;
     background: url('img/cardList_bg.jpg') no-repeat;
 }
-#cardList .list{
+#cardList .list{    
+    margin: 0 auto;
+    padding: 10px 0;
     width: 850px;
     height: 540px;
-    padding: 10px 0;    
-    margin: 0 auto;
 }
 #cardList .list li{
     float: left;
+    margin: 8px 5px;
     padding: 5px;
     width: 160px;
     height: 110px;
-    background: #fbbe01;
-    margin: 8px 5px;
+    background: #fbbe01;    
     border-radius: 5px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);    
     cursor: pointer;
@@ -200,16 +190,16 @@
     transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;    
 }
 #cardList .list li.ng-enter{
+    opacity: 0;
     -webkit-transform: translate(0, 50px);
     -moz-transform: translate(0, 50px);    
-    transform: translate(0, 50px);
-    opacity: 0;
+    transform: translate(0, 50px);    
 }
 #cardList .list li.ng-enter.ng-enter-active{
+    opacity: 1;
     -webkit-transform: translate(0,0);
     -moz-transform: translate(0,0);    
-    transform: translate(0,0);
-    opacity: 1;
+    transform: translate(0,0);    
 }
 #cardList .list li img{
     border-radius: 5px;
@@ -219,8 +209,8 @@
 }
 
 #cardList .pagination{
-    margin: 0 auto;
     position: absolute;
+    margin: 0 auto;    
     left: 0;
     right: 0;    
     text-align: center;    
@@ -229,8 +219,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    margin: 0 5px;
-    cursor: pointer;
+    margin: 0 5px;    
     font-size: 20px;
     font-weight: bold;
     font-family: "微軟正黑體";
@@ -239,6 +228,7 @@
                     0 -2px 0 rgba(255,255,255,1),
                     2px 0 0 rgba(255,255,255,1),
                     -2px 0 0 rgba(255,255,255,1);
+    cursor: pointer;
 }
 #cardList .pagination li:hover,
 #cardList .pagination li.selected{
@@ -251,10 +241,10 @@
 #cardViewWrap .closeBtn {
     position: absolute;
     right: -15px;
-    top: -15px;
-    z-index: 100;
+    top: -15px;    
     width: 28px;
     height: 28px;
+    z-index: 100;
     background: url('img/closeBtn.png') no-repeat;
     cursor: pointer;
 }
@@ -270,8 +260,6 @@
 }
 
 
-
-
 /*!
 *   GIFTBOX
 */
@@ -280,18 +268,16 @@
     height: 600px;
     background: url('img/giftBox/bg.jpg') no-repeat;    
 }
-
 #giftBox .statistics{
     margin: 0 0 0 300px;    
     padding-top: 40px;
     width: 700px;
     height: 460px;    
 }
-
 #giftBox .section{
+    margin: 30px 0;
     height: 70px;
     width: 100%;
-    margin: 30px 0;
 }
 #giftBox .statistics .item{
     float: left;
@@ -307,23 +293,22 @@
     -moz-transition: opacity 0.5s;
     transition: opacity 0.5s;
 }
-
 #giftBox .giftCount{
-    width: 100%;
     padding-top: 20px;
+    width: 100%;
     height: 100px;
     text-align: center;
 }
 #giftBox .giftBoxWrap{
     display: inline-block;
-    position: relative;    
+    position: relative;
     width: 180px;
     height: 80px;
 }
 #giftBox .giftBox{
+    padding-left: 105px;
     width: 180px;
     height: 80px;      
-    padding-left: 105px; 
     cursor: pointer;
     text-align: left;
     line-height: 90px;
@@ -353,7 +338,6 @@
 #giftBox .giftBox4{
     background: url('img/giftBox/giftBox_4.png') no-repeat;
 }
-
 #giftBox .openBoxAnimation{
     position: absolute;
     top: 0;
@@ -376,38 +360,18 @@
     animation: play 2s steps(2) infinite;  
     opacity: 0;  
 }
-
 #giftBox .openBoxAnimation.open{
     position: fixed;
     top: 50%;
     left: 50%;
     margin-left: -125px;
-    margin-top: -200px;
+    margin-top: -200px; 
+    opacity: 1;
+    z-index: 1001;
     -webkit-transform: scale(1);
     -ms-transform: scale(1);    
     transform: scale(1);
-    opacity: 1;
-    z-index: 1001;
 }
-@-webkit-keyframes play {
-   from { background-position:    0px; }
-     to { background-position: -500px; }
-}
-
-@-moz-keyframes play {
-   from { background-position:    0px; }
-     to { background-position: -500px; }
-}
-
-@-ms-keyframes play {
-   from { background-position:    0px; }
-     to { background-position: -500px; }
-}
-@keyframes play {
-   from { background-position:    0px; }
-     to { background-position: -500px; }
-}
-
 #giftBox .openBoxAnimation.giftAnimation1{
     background-image: url('img/giftBox/openBox_1.png');
 }
@@ -445,30 +409,26 @@
 #giftBox .openBoxAnimationOverlay .closeBtn {
     position: absolute;
     right: 30%;
-    top: 25%;
-    z-index: 100;
+    top: 25%;    
     width: 28px;
     height: 28px;
+    z-index: 100;
     background: url('img/closeBtn.png') no-repeat;
     cursor: pointer;
 }
-
 #giftBox .openBoxAnimationOverlay .message{
     position: fixed;    
     top: 50%;
     left: 50%;
-    width: 500px;
-    margin-left: -250px;
     margin-top: 100px;
+    margin-left: -250px;
+    width: 500px;
     text-align: center;
     color: #fff;
     font-weight: bold;
     font-family: "微軟正黑體";
     font-size: 32px;
 }
-
-
-
 
 
 /*!
@@ -485,9 +445,9 @@
 }
 #cardFactory{
     margin: 0 auto;
+    padding: 10px;
     width: 960px;
     height: 600px;
-    padding: 10px;
     background: #62422e;
     position: relative; 
     overflow: hidden;   
@@ -499,9 +459,9 @@
 }
 #cardFactory .workingArea{
     float:left;
+    position: relative;
     width: 710px;
     height: 470px;    
-    position: relative;            
     box-shadow: inset 0 0 10px 2px rgba(0,0,0,0.5);    
     overflow: hidden;
     border-radius: 10px;
@@ -521,9 +481,9 @@
     opacity: 0; 
 }
 #cardFactory .canvas{
+    position: relative;
     width: 100%;
     height: 100%;        
-    position: relative;
     z-index: 1;   
 }
 #cardFactory .frame{
@@ -532,29 +492,29 @@
 }
 #cardFactory .window{
     position: absolute;
-    z-index: -1;
     top: 50px;
     left: 10px;
     right: 10px;
     bottom: 50px;
-    height: 310px;    
     padding: 10px 20px 50px 20px;
+    height: 310px;    
+    z-index: -1;
     opacity: 0;    
     -webkit-transform: scale(2);
     -ms-transform: scale(2);    
     transform: scale(2);
 }
 #cardFactory .window.open{    
-    z-index: 200;
     -webkit-transform: scale(1);
     -ms-transform: scale(1);    
     transform: scale(1);    
+    z-index: 200;
     opacity: 1;
 }
 #cardFactory .window .closeBtn{
     position: absolute;
-    right: 14px;
     top: -7px;
+    right: 14px;
     width: 28px;
     height: 28px;
     background: url('img/closeBtn.png') no-repeat;
@@ -568,24 +528,24 @@
     text-align: center;    
 }
 #cardFactory .window .pagination li{    
+    display: inline-block;    
     position: relative;
+    margin: 0 10px;
     width: 20px;
     height: 20px;
-    margin: 0 10px;    
     border-radius: 100%;    
-    cursor: pointer;
-    display: inline-block;    
     background: #fff;
     box-shadow: inset 0 2px 5px 0 rgba(0, 0, 0, 0.5);    
+    cursor: pointer;
 }
 #cardFactory .window .pagination li:after{
     content: "";
     position: absolute;
     left: 1px;
     top: 2px;
+    padding: 0;
     width: 18px;
     height: 18px;
-    padding: 0;    
     border-radius: 50%;        
 }
 #cardFactory .window .pagination li.selected:after{    
@@ -599,22 +559,21 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=1 );
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
 }
-
 #cardFactory .window .section{
     width: 100%;
     height: 100%;        
     overflow: hidden;
 }
 #cardFactory .section .empty{
+    margin: 120px auto;
     width: 200px;
     height: 60px;    
-    margin: 120px auto;
     text-align: center;
     background: #CE4E4E;
     color: #fff;
-    opacity: 0;
     box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.6);
     visibility: hidden;
+    opacity: 0;
 }
 #cardFactory .section .empty.show{    
     opacity: 1;    
@@ -622,11 +581,11 @@
 }
 #cardFactory .item{    
     float: left;
+    position: relative;
     margin: 14px 6px;
     width: 150px;    
     height: 100px;    
     border-radius: 10px;
-    position: relative;
     box-shadow: 3px 3px 3px 0 rgba(0,0,0,0.5);
     background: #fff url('img/iml.gif') 50% 50% no-repeat;
     cursor: pointer;
@@ -652,8 +611,8 @@
     display: none;
 }
 #cardFactory .item img{
-    width: 100%;
     position: absolute;
+    width: 100%;
     left: 0;
     right: 0;
     top: 0;
@@ -667,9 +626,9 @@
     background: url('img/card/menu_bg.png') no-repeat 50% 50%;
 }
 #cardFactory .menu .menuBtn{
+    margin: 0 10px 10px 10px;            
     width: 200px;
     height: 50px;
-    margin: 0 10px 10px 10px;            
     cursor: pointer;
     background: url('img/card/btn_bg.png') no-repeat 0 0;
     position: relative;
@@ -684,42 +643,29 @@
     top: 0;
     width: 100%;
     height: 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+#cardFactory .menu .menuBtn.completed:after{
+    background-position: 100% 0;   
 }
 #cardFactory .menu .functionBtn1:after{
-    background: url('img/card/btn_1.png') no-repeat 0 0;
+    background: url('img/card/btn_1.png');
 }
 #cardFactory .menu .functionBtn2:after{
-    background: url('img/card/btn_2.png') no-repeat 0 0;
+    background: url('img/card/btn_2.png');
 }
 #cardFactory .menu .functionBtn3:after{
-    background: url('img/card/btn_3.png') no-repeat 0 0;
+    background: url('img/card/btn_3.png');
 }
 #cardFactory .menu .functionBtn4:after{
-    background: url('img/card/btn_4.png') no-repeat 0 0;
+    background: url('img/card/btn_4.png');
 }
 #cardFactory .menu .functionBtn5:after{
-    background: url('img/card/btn_5.png') no-repeat 0 0;
+    background: url('img/card/btn_5.png');
 }
 #cardFactory .menu .functionBtn6:after{
-    background: url('img/card/btn_6.png') no-repeat 0 0;
-}
-#cardFactory .menu .functionBtn1.completed:after{
-    background: url('img/card/btn_1.png') no-repeat 100% 0;
-}
-#cardFactory .menu .functionBtn2.completed:after{
-    background: url('img/card/btn_2.png') no-repeat 100% 0;
-}
-#cardFactory .menu .functionBtn3.completed:after{
-    background: url('img/card/btn_3.png') no-repeat 100% 0;
-}
-#cardFactory .menu .functionBtn4.completed:after{
-    background: url('img/card/btn_4.png') no-repeat 100% 0;
-}
-#cardFactory .menu .functionBtn5.completed:after{
-    background: url('img/card/btn_5.png') no-repeat 100% 0;
-}
-#cardFactory .menu .functionBtn6.completed:after{
-    background: url('img/card/btn_6.png') no-repeat 100% 0;
+    background: url('img/card/btn_6.png');
 }
 #cardFactory .menu .submitBtn{
     height: 90px;
@@ -783,24 +729,24 @@
     width: 880px;
 }
 #cardFactory .subMenu .navLeft{
-    background: url('img/card/la.png') no-repeat 0 50%;
     float: left;
+    background: url('img/card/la.png') no-repeat 0 50%;
 }
 #cardFactory .subMenu .navLeft:hover{
     background: url('img/card/la.png') no-repeat 100% 50%;
 }
 #cardFactory .subMenu .navRight{
-    background: url('img/card/ra.png') no-repeat 0 50%;
     float: right;
+    background: url('img/card/ra.png') no-repeat 0 50%;
 }
 #cardFactory .subMenu .navRight:hover{
     background: url('img/card/ra.png') no-repeat 100% 50%;
 }
 #cardFactory .subMenuBtn{
+    float: left;
+    margin: 0 35px;
     width: 150px;
     height: 100px;
-    margin: 0 35px;
-    float: left;
     cursor: pointer;
     background-position: 0 50%;
 }
@@ -837,15 +783,15 @@
 
 #preview{    
     position: fixed;    
-    background: rgba(0,0,0,0.5);
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;    
     z-index: -1;
     visibility: hidden;
-    opacity: 0;    
+    background: rgba(0,0,0,0.5);
     overflow-y: auto;
+    opacity: 0;    
     /** fix safari bug **/    
     -webkit-transition: opacity 0.5s;
     -moz-transition: opacity 0.5s;
@@ -859,8 +805,8 @@
 #preview .previewOverlay{    
     margin: 50px auto;
     width: 960px;
-    background: #fff;
     padding: 10px;
+    background: #fff;
     border-radius: 5px;    
     -webkit-transform: translateY(10%);
     -ms-transform: translateY(10%);    
@@ -877,15 +823,15 @@
 #preview .canvasWrap{
     margin: 0 auto 20px auto;
     padding: 5px;
+    height: 500px;    
     background: #62422E;
     border-radius: 10px;
-    height: 500px;    
 }
 #preview .canvas{    
+    position: relative;      
     margin: 10px auto;
     width: 710px;
     height: 470px; 
-    position: relative;      
     overflow: hidden;    
     border-radius: 10px;    
 }
@@ -894,26 +840,24 @@
     height: 100%;
 }
 #preview .sendForm{
-    width: 480px;
+    position: relative;
     margin: 0 auto;
     padding-left: 50px;
-    position: relative;
+    width: 480px;
 }
 #preview .sendForm:after{
     content: "";
     position: absolute;
-    z-index: 1;
+    top: -10px;
+    left: -220px;
     width: 250px;
     height: 250px;
-    left: -220px;
-    top: -10px;
+    z-index: 1;
     background: url('img/card/stamp.png');
 }
 #preview .sendForm .function-group {
     text-align: center;
 }
-
-
 
 
 /*!
@@ -935,11 +879,11 @@
 }
 .loadingOverlay .loading{  
     position: absolute;  
+    margin: auto;
     top:0;
     left:0;
     right:0;
     bottom: 0;
-    margin: auto;
     width: 52px;
     height: 52px;        
     background: #000 url('img/fal.gif') no-repeat 50% 50%;    
@@ -952,42 +896,42 @@
 */
 .adjustable{    
     position: absolute;
-    min-width: 50px;
-    min-height: 50px;
     left: 0;
     top: 0;
+    min-width: 50px;
+    min-height: 50px;
 }
 .adjustable.select{
     z-index: 100;
 }
 .adjustable.select:after{
-    z-index: 2;
     content: "";
     position: absolute;
     left: -20px;
     top: -20px;
     bottom: -20px;
     right: -20px;
+    z-index: 2;
     border: 2px dotted #ddd;
 
 }
 .adjustable .ad_btn{    
+    display: none;
     position: absolute;
     width: 30px;
     height: 30px;    
-    border-radius: 50%;
     z-index: 6; 
     opacity: 0;
-    display: none;
     cursor: pointer;
+    border-radius: 50%;
 }
 .adjustable.select .ad_btn{
-    opacity: 1;
     display: block;    
+    opacity: 1;
 }
 .adjustable .delBtn{
-    right: -35px;
     top: -35px;
+    right: -35px;
     background: url('img/card/delete_btn.png') no-repeat 0 50%;
 }
 .adjustable .delBtn:hover{
@@ -1019,5 +963,4 @@
     position: absolute;
     z-index: 101;
 }
-
 

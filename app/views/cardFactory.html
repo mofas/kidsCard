@@ -38,7 +38,7 @@
                         <div class="item" 
                             ng-repeat="item in itemList | startFrom: currentPage*pageSize  | limitTo:pageSize">
                             <img ng-cloak ng-src="{{item.thumb}}" ng-click="selectItem(item);" images-load-animation>                                
-                        </div>                            
+                        </div>
                         <div class="well empty" ng-class="{'show': itemList.length < 1 }">
                             現在還沒有東西可以用
                         </div>
