@@ -1,8 +1,9 @@
 body {  
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	position: relative;	
+	margin: 0;  
   color: #333;
 	background: url('img/bg_bottom.jpg') 0 4px;
-	position: relative;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 body:before{
 	content: " ";
@@ -54,19 +55,19 @@ ul{
 }
 .viewAnimate.ng-enter #index,
 .viewAnimate.ng-leave #index{	
-	opacity: 0;
+	opacity: 0;	
 }
 .viewAnimate.ng-leave .frameWrap{ 
   -webkit-transform: translate(0,0);
   -moz-transform: translate(0,0);
   transform: translate(0,0);
-  opacity: 1;
+  opacity: 1;  
 }
 .viewAnimate.ng-leave-active .frameWrap{
   -webkit-transform: translate(0,20px);
   -moz-transform: translate(0,20px);
   transform: translate(0,20px);
-  opacity: 0;
+  opacity: 0;  
 }
 
 #header{
@@ -111,14 +112,17 @@ ul{
 	-webkit-transition: all 0.6s cubic-bezier(.77,0,.175,1);
   -moz-transition: all 0.6s cubic-bezier(.77,0,.175,1);
   transition: all 0.6s cubic-bezier(.77,0,.175,1);    
-  opacity: 0;
+  opacity: 0;  
   -webkit-transform: translate(0,-20px);
   -moz-transform: translate(0,-20px);
   transform: translate(0,-20px);
 }
+.lt-ie9 #menu{
+	display: none;
+}
 #menu.show{	
 	margin: 23px auto;
-  opacity: 1;
+  opacity: 1;  
 	-webkit-transform: translate(0,0);
   -moz-transform: translate(0,0);
   transform: translate(0,0);
@@ -448,4 +452,50 @@ ul{
 }
 .icon-caret-right:before {
 	content: "\f0da";
+}
+
+
+
+
+
+
+.old_broswer_warning{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 9999;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAE0lEQVQIW2NkYGCoB2IUwEgDQQCT/QKB/1JzRQAAAABJRU5ErkJggg==) repeat;
+}
+.old_broswer_warning .box{	
+	display: block;
+	margin: 60px auto;	
+	width: 530px;
+	padding: 20px;
+	background: #fff;
+	border: 5px solid #ccc;
+	text-align: center;
+	font-family: "微軟正黑體";
+	font-size: 28px;
+}
+.old_broswer_warning .browserList{
+	margin-top: 20px;
+}
+.old_broswer_warning .browserList li{
+	float: left;
+	width: 120px;
+	margin: 0 20px;
+}
+.old_broswer_warning .browserList a{
+	display: block;
+	width: 100%;
+	text-decoration: none;
+	color: #FFAD33;
+}
+.old_broswer_warning .browserList img{
+	margin: 0 auto;
+	display: block;
+	width: 64px;
+	height: 64px;
 }
