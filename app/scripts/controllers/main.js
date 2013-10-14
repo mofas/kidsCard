@@ -68,7 +68,8 @@ module.controller('giftBoxPageCtrl', [ '$scope' , 'data' , function ($scope , da
 }]);
 
 
-module.controller('cardListPageCtrl', [ '$scope' , '$http' , 'synScopeAndData' ,  function ($scope , $http , synScopeAndData) {	
+module.controller('cardListPageCtrl', [ '$scope' , '$http' , '$location' , 'synScopeAndData' ,  
+	function ($scope , $http , $location , synScopeAndData) {	
 
 	//Pagination
 	$scope.$base = 0;
@@ -98,7 +99,7 @@ module.controller('cardListPageCtrl', [ '$scope' , '$http' , 'synScopeAndData' ,
 
 	$scope.$watch("currentPage" , function(){
 		$scope.list = [];
-		$http.get("data/card_list.json?currentPage=" + $scope.currentPage).success(function(data){
+		$http.get("data/card_list.json?currentPage=" + $scope.currentPage + "&listType=" + $location.$$path).success(function(data){
 			$scope.list = data.list;
 			$scope.numberOfPages = data.numberOfPages;
 		});

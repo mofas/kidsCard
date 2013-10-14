@@ -103,11 +103,12 @@ ul{
 
 
 #menu{	
+	position: relative;	
 	margin: -56px auto 0 auto;
 	width: 740px;	
 	height: 56px;
-	padding: 0 10px;	
-	position: relative;	
+	padding: 0 10px;		
+	z-index: 10;
 	background: url('img/menu_bg.jpg') repeat-x;
 	-webkit-transition: all 0.6s cubic-bezier(.77,0,.175,1);
   -moz-transition: all 0.6s cubic-bezier(.77,0,.175,1);
@@ -122,7 +123,7 @@ ul{
 }
 #menu.show{	
 	margin: 23px auto;
-  opacity: 1;  
+  opacity: 1;
 	-webkit-transform: translate(0,0);
   -moz-transform: translate(0,0);
   transform: translate(0,0);
@@ -159,12 +160,13 @@ ul{
 }
 #menu .linkList > li{	
 	display: block;
+	position: relative;
 	float:left;
 	margin: 0 4px;
 	height: 56px;		
 	background-image: url('img/menu_btn.png');
 	background-repeat: no-repeat;
-	overflow: hidden;		
+	/*overflow: hidden;		*/
 }
 #menu .linkList > li > a{
 	display: block;
@@ -228,6 +230,37 @@ ul{
 #menu .linkList .link6.selected{
 	background-position: -1400px 50%;
 }
+
+#menu .dropdown{
+	position: absolute;
+	padding: 5px 10px;
+	bottom: -90px;
+	left: -25px;
+	width: 140px;	
+	border: 5px solid #7E560E;
+	border-radius: 5px;
+	z-index: 99999;
+	text-align: center;
+	background: url('img/cardList_bg.jpg') no-repeat;
+	-webkit-transition: all 0.3s cubic-bezier(.77,0,.175,1);
+  -moz-transition: all 0.3s cubic-bezier(.77,0,.175,1);
+  transition: all 0.3s cubic-bezier(.77,0,.175,1);    
+  opacity: 0;
+}
+#menu .dropdown a{
+	font-family: "微軟正黑體";
+	color: #A76A0F;
+	font-size: 24px;
+	font-weight: bold;
+	text-decoration: none;
+}
+#menu .dropdown a:hover{
+	color: #DA9D00;
+}
+#menu .link4:hover .dropdown{
+	opacity: 1;
+}
+
 
 /*!
 *   FOOTER

@@ -37,12 +37,11 @@ module.config([ '$routeProvider' , function ($routeProvider) {
     })
     .when('/cardList', {
       templateUrl: 'views/cardList.html',
-      controller: 'cardListPageCtrl',
-      // resolve: {
-      //   data: ['ItineraryInfoDataLoader' , function (ItineraryInfoDataLoader) {
-      //     return ItineraryInfoDataLoader();
-      //   }]
-      // }, 
+      controller: 'cardListPageCtrl'
+    })
+    .when('/myCardList', {
+      templateUrl: 'views/cardList.html',
+      controller: 'cardListPageCtrl'
     })
     .when('/topList', {
       templateUrl: 'views/topList.html',

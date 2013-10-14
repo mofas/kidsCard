@@ -12,8 +12,11 @@
 		</li>		
 	</ul>
 	<ul class="linkList clearfix right">
-		<li class="link4" ng-class="{'selected' : currentLoaction == '/cardList'}">
-			<a href="#cardList"></a>
+		<li class="link4" ng-class="{'selected' : currentLoaction == '/cardList' || currentLoaction == myCardList}">
+			<ul class="dropdown">
+				<li><a href="#myCardList">我的卡片</a></li>
+				<li><a href="#cardList">全部卡片</a></li>
+			</ul>			
 		</li>
 		<li class="link5" ng-class="{'selected' : currentLoaction == '/topList'}">
 			<a href="#topList"></a>
