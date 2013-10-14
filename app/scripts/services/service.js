@@ -1,13 +1,13 @@
 'use strict';
 
-var services = angular.module('services', []);
+module = angular.module('services', []);
 
 
-services.service('shareCanvasDataService', [ function () {
+module.service('shareCanvasDataService', [ function () {
 	return { shareData : {} }
 }]);
 
-services.service('StyleService', [ function () {
+module.service('StyleService', [ function () {
 	return {		
 
 		getBGStyle : function(bg){					
@@ -94,7 +94,7 @@ services.service('StyleService', [ function () {
 	
 }]);
 
-services.factory('synScopeAndData', [ function () {
+module.factory('synScopeAndData', [ function () {
 	return function($scope , data){
 		$scope.selected_bg = data.selected_bg;
 		$scope.selected_frame =	data.selected_frame;
@@ -104,7 +104,7 @@ services.factory('synScopeAndData', [ function () {
 	}
 }]);
 
-services.factory('DataLoader', [ '$http' , '$q', function($http , $q){
+module.factory('DataLoader', [ '$http' , '$q', function($http , $q){
   return function(dataHref){    	
     var d = $q.defer();
     $http.get(dataHref).success(function(data){		      	

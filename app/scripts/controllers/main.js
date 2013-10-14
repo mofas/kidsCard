@@ -1,23 +1,22 @@
 'use strict';
 
-var controller = angular.module('kidsCardApp.controllers', ['utility' , 'services']);
+module = angular.module('kidsCardApp.controllers', ['utility' , 'services']);
 
 
 /*
 * Route Controller
 */
-
-controller.controller('IndexPageCtrl', [ function () {
+module.controller('IndexPageCtrl', [ function () {
 		
 }]);
 
 
-controller.controller('collectTaskPageCtrl', [ function () {
+module.controller('collectTaskPageCtrl', [ function () {
 		
 }]);
 
 
-controller.controller('giftBoxPageCtrl', [ '$scope' , 'data' , function ($scope , data) {
+module.controller('giftBoxPageCtrl', [ '$scope' , 'data' , function ($scope , data) {
 
 	$scope.bg = data.bg;
 	$scope.frame = data.frame;
@@ -31,6 +30,7 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , 'data' , function ($scope 
 
 
 		if($scope[type].giftBoxCount < 1){			
+			alert("你已經把禮物開完囉！看看還少了什麼，再玩一次遊戲吧~");
 			return;
 		}
 		$scope[type].giftBoxCount -= 1;
@@ -68,7 +68,7 @@ controller.controller('giftBoxPageCtrl', [ '$scope' , 'data' , function ($scope 
 }]);
 
 
-controller.controller('cardListPageCtrl', [ '$scope' , '$http' , 'synScopeAndData' ,  function ($scope , $http , synScopeAndData) {	
+module.controller('cardListPageCtrl', [ '$scope' , '$http' , 'synScopeAndData' ,  function ($scope , $http , synScopeAndData) {	
 
 	//Pagination
 	$scope.$base = 0;
@@ -127,16 +127,16 @@ controller.controller('cardListPageCtrl', [ '$scope' , '$http' , 'synScopeAndDat
 }]);
 
 
-controller.controller('topListPageCtrl', [ '$scope' , 'data' , function ($scope , data) {	
+module.controller('topListPageCtrl', [ '$scope' , 'data' , function ($scope , data) {	
 	$scope.list = data.list;
 }]);
 
 
-controller.controller('rewardPageCtrl', [ function () {
+module.controller('rewardPageCtrl', [ function () {
 		
 }]);
 
-controller.controller('cardFactoryPageCtrl' , [ '$scope' , 'shareCanvasDataService' , function($scope , shareCanvasDataService) {
+module.controller('cardFactoryPageCtrl' , [ '$scope' , 'shareCanvasDataService' , function($scope , shareCanvasDataService) {
 	$scope.previewMode = false;
 
 	$scope.openPreview = function () {		
@@ -160,7 +160,7 @@ controller.controller('cardFactoryPageCtrl' , [ '$scope' , 'shareCanvasDataServi
 * Component Controller
 */
 
-controller.controller('menuCtrl', [ '$scope' , '$location' , function($scope , $location){	
+module.controller('menuCtrl', [ '$scope' , '$location' , function($scope , $location){	
 	var checkRoute = function(){
 		$scope.currentLoaction = $location.$$url;
 		$scope.isShow = ($scope.currentLoaction === '/index' || $scope.currentLoaction === '/' ) ? false : true;	
@@ -173,7 +173,7 @@ controller.controller('menuCtrl', [ '$scope' , '$location' , function($scope , $
 
 }]);
 
-controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
+module.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
 	function ($scope , $http , $q , $timeout , StyleService , shareCanvasDataService) {
 
 		var changePageSizeEvent = function(){													
@@ -425,7 +425,7 @@ controller.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout
 
 }]);
 
-controller.controller('previewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService' , 'synScopeAndData' ,
+module.controller('previewCtrl', [ '$scope' , '$timeout' , 'shareCanvasDataService' , 'synScopeAndData' ,
 	function ($scope , $timeout , shareCanvasDataService , synScopeAndData) {
 
 		shareCanvasDataService.refresh = function(){

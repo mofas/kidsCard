@@ -1,8 +1,8 @@
 'use strict';
 
-var ui = angular.module('ui' , ['utility']);
+module = angular.module('ui' , ['utility']);
 
-ui.factory("transform" , [ function(){
+module.factory("transform" , [ function(){
 	return function(targetDOM , data){	
 
 		if(data != null && targetDOM != null){
@@ -20,7 +20,7 @@ ui.factory("transform" , [ function(){
 	}    
 }]);
 
-ui.factory("rotatable" , [ '$document', 'throttle' , 'transform' ,
+module.factory("rotatable" , [ '$document', 'throttle' , 'transform' ,
 	function($document , throttle , transform ) {
 		return function(triggerDOM , targetDOM , data){
 
@@ -103,7 +103,7 @@ ui.factory("rotatable" , [ '$document', 'throttle' , 'transform' ,
 	]
 );
 
-ui.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
+module.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 	function($document , throttle , transform ) {
 		return function(triggerDOM , targetDOM , data){	
 
@@ -226,7 +226,7 @@ ui.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 	}    
 }]);
 
-ui.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
+module.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 	function($document , throttle , transform ) {
 		return function(triggerDOM , targetDOM , data){		
 
@@ -301,7 +301,7 @@ ui.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 ]);
 
 
-ui.service('selectCtrl', ['$document', function ($document) {
+module.service('selectCtrl', ['$document', function ($document) {
 	var ctrl = {};
 
 	var cancelSelectEvent = function(e){		
@@ -319,7 +319,7 @@ ui.service('selectCtrl', ['$document', function ($document) {
 }]);
 
 /**
-ui.directive('transformable', [ '$timeout' , 'transform' , function($timeout , transform){
+module.directive('transformable', [ '$timeout' , 'transform' , function($timeout , transform){
 
 	return {
 		scope: {
@@ -355,7 +355,7 @@ ui.directive('transformable', [ '$timeout' , 'transform' , function($timeout , t
 
 
 
-ui.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable' , 'draggable',
+module.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable' , 'draggable',
 	function($document , $timeout , rotatable , resizable , draggable) {
 
 		return {

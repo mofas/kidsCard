@@ -349,6 +349,7 @@ ul{
     width: 250px;
     height: 250px;
     -webkit-animation: play .8s steps(2) infinite;
+    -moz-animation: play .8s steps(2) infinite;
     -ms-animation: play .8s steps(2) infinite;
     animation: play .8s steps(2) infinite;
     background-repeat: no-repeat;
@@ -357,22 +358,14 @@ ul{
    from { background-position:    0px; }
      to { background-position: -500px; }
 }
-
 @-moz-keyframes play {
    from { background-position:    0px; }
      to { background-position: -500px; }
 }
-
 @-ms-keyframes play {
    from { background-position:    0px; }
      to { background-position: -500px; }
 }
-
-@-o-keyframes play {
-   from { background-position:    0px; }
-     to { background-position: -500px; }
-}
-
 @keyframes play {
    from { background-position:    0px; }
      to { background-position: -500px; }

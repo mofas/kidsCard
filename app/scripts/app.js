@@ -1,6 +1,8 @@
 'use strict';
 
-var app = angular.module('kidsCardApp', [	
+var module = null;
+
+module = angular.module('kidsCardApp', [	
 	'ngRoute',
 	'ngAnimate',
 	
@@ -10,7 +12,7 @@ var app = angular.module('kidsCardApp', [
   'kidsCardApp.controllers'
 ]);
 
-app.config([ '$routeProvider' , function ($routeProvider) {
+module.config([ '$routeProvider' , function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/index.html',

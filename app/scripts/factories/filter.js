@@ -1,8 +1,8 @@
 'use strict';
 
-app = angular.module('filter', []);
+module = angular.module('filter', []);
 
-app.filter('range', function() {
+module.filter('range', function() {
 	return function(input, total) {
 		total = parseInt(total);
 		for (var i=0; i<total; i++)
@@ -11,7 +11,7 @@ app.filter('range', function() {
 	};
 });
 
-app.filter('startFrom', function() {
+module.filter('startFrom', function() {
 	return function(input, start) {         
 		return input.slice(start);
 	}

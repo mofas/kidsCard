@@ -1,8 +1,8 @@
 'use strict';
 
-var app = angular.module('directive' , ['utility']);
+module = angular.module('directive' , ['utility']);
 
-app.directive('imagesLoadAnimation', function () {        
+module.directive('imagesLoadAnimation', function () {        
 	return {
 		link: function(scope, element) {
 			element.css({ 
@@ -17,7 +17,7 @@ app.directive('imagesLoadAnimation', function () {
 	}
 });
 /**
-app.directive('clickOnce', function () {        
+module.directive('clickOnce', function () {        
 	return {
 		scope:{
 			"clickOnceEvent": "@clickOnce"

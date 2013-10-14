@@ -7,9 +7,9 @@
 //     Underscore may be freely distributed under the MIT license.
 
 
-var factories = angular.module('utility', []);
+module = angular.module('utility', []);
 
-factories.factory("throttle" , [ function(){
+module.factory("throttle" , [ function(){
 	return function(func, wait, options){							
 		var context, args, result;
 		var timeout = null;
