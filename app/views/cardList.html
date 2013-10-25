@@ -1,7 +1,14 @@
 <div class="frameWrap">
 	<div id="cardList">
 		<ul class="list clearfix">
-			<li ng-repeat="item in list">				
+			<li ng-repeat="item in list">
+				<div class="fnOverlay" ng-show="voteMode">
+					<div class="voteCount">得票數:{{item.count}}</div>
+					<div class="fnBtnWrap">
+						<div class="btn btn-default" ng-click="voteCard(item.id)">投他</div>
+						<div class="btn btn-default" ng-click="viewCard(item.link)">觀看</div>
+					</div>
+				</div>
 				<img images-load-animation ng-src="{{item.thumb}}" ng-click="viewCard(item.link)">
 			</li>
 		</ul>
@@ -23,6 +30,9 @@
 	<div id="cardView">
 		<div class="closeBtn" ng-click="closeWindow();"></div>
 		<div ng-include="'views/cardView.html'"></div>
-	</div>
+		<div class="share">
+			<div class="btn btn-primary btn-block">Facebook分享</div>
+		</div>
+	</div>	
 </div>
 

@@ -2,84 +2,76 @@
 	"numberOfPages" : 24,	
 	"list" : [
 			{
+				"id" : 123,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
+				"id" : 234,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
+				"id" : 435,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
+				"id" : 51,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
+				"id" : 576,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
-				"thumb": "images/card_thumb.jpg",
-				"link": "data/view.json"
-			},
-						{
-				"thumb": "images/card_thumb.jpg",
-				"link": "data/view.json"
-			},
-			{
+				"id" : 46,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
+				"id" : 67,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
+				"id" : 4679,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
+				"id" : 4679,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
-				"thumb": "images/card_thumb.jpg",
-				"link": "data/view.json"
-			},
-						{
-				"thumb": "images/card_thumb.jpg",
-				"link": "data/view.json"
-			},
-			{
+				"id" : 78,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
+				"id" : 2345,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
 			},
 			{
+				"id" : 4565465,
+				"count" : 100,
 				"thumb": "images/card_thumb.jpg",
 				"link": "data/view.json"
-			},
-			{
-				"thumb": "images/card_thumb.jpg",
-				"link": "data/view.json"
-			},
-			{
-				"thumb": "images/card_thumb.jpg",
-				"link": "data/view.json"
-			},
-			{
-				"thumb": "images/card_thumb.jpg",
-				"link": "data/view.json"
-			},
-			{
-				"thumb": "images/card_thumb.jpg",
-				"link": "data/view.json"
-			}		
+			}
 		]
 }

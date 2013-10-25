@@ -125,7 +125,26 @@ module.controller('cardListPageCtrl', [ '$scope' , '$http' , '$location' , 'synS
 	}
 
 
+	//Vove related function
+
+	//Please change mode when vote begin
+	$scope.voteMode = true;
+
+	$scope.voteCard = function(id){
+		alert("妳投了" + id + "一票");
+		//Write your AJAX HERE
+	}
+
+
+
+
 }]);
+
+module.controller('shareCardViewPageCtrl', [ '$scope' , 'data' , 'synScopeAndData' ,
+	function ($scope , data , synScopeAndData) {	
+		synScopeAndData($scope , data);
+}]);
+
 
 
 module.controller('topListPageCtrl', [ '$scope' , 'data' , function ($scope , data) {	

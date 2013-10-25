@@ -39,9 +39,22 @@ module.config([ '$routeProvider' , function ($routeProvider) {
       templateUrl: 'views/cardList.html',
       controller: 'cardListPageCtrl'
     })
+    .when('/shareCardView', {
+      templateUrl: 'views/shareCardView.html',
+      controller: 'shareCardViewPageCtrl',
+      resolve: {
+        data: ['DataLoader' , function (DataLoader) {
+          return DataLoader('data/view.json');
+        }]
+      },
+    })
     .when('/myCardList', {
       templateUrl: 'views/cardList.html',
       controller: 'cardListPageCtrl'
+    })
+    .when('/voteList', {
+      templateUrl: 'views/voteList.html',
+      controller: 'voteListPageCtrl'
     })
     .when('/topList', {
       templateUrl: 'views/topList.html',
@@ -55,11 +68,6 @@ module.config([ '$routeProvider' , function ($routeProvider) {
     .when('/reward', {
       templateUrl: 'views/reward.html',
       controller: 'rewardPageCtrl',
-      // resolve: {
-      //   data: ['ItineraryInfoDataLoader' , function (ItineraryInfoDataLoader) {
-      //     return ItineraryInfoDataLoader();
-      //   }]
-      // }, 
     })
 
     .otherwise({

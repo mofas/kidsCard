@@ -234,14 +234,13 @@ ul{
 #menu .dropdown{
 	position: absolute;
 	padding: 5px 10px;
-	bottom: -90px;
-	left: -25px;
-	width: 140px;	
-	border: 5px solid #7E560E;
+	bottom: -58px;
+	left: -5px;
+	width: 110px;		
 	border-radius: 5px;
 	z-index: 99999;
 	text-align: center;
-	background: url('img/cardList_bg.jpg') no-repeat;
+	background: rgba(255,255,255,0.5) no-repeat;
 	-webkit-transition: all 0.3s cubic-bezier(.77,0,.175,1);
   -moz-transition: all 0.3s cubic-bezier(.77,0,.175,1);
   transition: all 0.3s cubic-bezier(.77,0,.175,1);    
@@ -250,7 +249,7 @@ ul{
 #menu .dropdown a{
 	font-family: "微軟正黑體";
 	color: #A76A0F;
-	font-size: 24px;
+	font-size: 18px;
 	font-weight: bold;
 	text-decoration: none;
 }
