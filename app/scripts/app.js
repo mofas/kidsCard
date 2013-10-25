@@ -39,12 +39,12 @@ module.config([ '$routeProvider' , function ($routeProvider) {
       templateUrl: 'views/cardList.html',
       controller: 'cardListPageCtrl'
     })
-    .when('/shareCardView', {
+    .when('/shareCardView/:id', {
       templateUrl: 'views/shareCardView.html',
       controller: 'shareCardViewPageCtrl',
       resolve: {
-        data: ['DataLoader' , function (DataLoader) {
-          return DataLoader('data/view.json');
+        data: ['DataLoader' , '$route' , function (DataLoader , $route) {          
+          return DataLoader('data/view.json?id=' + $route.current.params.id);
         }]
       },
     })
