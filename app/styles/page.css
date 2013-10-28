@@ -211,7 +211,6 @@
     transition: opacity 0.5s;
 }
 
-
 #cardList .list .fnOverlay{
     position: absolute;
     top: 0;
@@ -229,18 +228,35 @@
 }
 
 #cardList .list .voteCount{
+    margin-top: 20px;
+    padding: 20px 0;
+    height: 60px;
     text-align: center;
     font-family: "微軟正黑體";
     color: #fff;
     font-size: 20px;
-    padding: 30px 0;
-    height: 80px;
 }
 #cardList .list .fnBtnWrap{
     text-align: center;
 }
-#cardList .list .fnBtnWrap .btn{
+#cardList .fnBtnWrap .voteBtn,
+#cardList .fnBtnWrap .viewBtn{    
     display: inline-block;
+    width: 65px;
+    height: 26px;
+    overflow: hidden;
+}
+#cardList .fnBtnWrap .voteBtn{
+    background: url('img/voteBtn.png') no-repeat 0 0;    
+}
+#cardList .fnBtnWrap .voteBtn:hover{
+    background-position: 100% 0;
+}
+#cardList .fnBtnWrap .viewBtn{
+    background: url('img/viewBtn.png') no-repeat 0 0;    
+}
+#cardList .fnBtnWrap .viewBtn:hover{
+    background-position: 100% 0;
 }
 
 
@@ -286,6 +302,23 @@
 }
 #cardViewWrap .share{
     margin: 20px auto;
+}
+
+#cardViewWrap .shareToFb{
+    display: block;
+    margin: 10px auto;
+    width: 60px;
+    height: 60px;
+    background: url('img/fb.png') no-repeat 50% 50%;
+    cursor: pointer;
+}
+#cardViewWrap .shareToFb:hover{
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);    
+    transform: scale(1.2);    
 }
 
 
@@ -390,7 +423,7 @@
     transition: transform 0.5s;
 
     -webkit-transform: scale(0.3);
-    -ms-transform: scale(0.3);    
+    -moz-transform: scale(0.3);    
     transform: scale(0.3);
 
     -webkit-animation: play 2s steps(2) infinite;
@@ -408,7 +441,7 @@
     opacity: 1;
     z-index: 1001;
     -webkit-transform: scale(1);
-    -ms-transform: scale(1);    
+    -moz-transform: scale(1);    
     transform: scale(1);
 }
 #giftBox .openBoxAnimation.giftAnimation1{

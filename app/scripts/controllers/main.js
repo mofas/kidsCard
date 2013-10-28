@@ -136,6 +136,14 @@ module.controller('cardListPageCtrl', [ '$scope' , '$http' , '$location' , 'synS
 	}
 
 
+	//Share related function
+	$scope.share = function(){
+		window.open(
+    	'https://www.facebook.com/sharer/sharer.php?u=' + "http://kids.yam.com/",
+    	'facebook-share-dialog', 
+    	'width=626,height=436'
+    );     		
+	}
 
 
 }]);
