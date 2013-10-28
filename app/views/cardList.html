@@ -6,10 +6,10 @@
 					<div class="voteCount">得票數:{{item.count}}</div>
 					<div class="fnBtnWrap">
 						<div class="voteBtn" ng-click="voteCard(item.id)"></div>
-						<div class="viewBtn" ng-click="viewCard(item.link)"></div>
+						<div class="viewBtn" ng-click="viewCard(item.link , item.id)"></div>
 					</div>
 				</div>
-				<img images-load-animation ng-src="{{item.thumb}}" ng-click="viewCard(item.link)">
+				<img images-load-animation ng-src="{{item.thumb}}" ng-click="viewCard(item.link , item.id)">
 			</li>
 		</ul>
 		<ul class="pagination"> 
@@ -30,8 +30,12 @@
 	<div id="cardView">
 		<div class="closeBtn" ng-click="closeWindow();"></div>
 		<div ng-include="'views/cardView.html'"></div>
-		<div class="share">
-			<div ng-click="share()" class="shareToFb"></div>
+		<div class="shareWrap">
+			<div class="share">
+				<div class="content">分享給你的好友們</div>
+				<input class="shareLink" value="http://mall.yam.com/events/kidsCard/index.html#/shareCardView/{{viewCardId}}"/>				
+				<div ng-click="share()" class="shareToFb"></div>
+			</div>
 		</div>
 	</div>	
 </div>

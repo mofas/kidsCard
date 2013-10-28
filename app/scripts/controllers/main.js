@@ -107,9 +107,10 @@ module.controller('cardListPageCtrl', [ '$scope' , '$http' , '$location' , 'synS
 
 
 	//Popbox
-	$scope.viewCard = function(dataHerf){		
+	$scope.viewCard = function(dataHerf , id){		
 		$http.get(dataHerf).success(function(data){
 			synScopeAndData($scope, data);
+			$scope.viewCardId = id;
 			$scope.openWindow();
 		});	
 	}
@@ -143,8 +144,7 @@ module.controller('cardListPageCtrl', [ '$scope' , '$http' , '$location' , 'synS
     	'facebook-share-dialog', 
     	'width=626,height=436'
     );     		
-	}
-
+	}		
 
 }]);
 
