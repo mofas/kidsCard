@@ -325,6 +325,7 @@
     border-radius: 0 0 10px 10px;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
+    -mz-transition: all 0.3s;
     transition: all 0.3s;
 }
 #cardViewWrap .shareWrap:hover .share{
@@ -488,28 +489,21 @@
     background-image: url('img/giftBox/openBox_4.png');
 }
 
-#giftBox .openBoxAnimationOverlay{
+#giftBoxOverlay{
+    display: none;
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    left: 0;       
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: -1;
+    background: rgba(0,0,0,0.5);    
     opacity: 0;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none; 
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
-#giftBox .openBoxAnimationOverlay.open{
-    z-index: 1000;
+#giftBoxOverlay.open{
     opacity: 1;
+    display: block;    
 }
-#giftBox .openBoxAnimationOverlay .closeBtn {
+#giftBoxOverlay .closeBtn {
     position: absolute;
     right: 30%;
     top: 25%;    
@@ -519,7 +513,7 @@
     background: url('img/closeBtn.png') no-repeat;
     cursor: pointer;
 }
-#giftBox .openBoxAnimationOverlay .message{
+#giftBoxOverlay .message{
     position: fixed;    
     top: 50%;
     left: 50%;
@@ -905,13 +899,14 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;    
+    bottom: 0;
+    width: 100%;
+    height: 100%;
     z-index: -1;
     visibility: hidden;
     background: rgba(0,0,0,0.5);
     overflow-y: auto;
-    opacity: 0;    
-    /** fix safari bug **/    
+    opacity: 0;            
     -webkit-transition: opacity 0.5s;
     -moz-transition: opacity 0.5s;
     transition: opacity 0.5s;

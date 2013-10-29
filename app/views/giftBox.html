@@ -1,64 +1,61 @@
 <div class="frameWrap">
-	<div id="giftBox">
-			<div class="statistics">
+	<div id="giftBox">		
+		<div class="statistics">
 
-				<div class="bgSection section clearfix">
-					<div class="item" ng-repeat="item in bg.giftThumb">
-						<img images-load-animation ng-src="{{item.src}}">
-					</div>
-				</div>
-
-				<div class="frameSection section clearfix">
-					<div class="item" ng-repeat="item in frame.giftThumb">
-						<img images-load-animation ng-src="{{item.src}}">
-					</div>
-				</div>
-
-				<div class="adornmentSection section clearfix">
-					<div class="item" ng-repeat="item in adornment.giftThumb">
-						<img images-load-animation ng-src="{{item.src}}">
-					</div>
-				</div>
-
-				<div class="specialSection section clearfix">
-					<div class="item" ng-repeat="item in special.giftThumb">
-						<img images-load-animation ng-src="{{item.src}}">
-					</div>
+			<div class="bgSection section clearfix">
+				<div class="item" ng-repeat="item in bg.giftThumb">
+					<img images-load-animation ng-src="{{item.src}}">
 				</div>
 			</div>
 
-
-			<div class="giftCount">
-				<div class="giftBoxWrap">
-					<div class="giftBox giftBox1" ng-click="openBox('bg')" >
-						{{bg.giftBoxCount}}	
-					</div>					
-					<div class="openBoxAnimation giftAnimation1" ng-class="{'open': openBoxMode === 'bg' }"></div>
-				</div>
-				<div class="giftBoxWrap">
-					<div ng-click="openBox('frame')" class="giftBox giftBox2">
-						{{frame.giftBoxCount}}						
-					</div>
-					<div class="openBoxAnimation giftAnimation2" ng-class="{'open': openBoxMode === 'frame' }"></div>
-				</div>
-				<div class="giftBoxWrap">
-					<div ng-click="openBox('adornment')" class="giftBox giftBox3">
-						{{adornment.giftBoxCount}}						
-					</div>
-					<div class="openBoxAnimation giftAnimation3" ng-class="{'open': openBoxMode === 'adornment' }"></div>
-				</div>
-				<div class="giftBoxWrap">
-					<div ng-click="openBox('special')" class="giftBox giftBox4">
-						{{special.giftBoxCount}}						
-					</div>
-					<div class="openBoxAnimation giftAnimation4" ng-class="{'open': openBoxMode === 'special' }"></div>
+			<div class="frameSection section clearfix">
+				<div class="item" ng-repeat="item in frame.giftThumb">
+					<img images-load-animation ng-src="{{item.src}}">
 				</div>
 			</div>
 
-
-			<div class="openBoxAnimationOverlay" ng-class="{'open': openBoxMode != null }" ng-click="closeAnimation()">
-				<div class="closeBtn"></div>
-				<div class="message">{{openBoxMessage}}!!</div>
+			<div class="adornmentSection section clearfix">
+				<div class="item" ng-repeat="item in adornment.giftThumb">
+					<img images-load-animation ng-src="{{item.src}}">
+				</div>
 			</div>
-	</div>
+
+			<div class="specialSection section clearfix">
+				<div class="item" ng-repeat="item in special.giftThumb">
+					<img images-load-animation ng-src="{{item.src}}">
+				</div>
+			</div>
+		</div>
+		<div class="giftCount">
+			<div class="giftBoxWrap">
+				<div class="giftBox giftBox1" ng-click="openBox('bg')" >
+					{{bg.giftBoxCount}}	
+				</div>					
+				<div class="openBoxAnimation giftAnimation1" ng-class="{'open': openBoxMode === 'bg' }"></div>
+			</div>
+			<div class="giftBoxWrap">
+				<div ng-click="openBox('frame')" class="giftBox giftBox2">
+					{{frame.giftBoxCount}}						
+				</div>
+				<div class="openBoxAnimation giftAnimation2" ng-class="{'open': openBoxMode === 'frame' }"></div>
+			</div>
+			<div class="giftBoxWrap">
+				<div ng-click="openBox('adornment')" class="giftBox giftBox3">
+					{{adornment.giftBoxCount}}						
+				</div>
+				<div class="openBoxAnimation giftAnimation3" ng-class="{'open': openBoxMode === 'adornment' }"></div>
+			</div>
+			<div class="giftBoxWrap">
+				<div ng-click="openBox('special')" class="giftBox giftBox4">
+					{{special.giftBoxCount}}						
+				</div>
+				<div class="openBoxAnimation giftAnimation4" ng-class="{'open': openBoxMode === 'special' }"></div>
+			</div>
+		</div>
+	</div>				
+</div>
+
+<div id="giftBoxOverlay" ng-class="{'open': openBoxMode != null }" ng-click="closeAnimation()">
+	<div class="closeBtn"></div>
+	<div class="message">{{openBoxMessage}}!!</div>
 </div>

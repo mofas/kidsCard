@@ -91,60 +91,61 @@
                 </div>
             </div>
         </div>            
-    </div>
-    <div id="preview"ng-controller="previewCtrl" ng-class="{'open': previewMode}">
-        <div class="previewOverlay">
-            <div class="canvasWrap">
-                <div ng-include="'views/cardView.html'"></div>
-            </div>
-            <div class="sendForm">
-                <form class="form-horizontal">
-
-                    <div class="form-group">               
-                        <div class="control-group">             
-                            <label class="col-lg-2 control-label">主旨</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" name="inputEmail" value="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">               
-                        <div class="control-group">             
-                            <label class="col-lg-2 control-label">收件人</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" name="inputEmail" value="">
-                            </div>
-                        </div>
-                    </div>  
-                    <div class="form-group">               
-                        <div class="control-group">             
-                            <label class="col-lg-2 control-label">收件人</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" name="inputEmail" value="">
-                            </div>
-                        </div>
-                    </div>  
-                    <div class="form-group">               
-                        <div class="control-group">             
-                            <label class="col-lg-2 control-label">收件人</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" name="inputEmail" value="">
-                            </div>
-                        </div>
-                    </div>                        
-
-                    <div class="form-group function-group">
-                        <div class="msgText"></div>
-                        <div class="row">
-                            <button class="btn btn-danger btn-lg" ng-click="closePreview()">返回修改</button>
-                            <button class="btn btn-info btn-lg" ng-click="sendMail();">確認寄出</button>
-                            <button class="btn btn-info btn-lg" ng-click="save();">儲存到我的卡片櫃</button>
-                            
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>    
 </div>
+
+<div id="preview"ng-controller="previewCtrl" ng-class="{'open': previewMode}">
+    <div class="previewOverlay">
+        <div class="canvasWrap">
+            <div ng-include="'views/cardView.html'"></div>
+        </div>
+        <div class="sendForm">
+            <form class="form-horizontal">
+
+                <div class="form-group">               
+                    <div class="control-group">             
+                        <label class="col-lg-2 control-label">主旨</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="inputEmail" value="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">               
+                    <div class="control-group">             
+                        <label class="col-lg-2 control-label">收件人</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="inputEmail" value="">
+                        </div>
+                    </div>
+                </div>  
+                <div class="form-group">               
+                    <div class="control-group">             
+                        <label class="col-lg-2 control-label">收件人</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="inputEmail" value="">
+                        </div>
+                    </div>
+                </div>  
+                <div class="form-group">               
+                    <div class="control-group">             
+                        <label class="col-lg-2 control-label">收件人</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="inputEmail" value="">
+                        </div>
+                    </div>
+                </div>                        
+
+                <div class="form-group function-group">
+                    <div class="msgText"></div>
+                    <div class="row">
+                        <button class="btn btn-danger btn-lg" ng-click="closePreview()">返回修改</button>
+                        <button class="btn btn-info btn-lg" ng-click="sendMail();">確認寄出</button>
+                        <button class="btn btn-info btn-lg" ng-click="save();">儲存到我的卡片櫃</button>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>    
