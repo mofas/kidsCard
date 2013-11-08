@@ -3,7 +3,11 @@
 module = angular.module('ui' , ['utility']);
 
 module.factory("transform" , [ function(){
-	return function(targetDOM , data){	
+	return function(targetDOM){	
+
+
+		var data = targetDOM.data();		
+		//console.log(targetDOM , data);
 
 		if(data != null && targetDOM != null){
 			var transformStr = 'translate(' + (data.offsetX || 0) + 'px,' + (data.offsetY || 0) + 'px) ' + 
@@ -15,14 +19,15 @@ module.factory("transform" , [ function(){
 				'-webkit-transform': transformStr,
 				'-o-transform': transformStr,
 				'-ms-transform': transformStr,
-			});		
+				'z-index' : data.z_index
+			});					
 		}		
 	}    
 }]);
 
 module.factory("rotatable" , [ '$document', 'throttle' , 'transform' ,
 	function($document , throttle , transform ) {
-		return function(triggerDOM , targetDOM , data){
+		return function(triggerDOM , targetDOM){
 
 			var
 				startX = 0, // Record mousedow position
@@ -30,74 +35,74 @@ module.factory("rotatable" , [ '$document', 'throttle' , 'transform' ,
 				x = 0,  		// Temporary variable
 				y = 0;			// Temporary variable	
 
-				var rotateDegrees = data.rotateDegrees;
+			var data = targetDOM.data();
+			var rotateDegrees = data.rotateDegrees;
+			var rotate_mousemove = function (event) {
+				y = event.screenY - startY;
+				x = event.screenX - startX;
+				startX = event.screenX;
+				startY = event.screenY;
+				var rotateDelta = Math.floor(Math.sqrt(x*x + y*y)*1000/Math.sqrt(data.W*data.W + data.H*data.H))/10;				
 
-				var rotate_mousemove = function (event) {
-					y = event.screenY - startY;
-					x = event.screenX - startX;
-					startX = event.screenX;
-					startY = event.screenY;
-					var rotateDelta = Math.floor(Math.sqrt(x*x + y*y)*1000/Math.sqrt(data.W*data.W + data.H*data.H))/10;				
-
-					if(rotateDegrees > 360){
-						rotateDegrees-= 360;
-					}
-					if(rotateDegrees < 0){
-						rotateDegrees+= 360;
-					}
-
-					if(rotateDegrees < 45 || rotateDegrees >= 315) {
-						if(x+y > 0){
-							rotateDegrees-= rotateDelta;
-						} else {
-							rotateDegrees+= rotateDelta;
-						}
-					}	else if(rotateDegrees >= 45 && rotateDegrees < 135) {
-						if(x-y > 0){
-							rotateDegrees+= rotateDelta;
-						} else {
-							rotateDegrees-= rotateDelta;
-						}
-					} else if(rotateDegrees >= 135 && rotateDegrees < 225) {
-						if(x+y > 0){
-							rotateDegrees+= rotateDelta;
-						}	else {
-							rotateDegrees-= rotateDelta;
-						}
-					} else if(rotateDegrees >= 225 || rotateDegrees < 315) {
-						if(x-y > 0){
-							rotateDegrees-= rotateDelta;
-						} else {
-							rotateDegrees+= rotateDelta;
-						}
-					}
-
-					data.rotateDegrees = rotateDegrees;
-					transform(targetDOM , data);
+				if(rotateDegrees > 360){
+					rotateDegrees-= 360;
+				}
+				if(rotateDegrees < 0){
+					rotateDegrees+= 360;
 				}
 
-				var rotate_mouseup = function() {
-					$document.unbind('mousemove', throttle_rotate_mousemove);
-					$document.unbind('mouseup', rotate_mouseup);				
+				if(rotateDegrees < 45 || rotateDegrees >= 315) {
+					if(x+y > 0){
+						rotateDegrees-= rotateDelta;
+					} else {
+						rotateDegrees+= rotateDelta;
+					}
+				}	else if(rotateDegrees >= 45 && rotateDegrees < 135) {
+					if(x-y > 0){
+						rotateDegrees+= rotateDelta;
+					} else {
+						rotateDegrees-= rotateDelta;
+					}
+				} else if(rotateDegrees >= 135 && rotateDegrees < 225) {
+					if(x+y > 0){
+						rotateDegrees+= rotateDelta;
+					}	else {
+						rotateDegrees-= rotateDelta;
+					}
+				} else if(rotateDegrees >= 225 || rotateDegrees < 315) {
+					if(x-y > 0){
+						rotateDegrees-= rotateDelta;
+					} else {
+						rotateDegrees+= rotateDelta;
+					}
 				}
 
-				var throttle_rotate_mousemove = throttle(rotate_mousemove , 16);
+				data.rotateDegrees = rotateDegrees;
+				transform(targetDOM);
+			}
 
-				angular.element(triggerDOM).on('mousedown', function(event) {			    
-					event.preventDefault();
-					event.stopPropagation();
+			var rotate_mouseup = function() {
+				$document.unbind('mousemove', throttle_rotate_mousemove);
+				$document.unbind('mouseup', rotate_mouseup);				
+			}
 
-					//Reset
-					rotate_mouseup();
-					startX = event.screenX;
-					startY = event.screenY;
-					x = 0;
-					y = 0;
-					data.W = targetDOM[0].clientWidth;
-					data.H = targetDOM[0].clientHeight;
-					$document.on('mousemove', throttle_rotate_mousemove);
-					$document.on('mouseup', rotate_mouseup);
-				});
+			var throttle_rotate_mousemove = throttle(rotate_mousemove , 16);
+
+			angular.element(triggerDOM).on('mousedown', function(event) {			    
+				event.preventDefault();
+				event.stopPropagation();
+
+				//Reset
+				rotate_mouseup();
+				startX = event.screenX;
+				startY = event.screenY;
+				x = 0;
+				y = 0;
+				data.W = targetDOM[0].clientWidth;
+				data.H = targetDOM[0].clientHeight;
+				$document.on('mousemove', throttle_rotate_mousemove);
+				$document.on('mouseup', rotate_mouseup);
+			});
 			}    
 		}
 	]
@@ -105,7 +110,7 @@ module.factory("rotatable" , [ '$document', 'throttle' , 'transform' ,
 
 module.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 	function($document , throttle , transform ) {
-		return function(triggerDOM , targetDOM , data){	
+		return function(triggerDOM , targetDOM){	
 
 			var 
 				shifted = false, 	// Shift key is pressed or not
@@ -121,6 +126,9 @@ module.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 				stretchH = 0,			// Current stretched height
 				cosTheta = 0,			// Cos value of rotation degree
 				sinTheta = 0;			// Sin value of rotation degree
+
+
+			var data = targetDOM.data();
 
 			var resize_mousemove = function(event) {				
 				y = event.screenY - startY;
@@ -158,7 +166,7 @@ module.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 				'height': data.H + "px"
 			});
 
-			transform(targetDOM , data);
+			transform(targetDOM);
 
 			// Check inner obj need adjust 
 			if(data.resizeInner){
@@ -183,7 +191,9 @@ module.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 					scaleX : scaleX,
 					scaleY : scaleY 
 				}
-				transform(angular.element(inner) , data.inner);
+				var innerDOM = angular.element(inner);
+				innerDOM.data(data.inner);
+				transform(innerDOM);
 			}
 		}
 
@@ -228,7 +238,7 @@ module.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 
 module.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 	function($document , throttle , transform ) {
-		return function(triggerDOM , targetDOM , data){		
+		return function(triggerDOM , targetDOM){		
 
 			var 
 				touchTarget = null, // Touch target
@@ -238,6 +248,8 @@ module.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 				startOffsetY = 0,		// Initial position y of targetDOM
 				startX = 0,					// Position x when mousedown/touchstart
 				startY = 0;					// Position y when mousedown/touchstart
+
+			var data = targetDOM.data();			
 
 			var drag_start = function(initX , initY){
 				x = 0;
@@ -253,7 +265,7 @@ module.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 				x = e.screenX - startX;			
 				data.offsetX = startOffsetX + x;
 				data.offsetY = startOffsetY + y;
-				transform(targetDOM , data);			
+				transform(targetDOM);			
 				e.preventDefault();
 			}
 
@@ -262,7 +274,7 @@ module.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 				x = e.targetTouches[0].clientX - startX;
 				data.offsetX = startOffsetX + x;
 				data.offsetY = startOffsetY + y;
-				transform(targetDOM , data);  			
+				transform(targetDOM);  			
 			}
 
 			var drag_touchend = function(){
@@ -318,45 +330,9 @@ module.service('selectCtrl', ['$document', function ($document) {
 
 }]);
 
-/**
-module.directive('transformable', [ '$timeout' , 'transform' , function($timeout , transform){
 
-	return {
-		scope: {
-			"originalData" : "=transformData"
-		},
-		link : function(scope, element, attrs) {
-			var data = scope.originalData.data;			
-			if(data.W == 0){
-				data.W = element[0].clientWidth;
-			}
-			if(data.H == 0){
-				data.H = element[0].clientHeight;
-			}
-			var targetDOM = angular.element(element[0]);
-			var inner = angular.element(element[0].children[0]);
-			targetDOM.css({				
-				'width': data.W + "px",
-				'height': data.H + "px"
-			});
-			transform(targetDOM , data);			
-
-			if(data.resizeInner){
-				//waiting for ng-style finish
-				$timeout(function(){
-					transform(inner , data.inner);		
-				} , 1);				
-			}			
-		}		
-	}
-
-}]);
-**/
-
-
-
-module.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable' , 'draggable',
-	function($document , $timeout , rotatable , resizable , draggable) {
+module.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resizable' , 'draggable', 'transform' ,
+	function($document , $timeout , rotatable , resizable , draggable , transform) {
 
 		return {
 
@@ -381,6 +357,18 @@ module.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resiza
 					$element.addClass("select");
 					selectCtrl.perviousSelected = $element;												
 				});
+				
+				//redefine z-index
+				$scope.$on('relayout_' + $scope.obj.id , function(e , index){					
+					var data = $element.data();
+					data['z_index'] = index;
+					$element.data(data);
+					transform($element);
+				});
+
+				$scope.$on('synStyleData' , function(){					
+					$scope.obj.data = $element.data();
+				});
 
 			}],		
 			link : function(scope, element, attrs) {
@@ -396,13 +384,18 @@ module.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resiza
 				data.minH = scope.minH || 0;
 				data.maxW = scope.maxW || 1000;
 				data.maxH = scope.maxH || 1000;
-				data.resizeInner = scope.resizeInner || false;	
-
+				data.resizeInner = scope.resizeInner || false;
+				
+				data.z_index = scope.obj.z_index;
 				scope.obj.data = data;
 
-				rotatable(element[0].children[1] , element , data);
-				resizable(element[0].children[2] , element , data);
-				draggable(element[0].children[3] , element , data);
+				element.data(data);
+				transform(element);
+
+				rotatable(element[0].children[1] , element);
+				resizable(element[0].children[2] , element);
+				draggable(element[0].children[3] , element);
+								
 
 				scope.del = function(){								
 					element[0].parentNode.removeChild(element[0]);				

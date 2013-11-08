@@ -1016,7 +1016,7 @@
     min-height: 50px;
 }
 .adjustable.select{
-    z-index: 100;
+    z-index: 100 !important; 
 }
 .adjustable.select:after{
     content: "";

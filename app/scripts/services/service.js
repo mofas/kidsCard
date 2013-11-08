@@ -46,7 +46,7 @@ module.service('StyleService', [ function () {
 				}
 
 				// Copy style into inside 
-				angular.forEach(originalObj.style , function(val, key){					
+				angular.forEach(originalObj.style , function(val, key){
 					newObj.inner.style[key] = val;
 				});
 
@@ -64,14 +64,16 @@ module.service('StyleService', [ function () {
 				}
 
 				if(originalObj.data != null){
-					data = originalObj.data;			 		
+					data = originalObj.data;			
+
+					newObj.style['z-index'] = data.z_index;					
 					transformStr = 'translate(' + (data.offsetX || 0) + 'px,' + (data.offsetY || 0) + 'px) ' + 
 						'rotate(' + (data.rotateDegrees || 0) + 'deg) ' +
 						'scale( ' + (data.scaleX || 1) + ', ' + (data.scaleY || 1) + ')';					
 					newObj.style["-moz-transform"] = transformStr;
 					newObj.style["-webkit-transform"] = transformStr;
 					newObj.style["-o-transform"] = transformStr;
-					newObj.style["-ms-transform"] = transformStr;
+					newObj.style["-ms-transform"] = transformStr;					
 
 					// Inner style
 					if(originalObj.data.resizeInner && originalObj.data.inner != null){
@@ -84,7 +86,7 @@ module.service('StyleService', [ function () {
 						newObj.inner.style["-o-transform"] = transformStr;
 						newObj.inner.style["-ms-transform"] = transformStr;
 					}
-				}
+				}				
 				returnList.push(newObj);
 			});			
 			return returnList;
@@ -105,9 +107,11 @@ module.factory('synScopeAndData', [ function () {
 }]);
 
 module.factory('DataLoader', [ '$http' , '$q', function($http , $q){
-  return function(dataHref){    	
+  return function(dataHref){
     var d = $q.defer();
-    $http.get(dataHref).success(function(data){		      	
+
+    //prevent IE10 cache
+    $http.get(dataHref, { "params" : { "t" : new Date().getTime() } } ).success(function(data){		      	
     	d.resolve(data);
     }).error(function(data, status, headers, config){
     	d.reject(data);

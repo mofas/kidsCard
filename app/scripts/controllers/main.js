@@ -201,7 +201,7 @@ module.controller('menuCtrl', [ '$scope' , '$location' , function($scope , $loca
 
 }]);
 
-module.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
+module.controller('cardFactoryCtrl', ['$scope' , '$http' , '$q' , '$timeout', 'StyleService' , 'shareCanvasDataService' ,
 	function ($scope , $http , $q , $timeout , StyleService , shareCanvasDataService) {
 
 		var changePageSizeEvent = function(){													
@@ -238,6 +238,30 @@ module.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', '
 				changeTopic();
 				$scope.isLoadding = false;
 			});	
+		}
+
+
+		var layoutOrderSequence = [];
+
+		var refreshAdjustObjLayoutOrder = function(id){			
+			if(typeof id === "number"){
+				//delete obj
+				angular.forEach(layoutOrderSequence , function(obj , i){		 	
+					if( obj.id == id){						
+						layoutOrderSequence.splice(i , 1);
+					}
+				});
+			}
+			else{
+				//add obj
+				layoutOrderSequence.push(id);
+			}
+			var sequence = [];
+			angular.forEach(layoutOrderSequence , function(obj , i){
+				$scope.$broadcast("relayout_" + obj.id , 50+i);
+				obj.z_index = 50 + i;
+			});
+			
 		}
 
 		var initData = function($scope){
@@ -340,6 +364,7 @@ module.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', '
 					src: item.src,
 					style: StyleService.getBGStyle(item.src)		
 				}
+				refreshAdjustObjLayoutOrder(newObj);				
 				$scope.adornmentList.push(newObj);
 			}
 
@@ -350,7 +375,8 @@ module.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', '
 						index = i;
 					}
 				});
-				$scope.adornmentList.splice(index , 1);		
+				refreshAdjustObjLayoutOrder(id);				
+				$scope.adornmentList.splice(index , 1);
 			}
 
 			$scope.addBubbler = function(item){
@@ -363,7 +389,8 @@ module.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', '
 					id: $scope.adjustObjIndex++,
 					style: item.style
 				}
-				$scope.bubblerList.push(newObj);					
+				refreshAdjustObjLayoutOrder(newObj);				
+				$scope.bubblerList.push(newObj);
 			}
 
 			$scope.removeBubbler = function(id){
@@ -373,7 +400,8 @@ module.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', '
 						index = i;
 					}
 				});
-				$scope.bubblerList.splice(index , 1);			
+				refreshAdjustObjLayoutOrder(id);							
+				$scope.bubblerList.splice(index , 1);
 			}
 
 			$scope.addGraffiti = function(item){
@@ -387,7 +415,8 @@ module.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', '
 					src: item.src,
 					style: StyleService.getBGStyle(item.src)
 				}
-				$scope.graffitiList.push(newObj);					
+				refreshAdjustObjLayoutOrder(newObj);				
+				$scope.graffitiList.push(newObj);
 			}
 
 			$scope.removeGraffiti = function(id){
@@ -397,7 +426,8 @@ module.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', '
 						index = i;
 					}
 				});
-				$scope.graffitiList.splice(index , 1);			
+				refreshAdjustObjLayoutOrder(id);				
+				$scope.graffitiList.splice(index , 1);
 			}
 
 
@@ -421,6 +451,7 @@ module.controller('cardFactoryCtrl', [ '$scope' , '$http' , '$q' , '$timeout', '
 				canvasData.selected_bg = $scope.selected_bg;
 				canvasData.selected_frame = $scope.selected_frame;
 
+				$scope.$broadcast('synStyleData');
 				canvasData.adornmentList = StyleService.convertDataToStyle($scope.adornmentList);
 				canvasData.bubblerList = StyleService.convertDataToStyle($scope.bubblerList);
 				canvasData.graffitiList = StyleService.convertDataToStyle($scope.graffitiList);
