@@ -3,10 +3,8 @@
 module = angular.module('ui' , ['utility']);
 
 module.factory("transform" , [ function(){
-	return function(targetDOM){	
-
-
-		var data = targetDOM.data();		
+	return function(targetDOM , data){	
+		
 		//console.log(targetDOM , data);
 
 		if(data != null && targetDOM != null){
@@ -78,7 +76,7 @@ module.factory("rotatable" , [ '$document', 'throttle' , 'transform' ,
 				}
 
 				data.rotateDegrees = rotateDegrees;
-				transform(targetDOM);
+				transform(targetDOM , data);
 			}
 
 			var rotate_mouseup = function() {
@@ -166,7 +164,7 @@ module.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 				'height': data.H + "px"
 			});
 
-			transform(targetDOM);
+			transform(targetDOM, data);
 
 			// Check inner obj need adjust 
 			if(data.resizeInner){
@@ -192,8 +190,8 @@ module.factory("resizable" , [ '$document', 'throttle' , 'transform' ,
 					scaleY : scaleY 
 				}
 				var innerDOM = angular.element(inner);
-				innerDOM.data(data.inner);
-				transform(innerDOM);
+				//innerDOM.data(data.inner);
+				transform(innerDOM , data.inner);
 			}
 		}
 
@@ -265,7 +263,7 @@ module.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 				x = e.screenX - startX;			
 				data.offsetX = startOffsetX + x;
 				data.offsetY = startOffsetY + y;
-				transform(targetDOM);			
+				transform(targetDOM , data);			
 				e.preventDefault();
 			}
 
@@ -274,7 +272,7 @@ module.factory("draggable" , [ '$document', 'throttle' , 'transform' ,
 				x = e.targetTouches[0].clientX - startX;
 				data.offsetX = startOffsetX + x;
 				data.offsetY = startOffsetY + y;
-				transform(targetDOM);  			
+				transform(targetDOM , data);  			
 			}
 
 			var drag_touchend = function(){
@@ -363,7 +361,7 @@ module.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resiza
 					var data = $element.data();
 					data['z_index'] = index;
 					$element.data(data);
-					transform($element);
+					transform($element , data);
 				});
 
 				$scope.$on('synStyleData' , function(){					
@@ -390,7 +388,7 @@ module.directive('adjustable', [ '$document', '$timeout' , 'rotatable' , 'resiza
 				scope.obj.data = data;
 
 				element.data(data);
-				transform(element);
+				transform(element , data);
 
 				rotatable(element[0].children[1] , element);
 				resizable(element[0].children[2] , element);
